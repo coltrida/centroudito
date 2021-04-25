@@ -15,6 +15,11 @@ class CreateFornitoresTable extends Migration
     {
         Schema::create('fornitores', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('codfisc')->nullable();
+            $table->string('citta')->nullable();
+            $table->string('pec')->nullable();
+            $table->string('univoco')->nullable();
             $table->timestamps();
         });
     }

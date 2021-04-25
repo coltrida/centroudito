@@ -16,12 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'ruolo'
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -45,5 +40,25 @@ class User extends Authenticatable
     public function getIsAdminAttribute()
     {
         return $this->ruolo == 'admin' ? true : false;
+    }
+
+    public function getIsAudioAttribute()
+    {
+        return $this->ruolo == 'audio' ? true : false;
+    }
+
+    public function audiometrie()
+    {
+        return $this->hasMany(Audiometria::class);
+    }
+
+    public function filiale()
+    {
+        return $this->belongsTo(Filiale::class);
+    }
+
+    public function prova()
+    {
+        return $this->hasMany(Prova::class);
     }
 }

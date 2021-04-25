@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateListinosTable extends Migration
+class Productprova extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateListinosTable extends Migration
      */
     public function up()
     {
-        Schema::create('listinos', function (Blueprint $table) {
+        Schema::create('productprova', function (Blueprint $table) {
             $table->id();
-            $table->string('categoria')->nullable();
-            $table->string('descrizione')->nullable();
-            $table->string('costo')->nullable();
-            $table->string('prezzolistino')->nullable();
-            $table->string('iva')->nullable();
+            $table->bigInteger('id_prova');
+            $table->bigInteger('id_product');
+            $table->string('prezzo')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateListinosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('listinos');
+        Schema::dropIfExists('productprova');
     }
 }

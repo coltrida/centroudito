@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Prova extends Model
 {
     use HasFactory;
+
+    protected $table = 'provas';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Listino extends Model
 {
     use HasFactory;
+
+    protected $table = 'listinos';
 }

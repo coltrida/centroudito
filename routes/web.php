@@ -12,4 +12,11 @@ Route::get('/', [FrontController::class, 'inizio'])->name('inizio');
 
 require __DIR__.'/auth.php';
 
-Route::get('/clients', [ClientController::class, 'index'])->name('client.index');
+Route::group([ 'middleware' => 'auth' ], function() {
+    Route::get('/clients/{idAudio}', [ClientController::class, 'index'])->name('client.index');
+    });
+
+Route::group(['middleware' => ['auth','verifyIsAdmin'], 'prefix' => 'admin'], function(){
+    Route::get('/clients', [ClientController::class, 'indexAdmin'])->name('admin.client.index');
+    });
+

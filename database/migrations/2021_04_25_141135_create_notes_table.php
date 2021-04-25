@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateListinosTable extends Migration
+class CreateNotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateListinosTable extends Migration
      */
     public function up()
     {
-        Schema::create('listinos', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id();
-            $table->string('categoria')->nullable();
-            $table->string('descrizione')->nullable();
-            $table->string('costo')->nullable();
-            $table->string('prezzolistino')->nullable();
-            $table->string('iva')->nullable();
+            $table->string('testo');
+            $table->bigInteger('id_client')->unsigned();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateListinosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('listinos');
+        Schema::dropIfExists('notes');
     }
 }

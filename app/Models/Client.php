@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     use HasFactory;
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function prova()
+    {
+        return $this->hasMany(Prova::class);
+    }
 }

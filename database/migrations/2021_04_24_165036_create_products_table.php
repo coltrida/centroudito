@@ -15,6 +15,11 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('matricola')->nullable();
+            $table->string('stato')->nullable();
+            $table->bigInteger('id_prova')->nullable();
+            $table->bigInteger('id_filiale')->nullable();
+            $table->bigInteger('id_listino')->nullable();
             $table->timestamps();
         });
     }
