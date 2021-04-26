@@ -16,13 +16,13 @@
                 <button type="submit" class="p-2 bg-blue-500 w-20 rounded shadow text-white">Aggiungi</button>
             </div>
         </form>
-        @foreach($canali as $canale)
+        @foreach($canali as $item)
                 <div class="rounded border p-3 my-2" style=" box-shadow: 2px 2px 4px #000000;">
                 <div class="flex justify-between my-1">
                     <div class="flex">
-                        <p class="font-bold text-lg">{{$canale->name}}</p>
+                        <p class="font-bold text-lg">{{$item->name}}</p>
                     </div>
-                    <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$canale->id}})"></i>
+                    <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$item->id}})"></i>
                 </div>
             </div>
         @endforeach

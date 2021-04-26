@@ -18,6 +18,7 @@ class CreateFilialesTable extends Migration
             $table->string('nome');
             $table->string('indirizzo');
             $table->string('citta');
+            $table->string('telefono');
             $table->string('cap');
             $table->string('provincia');
             $table->timestamps();

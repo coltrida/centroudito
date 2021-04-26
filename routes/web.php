@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FilialeController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\MarketingController;
 use Illuminate\Support\Facades\Route;
@@ -17,5 +18,6 @@ Route::group([ 'middleware' => 'auth' ], function() {
 
 Route::group(['middleware' => ['auth','verifyIsAdmin'], 'prefix' => 'admin'], function(){
     Route::get('/marketing', [MarketingController::class, 'index'])->name('marketing.idex');
+    Route::get('/filiali', [FilialeController::class, 'index'])->name('filiale.idex');
 });
 
