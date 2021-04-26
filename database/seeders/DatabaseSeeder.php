@@ -60,7 +60,7 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        for ($i = 1; $i <50000; $i++){
+/*        for ($i = 1; $i <50000; $i++){
             Client::create([
                 'name' => 'cliente'.$i,
                 'codfisc' => Str::random(11),
@@ -73,6 +73,6 @@ class DatabaseSeeder extends Seeder
                 'fonte' => Arr::random(['Farmacia Rossi', 'Farmacia Bianchi', 'Farmacia Verdi', 'giornale', 'telefonata']),
                 'user_id' => rand(2,3)
             ]);
-        }
+        }*/
     }
 }

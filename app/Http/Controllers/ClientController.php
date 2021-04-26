@@ -2,18 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InsertClientRequest;
+use App\Services\ClientService;
+use App\Services\MarketingService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use function abort;
+use function dd;
+use function redirect;
 use function view;
 
 class ClientController extends Controller
 {
-    public function indexAdmin()
+
+    public function index(UserService $userService, $idAudio = '')
     {
-        return view('client.index', ['idAudio' => '']);
+        if ($userService->userNonAutorizzato($idAudio) && $idAudio != ''){ abort(401); }
+        return view('client.index', ['idAudio' => $idAudio]);
     }
 
-    public function index($idAudio)
+    public function inserisci(MarketingService $marketingService)
     {
-        return view('client.index', ['idAudio' => $idAudio]);
+        return view('client.inserisci', ['canali' => $marketingService->canali()]);
+    }
+
+    public function postInserisci(InsertClientRequest $request, ClientService $clientService)
+    {
+        if (!$clientService->inserisci($request)) {
+            return redirect()->route('client.index')->withMessage("Errore nell'inserimento cliente");
+        }
+        return redirect()->route('client.index')->withMessage("Cliente Inserito");
     }
 }

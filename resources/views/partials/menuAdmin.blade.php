@@ -4,11 +4,11 @@
         Clienti
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="{{route('client.inserisci')}}">Inserisci</a></li>
         <li>
             <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="{{route('admin.client.index')}}">lista</a></li>
+        <li><a class="dropdown-item" href="{{route('client.index')}}">lista</a></li>
     </ul>
 </li>
 <li class="nav-item dropdown">
@@ -27,14 +27,16 @@
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
        aria-expanded="false">
-        Audioprotesisti
+        Personale
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Ins. Audioprot.</a></li>
+        <li><a class="dropdown-item" href="#">Lista Audioprot.</a></li>
         <li>
             <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><a class="dropdown-item" href="#">Ins. Ammin.</a></li>
+        <li><a class="dropdown-item" href="#">Lista Ammin.</a></li>
     </ul>
 </li>
 <li class="nav-item dropdown">
@@ -95,11 +97,7 @@
         Marketing
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li>
-            <hr class="dropdown-divider">
-        </li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><a class="dropdown-item" href="{{route('marketing.idex')}}">Lista</a></li>
     </ul>
 </li>
 <li class="nav-item dropdown">
@@ -108,10 +106,22 @@
         Gestione
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Filiale - Audiop</a></li>
+        <li><a class="dropdown-item" href="#">Filiale - Ammin</a></li>
         <li>
             <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><a class="dropdown-item" href="#">Tempi Recall</a></li>
+    </ul>
+</li>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+       aria-expanded="false">
+        Statistiche
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="#">Vendite</a></li>
+        <li><a class="dropdown-item" href="#">Canali Mkt</a></li>
+        <li><a class="dropdown-item" href="#">Costi</a></li>
     </ul>
 </li>

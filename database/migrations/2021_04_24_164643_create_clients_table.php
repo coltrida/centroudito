@@ -16,14 +16,15 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('codfisc');
+            $table->string('codfisc')->unique()->nullable();
             $table->string('indirizzo');
             $table->string('citta');
             $table->string('cap');
             $table->string('provincia');
             $table->string('telefono');
             $table->string('tipo');
-            $table->string('fonte');
+            $table->string('fonte')->nullable();
+            $table->string('mail')->nullable();
             $table->char('recall')->nullable();
             $table->date('datarecall')->nullable();
             $table->bigInteger('user_id')->unsigned();

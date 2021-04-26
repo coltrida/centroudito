@@ -8,8 +8,11 @@
     <a href="#" class="btn btn-warning mr-1" title="note" style="box-shadow: 2px 2px 4px #000000;">
         <i class="far fa-sticky-note"></i>
     </a>
-    <a href="#" class="btn" style="background-color: #c2a449; box-shadow: 2px 2px 4px #000000;">
+    <a href="#" class="btn mr-1" style="background-color: #c2a449; box-shadow: 2px 2px 4px #000000;" title="prove">
         <i class="fas fa-assistive-listening-systems"></i>
+    </a>
+    <a href="#" class="btn" style="background-color: #9153c2; box-shadow: 2px 2px 4px #000000;" title="modifica">
+        <i class="fas fa-edit"></i>
     </a>
 </div>
 

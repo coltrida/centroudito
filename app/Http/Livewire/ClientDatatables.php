@@ -13,6 +13,7 @@ use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
 class ClientDatatables extends LivewireDatatable
 {
     public $idAudio;
+  //  public $perPage = 5;
   //  public $model =  Client::class;
 
     public function builder()
@@ -28,16 +29,20 @@ class ClientDatatables extends LivewireDatatable
             Column::name('id')->view2('components.button2')->label(''),
 
             Column::name('name')
-                ->label('Nome')
-                ->sortBy('name')
-                ->defaultSort('asc')->editable(),
+                ->label('Nome'),
 
-            Column::name('indirizzo')->editable(),
-            Column::name('citta')->editable(),
-            Column::name('provincia')->editable(),
-            Column::name('telefono')->editable(),
+            Column::name('indirizzo'),
+            Column::name('citta'),
+            Column::name('provincia'),
+            Column::name('cap'),
+            Column::name('telefono'),
+            Column::name('tipo'),
+            Column::name('fonte'),
+            Column::name('codfisc'),
 
             DateColumn::name('created_at')
+                ->sortBy('created_at')
+                ->defaultSort('asc')
                 ->label('Data Creazione')
         ];
     }
