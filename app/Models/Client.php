@@ -35,4 +35,9 @@ class Client extends Model
     {
         return $this->hasMany(Prova::class);
     }
+
+    public function recapito()
+    {
+        return $this->belongsTo(Recapito::class);
+    }
 }

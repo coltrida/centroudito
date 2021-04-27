@@ -63,6 +63,7 @@ class ClientDatatables extends LivewireDatatable
             Column::name('telefono')->filterable()->searchable(),
             Column::name('user.name')->filterable()->searchable()->label('Audioprotesista'),
             Column::name('filiale.nome')->filterable()->searchable()->label('Filile'),
+            Column::name('recapito.nome')->filterable()->searchable()->label('Recapito'),
             Column::name('tipo')->filterable()->searchable(),
             Column::name('fonte')->filterable()->searchable(),
             Column::name('mail')->filterable()->searchable(),

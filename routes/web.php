@@ -6,6 +6,7 @@ use App\Http\Controllers\FornitoreController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ListinoController;
 use App\Http\Controllers\MarketingController;
+use App\Http\Controllers\RecapitoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::group([ 'middleware' => 'auth' ], function() {
 Route::group(['middleware' => ['auth','verifyIsAdmin'], 'prefix' => 'admin'], function(){
     Route::get('/marketing', [MarketingController::class, 'index'])->name('marketing.index');
     Route::get('/filiali', [FilialeController::class, 'index'])->name('filiale.index');
+    Route::get('/recapiti', [RecapitoController::class, 'index'])->name('recapiti.index');
     Route::get('/fornitori', [FornitoreController::class, 'index'])->name('fornitori.index');
     Route::get('/listino', [ListinoController::class, 'index'])->name('listino.index');
     Route::get('/personale', [UserController::class, 'audioprotesisti'])->name('personale.index');

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InsertClientRequest;
 use App\Services\ClientService;
+use App\Services\FilialeService;
 use App\Services\MarketingService;
+use App\Services\RecapitoService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,9 +24,13 @@ class ClientController extends Controller
         return view('client.index', ['idAudio' => $idAudio]);
     }
 
-    public function inserisci(MarketingService $marketingService)
+    public function inserisci(MarketingService $marketingService, RecapitoService $recapitoService, FilialeService $filialeService)
     {
-        return view('client.inserisci', ['canali' => $marketingService->canali()]);
+        return view('client.inserisci', [
+            'canali' => $marketingService->canali(),
+            'filiali' => $filialeService->filiali(),
+            'recapiti' => $recapitoService->recapiti()
+        ]);
     }
 
     public function postInserisci(InsertClientRequest $request, ClientService $clientService)
