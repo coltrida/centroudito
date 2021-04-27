@@ -26,6 +26,11 @@ class Client extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function filiale()
+    {
+        return $this->belongsTo(Filiale::class);
+    }
+
     public function prova()
     {
         return $this->hasMany(Prova::class);

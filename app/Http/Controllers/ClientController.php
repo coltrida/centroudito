@@ -34,4 +34,12 @@ class ClientController extends Controller
         }
         return redirect()->route('client.index')->withMessage("Cliente Inserito");
     }
+
+    public function recall(Request $request, ClientService $clientService)
+    {
+        if (!$clientService->recall($request)) {
+            return redirect()->back()->withMessage("Errore nell'inserimento recall");
+        }
+        return redirect()->back()->withMessage("recall Inserito");
+    }
 }

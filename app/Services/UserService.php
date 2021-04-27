@@ -18,16 +18,26 @@ class UserService
 
     public function getAudioprotesisti()
     {
-        return User::where('ruolo', config('enum.ruoli.audio'))->get();
+        return User::with('filiale')->where('ruolo', config('enum.ruoli.audio'))->get();
     }
 
-    public function inserisciAudioprotesista($request)
+    public function getAmministrazione()
+    {
+        return User::with('filiale')->where('ruolo', config('enum.ruoli.segreteria'))->get();
+    }
+
+    public function inserisci($request)
     {
         return User::insert([
             'name' => $request['nome'],
             'email' => $request['email'],
-            'id_filiale' => $request['id_filiale'],
-            'ruolo' => config('enum.ruoli.audio'),
+            'filiale_id' => $request['filiale_id'],
+            'ruolo' => $request['ruolo'],
         ]);
+    }
+
+    public function rimuovi($id)
+    {
+        return User::find($id)->delete();
     }
 }

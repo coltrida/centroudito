@@ -10,4 +10,9 @@ class Listino extends Model
     use HasFactory;
 
     protected $table = 'listinos';
+
+    public function fornitore()
+    {
+        return $this->belongsTo(Fornitore::class, 'fornitore_id', 'id');
+    }
 }

@@ -54,13 +54,15 @@ class ClientDatatables extends LivewireDatatable
             Column::callback(['id', 'name'], function ($id, $name) {
                 return view('components.button3', ['id' => $id, 'name' => $name]);
             }),
-
+            /*NumberColumn::name('id')->filterable(),*/
             Column::name('name')->filterable()->searchable(),
             Column::name('indirizzo')->filterable()->searchable(),
             Column::name('citta')->filterable()->searchable(),
             Column::name('cap')->filterable()->searchable(),
             Column::name('provincia')->filterable()->searchable(),
             Column::name('telefono')->filterable()->searchable(),
+            Column::name('user.name')->filterable()->searchable()->label('Audioprotesista'),
+            Column::name('filiale.nome')->filterable()->searchable()->label('Filile'),
             Column::name('tipo')->filterable()->searchable(),
             Column::name('fonte')->filterable()->searchable(),
             Column::name('mail')->filterable()->searchable(),

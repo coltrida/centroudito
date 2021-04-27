@@ -26,11 +26,11 @@
         Personale
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="{{route('audioprotesisti.index')}}">Audioprotesisti</a></li>
+        <li><a class="dropdown-item" href="{{route('personale.index')}}">Audioprotesisti</a></li>
         <li>
             <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="#">Amministrazione</a></li>
+        <li><a class="dropdown-item" href="{{route('amministrazione.index')}}">Amministrazione</a></li>
     </ul>
 </li>
 <li class="nav-item dropdown">
@@ -39,11 +39,7 @@
         Listino
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li>
-            <hr class="dropdown-divider">
-        </li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><a class="dropdown-item" href="{{route('listino.index')}}">Lista</a></li>
     </ul>
 </li>
 <li class="nav-item dropdown">
@@ -78,11 +74,7 @@
         Fornitori
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li>
-            <hr class="dropdown-divider">
-        </li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><a class="dropdown-item" href="{{route('fornitori.index')}}">Lista</a></li>
     </ul>
 </li>
 <li class="nav-item dropdown">

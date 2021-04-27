@@ -15,8 +15,9 @@ class CreateListinosTable extends Migration
     {
         Schema::create('listinos', function (Blueprint $table) {
             $table->id();
+            $table->string('nome')->nullable();
+            $table->bigInteger('fornitore_id')->nullable();
             $table->string('categoria')->nullable();
-            $table->string('descrizione')->nullable();
             $table->string('costo')->nullable();
             $table->string('prezzolistino')->nullable();
             $table->string('iva')->nullable();

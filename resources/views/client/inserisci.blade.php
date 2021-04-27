@@ -55,8 +55,8 @@
                 <input type="text" class="form-control" id="mail" name="mail" placeholder="e-mail">
             </div>
             <div class="mb-3 col-2">
-                <label for="mail" class="form-label">Tipo @error('tipo') <span class="text-red-500 text-xs"> - {{ $message }}</span> @enderror</label>
-                <select class="form-select" aria-label="Default select example" name="tipo">
+                <label for="tipo" class="form-label">Tipo @error('tipo') <span class="text-red-500 text-xs"> - {{ $message }}</span> @enderror</label>
+                <select class="form-select" aria-label="Default select example" name="tipo" id="tipo">
                     <option selected></option>
                     @foreach(config('enum.tipi') as $tipo)
                         <option value="{{$tipo}}">{{$tipo}}</option>
@@ -64,8 +64,8 @@
                 </select>
             </div>
             <div class="mb-3 col-3">
-                <label for="mail" class="form-label">Canale Mkt @error('fonte') <span class="text-red-500 text-xs"> - {{ $message }}</span> @enderror</label>
-                <select class="form-select" aria-label="Default select example" name="fonte">
+                <label for="fonte" class="form-label">Canale Mkt @error('fonte') <span class="text-red-500 text-xs"> - {{ $message }}</span> @enderror</label>
+                <select class="form-select" aria-label="Default select example" name="fonte" id="fonte">
                     <option selected></option>
                     @foreach($canali as $canale)
                         <option value="{{$canale->name}}">{{$canale->name}}</option>

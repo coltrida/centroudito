@@ -9,6 +9,11 @@ class UserController extends Controller
 {
     public function audioprotesisti()
     {
-        return view('audioprotesisti.index');
+        return view('personale.audioprotesisti');
+    }
+
+    public function amministrazione()
+    {
+        return view('personale.amministrazione');
     }
 }

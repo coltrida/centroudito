@@ -11,28 +11,36 @@
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
     </button>--}}
 
-    <a href="#" class="btn btn-primary" style="box-shadow: 2px 2px 4px #000000;" data-bs-toggle="modal" data-bs-target="#exampleModal" title="informazioni">
-        <i class="fas fa-info-circle"></i>
+    <a href="#" class="btn btn-sm btn-primary mr-1"
+            style="box-shadow: 2px 2px 4px #000000;"
+            data-bs-toggle="modal"
+            data-bs-target="#infoModal"
+            title="informazioni">
+        {{ $id }}
     </a>
-    <a href="#" class="btn btn-success mx-1" title="ricontatta" style="box-shadow: 2px 2px 4px #000000;">
-        <i class="fas fa-phone"></i>
+    <a href="#" class="btn btn-sm btn-success mr-1"
+            title="ricontatta"
+            data-bs-toggle="modal"
+            data-bs-target="#callModal"
+            style="box-shadow: 2px 2px 4px #000000;">
+                <i class="fas fa-phone"></i>
     </a>
-    <a href="#" class="btn btn-warning mr-1" title="note" style="box-shadow: 2px 2px 4px #000000;">
+    <a href="#" class="btn btn-sm btn-warning mr-1" title="note" style="box-shadow: 2px 2px 4px #000000;">
         <i class="far fa-sticky-note"></i>
     </a>
-    <a href="#" class="btn mr-1" style="background-color: #c2a449; box-shadow: 2px 2px 4px #000000;" title="prove">
+    <a href="#" class="btn btn-sm mr-1" style="background-color: #c2a449; box-shadow: 2px 2px 4px #000000;" title="prove">
         <i class="fas fa-assistive-listening-systems"></i>
     </a>
-    <a href="#" class="btn" style="background-color: #9153c2; box-shadow: 2px 2px 4px #000000;" title="modifica">
+    <a href="#" class="btn btn-sm" style="background-color: #9153c2; box-shadow: 2px 2px 4px #000000;" title="modifica">
         <i class="fas fa-edit"></i>
     </a>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{$name}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ $id }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -45,3 +53,78 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="callModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Fissare recall per: {{$name}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{route('client.recall')}}" method="POST">
+                @csrf
+            <div class="modal-body">
+
+                    <div class="modal-body">
+                        <input type="hidden" name="id_client" value="{{$id}}">
+                        <input type="date" name="recall"  {{--value="{{$client->datarecall ? $client->datarecall : ''}}"--}} >
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <button type="submit" class="btn btn-primary">Inserisci recall</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@if (session()->has('message'))
+<div class="modal fade" id="messaggioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Recall</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body">
+
+                    <div class="modal-body">
+                        {{ session('message') }}
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <button type="submit" class="btn btn-primary">Inserisci recall</button>
+                </div>
+        </div>
+    </div>
+</div>
+@endif
+
+{{--<div class="modal fade" id="callModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nomeRecall"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="#" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <input type="hidden" id="id_cliente" name="id_cliente">
+                    <input type="date" name="recall" id="recall" --}}{{--value="{{$client->datarecall ? $client->datarecall : ''}}"--}}{{-- >
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                    <button type="submit" class="btn btn-primary">Salva</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>--}}

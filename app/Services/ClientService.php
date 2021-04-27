@@ -5,8 +5,10 @@ namespace App\Services;
 
 
 use App\Models\Client;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use function dd;
 use function trim;
 
 class ClientService
@@ -31,5 +33,14 @@ class ClientService
             'mail' => trim(Str::upper($request->mail)),
             'tipo' => trim(Str::upper($request->tipo))
         ]);
+    }
+
+    public function recall($request)
+    {
+        dd($request);
+        $client = Client::find($request->id_client);
+        $client->recall = '1';
+        $client->datarecall = $request->recall;
+        return $client->save();
     }
 }

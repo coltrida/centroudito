@@ -55,8 +55,9 @@ class User extends Authenticatable
 
     public function filiale()
     {
-        return $this->belongsTo(Filiale::class);
+        return $this->belongsTo(Filiale::class, 'filiale_id', 'id');
     }
+
 
     public function prova()
     {

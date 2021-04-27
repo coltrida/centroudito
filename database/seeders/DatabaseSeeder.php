@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'cacao',
                 'email' => 'cacao@cacao.it',
                 'ruolo' => 'admin',
-                'id_filiale' => null,
+                'filiale_id' => null,
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'audio',
                 'email' => 'audio@audio.it',
                 'ruolo' => 'audio',
-                'id_filiale' => 1,
+                'filiale_id' => 1,
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'audio2',
                 'email' => 'audio2@audio.it',
                 'ruolo' => 'audio',
-                'id_filiale' => 1,
+                'filiale_id' => 1,
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'audio3',
                 'email' => 'audio3@audio.it',
                 'ruolo' => 'audio',
-                'id_filiale' => 2,
+                'filiale_id' => 2,
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'amministrativo',
                 'email' => 'amministrativo@amministrativo.it',
                 'ruolo' => 'segreteria',
-                'id_filiale' => 1,
+                'filiale_id' => 1,
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -109,7 +109,7 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-/*        for ($i = 1; $i <50000; $i++){
+        for ($i = 1; $i <5; $i++){
             Client::create([
                 'name' => 'cliente'.$i,
                 'codfisc' => Str::random(11),
@@ -120,8 +120,9 @@ class DatabaseSeeder extends Seeder
                 'telefono' => '321615612',
                 'tipo' => Arr::random(['pc', 'cl', 'clc']),
                 'fonte' => Arr::random(['Farmacia Rossi', 'Farmacia Bianchi', 'Farmacia Verdi', 'giornale', 'telefonata']),
-                'user_id' => rand(2,3)
+                'user_id' => rand(2,3),
+                'filiale_id' => rand(1,2),
             ]);
-        }*/
+        }
     }
 }
