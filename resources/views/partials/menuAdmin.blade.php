@@ -17,7 +17,7 @@
         Filiali
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="{{route('filiale.idex')}}">Lista</a></li>
+        <li><a class="dropdown-item" href="{{route('filiale.index')}}">Lista</a></li>
     </ul>
 </li>
 <li class="nav-item dropdown">
@@ -26,13 +26,11 @@
         Personale
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="#">Ins. Audioprot.</a></li>
-        <li><a class="dropdown-item" href="#">Lista Audioprot.</a></li>
+        <li><a class="dropdown-item" href="{{route('audioprotesisti.index')}}">Audioprotesisti</a></li>
         <li>
             <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="#">Ins. Ammin.</a></li>
-        <li><a class="dropdown-item" href="#">Lista Ammin.</a></li>
+        <li><a class="dropdown-item" href="#">Amministrazione</a></li>
     </ul>
 </li>
 <li class="nav-item dropdown">
@@ -93,7 +91,7 @@
         Marketing
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="{{route('marketing.idex')}}">Lista</a></li>
+        <li><a class="dropdown-item" href="{{route('marketing.index')}}">Lista</a></li>
     </ul>
 </li>
 <li class="nav-item dropdown">

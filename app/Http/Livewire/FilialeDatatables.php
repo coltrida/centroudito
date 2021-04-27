@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Services\FilialeService;
 use Livewire\Component;
-use stdClass;
 use function session;
 
 class FilialeDatatables extends Component

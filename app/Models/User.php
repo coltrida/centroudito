@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use function config;
 
 class User extends Authenticatable
 {
@@ -39,12 +40,12 @@ class User extends Authenticatable
 
     public function getIsAdminAttribute()
     {
-        return $this->ruolo == 'admin' ? true : false;
+        return $this->ruolo == config('enum.ruoli.admin') ? true : false;
     }
 
     public function getIsAudioAttribute()
     {
-        return $this->ruolo == 'audio' ? true : false;
+        return $this->ruolo == config('enum.ruoli.audio') ? true : false;
     }
 
     public function audiometrie()

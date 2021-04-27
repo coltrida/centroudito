@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FilialeController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\MarketingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'inizio'])->name('inizio');
@@ -17,7 +18,8 @@ Route::group([ 'middleware' => 'auth' ], function() {
 });
 
 Route::group(['middleware' => ['auth','verifyIsAdmin'], 'prefix' => 'admin'], function(){
-    Route::get('/marketing', [MarketingController::class, 'index'])->name('marketing.idex');
-    Route::get('/filiali', [FilialeController::class, 'index'])->name('filiale.idex');
+    Route::get('/marketing', [MarketingController::class, 'index'])->name('marketing.index');
+    Route::get('/filiali', [FilialeController::class, 'index'])->name('filiale.index');
+    Route::get('/audioprotesisti', [UserController::class, 'audioprotesisti'])->name('audioprotesisti.index');
 });
 

@@ -1,7 +1,11 @@
 <?php
 
 return [
-    'ruoli' => ['admin', 'audio', 'segreteria'],
+    'ruoli' => [
+        'admin' =>'admin',
+        'audio' => 'audio',
+        'segreteria' =>'segreteria'
+    ],
 
     'tipi' => ['CL', 'PC', 'CLC', 'DEC']
 ];
