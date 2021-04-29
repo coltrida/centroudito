@@ -5,13 +5,14 @@ namespace App\Services;
 
 
 use App\Models\Listino;
+use Illuminate\Support\Str;
 
 class ListinoService
 {
     public function listino($ricerca)
     {
         if($ricerca == ''){
-            return Listino::orderBy('categoria')->get();
+            return Listino::orderBy('fornitore_id')->orderBy('categoria')->get();
         } else {
             return Listino::where('nome', 'like', '%'.$ricerca.'%')->get();
         }
@@ -21,12 +22,12 @@ class ListinoService
     public function inserisci($request)
     {
         return Listino::insert([
-            'categoria' => $request['categoria'],
-            'nome' => $request['nome'],
-            'costo' => $request['costo'],
+            'categoria' => trim(Str::upper($request['categoria'])),
+            'nome' => trim(Str::upper($request['nome'])),
+            'costo' => trim($request['costo']),
             'fornitore_id' => $request['fornitore_id'],
-            'prezzolistino' => $request['prezzolistino'],
-            'iva' => $request['iva'],
+            'prezzolistino' => trim($request['prezzolistino']),
+            'iva' => trim($request['iva']),
         ]);
     }
 

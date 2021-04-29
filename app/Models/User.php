@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function filiale()
     {
-        return $this->belongsTo(Filiale::class, 'filiale_id', 'id');
+        return $this->belongsToMany(Filiale::class, 'filiale_user', 'user_id', 'filiale_id');
     }
 
 

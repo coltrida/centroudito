@@ -26,7 +26,7 @@
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
-            <div class="mt-4">
+            {{--<div class="mt-4">
                 <x-label for="ruolo" :value="__('Ruolo')" />
                 <select name="ruolo" id="ruolo" class="block mt-1 w-full rounded shadow border-gray-300" aria-label="Default select example">
                     <option selected></option>
@@ -34,7 +34,7 @@
                         <option  value="{{$ele}}">{{$ele}}</option>
                     @endforeach
                 </select>
-            </div>
+            </div>--}}
 
             <!-- Password -->
             <div class="mt-4">

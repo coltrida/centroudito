@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Recapito;
+use Illuminate\Support\Str;
 
 class RecapitoService
 {
@@ -16,10 +17,10 @@ class RecapitoService
     public function inserisci($request)
     {
         return Recapito::insert([
-            'nome' => $request['nome'],
-            'indirizzo' => $request['indirizzo'],
-            'citta' => $request['citta'],
-            'provincia' => $request['provincia']
+            'nome' => trim(Str::upper($request['nome'])),
+            'indirizzo' => trim(Str::upper($request['indirizzo'])),
+            'citta' => trim(Str::upper($request['citta'])),
+            'provincia' => trim(Str::upper($request['provincia']))
         ]);
     }
 

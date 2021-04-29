@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRecapitosTable extends Migration
+class CreateFilialeUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateRecapitosTable extends Migration
      */
     public function up()
     {
-        Schema::create('recapitos', function (Blueprint $table) {
+        Schema::create('filiale_user', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('indirizzo')->nullable();
-            $table->string('citta')->nullable();
-            $table->string('provincia')->nullable();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('filiale_id')->unsigned();
+            $table->unique(['user_id','filiale_id']);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateRecapitosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('recapitos');
+        Schema::dropIfExists('filiale_user');
     }
 }

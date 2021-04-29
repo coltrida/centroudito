@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Marketing;
+use Illuminate\Support\Str;
 
 class MarketingService
 {
@@ -15,7 +16,7 @@ class MarketingService
 
     public function inserisci($nome)
     {
-        return Marketing::insert(['name' => $nome]);
+        return Marketing::insert(['name' => trim(Str::upper($nome))]);
     }
 
     public function rimuovi($id)

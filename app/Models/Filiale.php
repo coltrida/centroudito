@@ -13,6 +13,11 @@ class Filiale extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class, 'user_id', 'id');
+        return $this->belongsToMany(User::class, 'filiale_user', 'filiale_id', 'user_id')->withPivot(['id']);
+    }
+
+    public function clients()
+    {
+        return $this->hasMany(Client::class, 'filiale_id', 'id');
     }
 }

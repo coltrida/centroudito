@@ -3,23 +3,30 @@
 namespace App\Http\Livewire;
 
 use App\Models\Client;
+use App\Models\Filiale;
+use App\Models\FilialeUser;
+use App\Models\User;
 use App\Services\ClientService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\NumberColumn;
 use Mediconesystems\LivewireDatatables\DateColumn;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
+use function collect;
+use function dd;
 use function view;
 
 class ClientDatatables extends LivewireDatatable
 {
     public $idAudio;
+    public $idFiliale;
     public $model = Client::class;
 
     public function builder()
     {
-        return $this->idAudio != '' ? Client::query()->where('user_id', $this->idAudio) : Client::query();
+        return $this->idAudio != '' ? Client::query()->where('filiale_id', $this->idFiliale) : Client::query();
     }
 
 //    public function columns()
@@ -51,11 +58,12 @@ class ClientDatatables extends LivewireDatatable
     public function columns()
     {
         return [
-            Column::callback(['id', 'name'], function ($id, $name) {
-                return view('components.button3', ['id' => $id, 'name' => $name]);
+            Column::callback(['id', 'nome'], function ($id, $nome) {
+                return view('components.button3', ['id' => $id, 'nome' => $nome]);
             }),
             /*NumberColumn::name('id')->filterable(),*/
-            Column::name('name')->filterable()->searchable(),
+            Column::name('nome')->filterable()->searchable(),
+            Column::name('cognome')->filterable()->searchable(),
             Column::name('indirizzo')->filterable()->searchable(),
             Column::name('citta')->filterable()->searchable(),
             Column::name('cap')->filterable()->searchable(),
@@ -67,7 +75,7 @@ class ClientDatatables extends LivewireDatatable
             Column::name('tipo')->filterable()->searchable(),
             Column::name('fonte')->filterable()->searchable(),
             Column::name('mail')->filterable()->searchable(),
-
+            DateColumn::name('datarecall')->filterable(),
             DateColumn::name('created_at')->filterable(),
             Column::delete()
 

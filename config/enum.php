@@ -9,5 +9,5 @@ return [
 
     'tipi' => ['CL', 'PC', 'CLC', 'DEC'],
 
-    'categoria_listino' => ['APA', 'ACC']
+    'categoria_listino' => ['APA', 'ACC', 'SERVIZI']
 ];

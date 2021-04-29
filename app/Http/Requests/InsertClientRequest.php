@@ -24,14 +24,13 @@ class InsertClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required|string|max:255',
+                'nome' => 'required|string|max:255',
                 'cognome' => 'required|string|max:255',
                 'indirizzo' => 'required|string|max:255',
                 'citta' => 'required|string|max:255',
                 'cap' => 'required|numeric',
                 'provincia' => 'required|string|max:4',
                 'telefono' => 'required|string|max:20',
-                'mail' => 'required|email',
                 'tipo' => 'required',
                 'fonte' => 'required',
         ];
@@ -47,7 +46,6 @@ class InsertClientRequest extends FormRequest
             'cap.required' => 'il cap è obbligatorio',
             'provincia.required' => 'PR obbligatoria',
             'telefono.required' => 'il telefono è obbligatorio',
-            'mail.required' => 'la mail è obbligatoria',
             'tipo.required' => 'il tipo è obbligatorio',
             'fonte.required' => 'la fonte è obbligatoria',
         ];

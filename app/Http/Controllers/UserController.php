@@ -16,4 +16,9 @@ class UserController extends Controller
     {
         return view('personale.amministrazione');
     }
+
+    public function associaFiliale()
+    {
+        return view('gestione.userFiliale');
+    }
 }

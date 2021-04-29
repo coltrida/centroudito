@@ -61,26 +61,27 @@
                 </div>
             </div>
         </form>
+
         @foreach($listino as $item)
             <div class="rounded border p-3 my-2" style="background-color: #124874; box-shadow: 2px 2px 4px #000000;">
                 <div class="row justify-between my-1 align-items-center">
                     <div class="col">
-                        <p class="font-bold text-lg">{{$item->fornitore->nome}}</p>
+                        <p class="font-bold">{{$item->fornitore->nome}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold text-lg">{{$item->categoria}}</p>
+                        <p class="font-bold">{{$item->categoria}}</p>
                     </div>
                     <div class="col-2">
-                        <p class="font-bold text-lg">{{$item->nome}}</p>
+                        <p class="font-bold">{{$item->nome}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold text-lg">€ {{$item->costo}}</p>
+                        <p class="font-bold">€ {{$item->costo}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold text-lg">€ {{$item->prezzolistino}}</p>
+                        <p class="font-bold">€ {{$item->prezzolistino}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold text-lg">{{$item->iva}}%</p>
+                        <p class="font-bold">{{$item->iva}}%</p>
                     </div>
                     <div class="col-1">
                         <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$item->id}})"></i>

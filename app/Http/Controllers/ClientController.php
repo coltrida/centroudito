@@ -18,15 +18,16 @@ use function view;
 class ClientController extends Controller
 {
 
-    public function index(UserService $userService, $idAudio = '')
+    public function index(UserService $userService, $idAudio = '', $idFiliale = '')
     {
         if ($userService->userNonAutorizzato($idAudio) && $idAudio != ''){ abort(401); }
-        return view('client.index', ['idAudio' => $idAudio]);
+        return view('client.index', ['idAudio' => $idAudio, 'idFiliale' => $idFiliale ]);
     }
 
-    public function inserisci(MarketingService $marketingService, RecapitoService $recapitoService, FilialeService $filialeService)
+    public function inserisci(ClientService $clientService, MarketingService $marketingService, RecapitoService $recapitoService, FilialeService $filialeService, $id='')
     {
         return view('client.inserisci', [
+            'client' => $clientService->getClient($id),
             'canali' => $marketingService->canali(),
             'filiali' => $filialeService->filiali(),
             'recapiti' => $recapitoService->recapiti()
@@ -39,6 +40,14 @@ class ClientController extends Controller
             return redirect()->route('client.index')->withMessage("Errore nell'inserimento cliente");
         }
         return redirect()->route('client.index')->withMessage("Cliente Inserito");
+    }
+
+    public function modifica(InsertClientRequest $request, ClientService $clientService)
+    {
+        if (!$clientService->modifica($request)) {
+            return redirect()->route('client.index')->withMessage("Errore nella modifica cliente");
+        }
+        return redirect()->route('client.index')->withMessage("Cliente {$request->nome} {$request->cognome} Modificato");
     }
 
     public function recall(Request $request, ClientService $clientService)

@@ -33,13 +33,15 @@
             <div class="rounded border p-3 my-2" style="background-color: #124874; box-shadow: 2px 2px 4px #000000;">
                 <div class="row justify-between my-1 align-items-center">
                     <div class="col">
-                        <p class="font-bold text-lg">{{$item->name}}</p>
+                        <p class="font-bold">{{$item->name}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold text-lg">{{$item->email}}</p>
+                        <p class="font-bold">{{$item->email}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold text-lg">{{$item->filiale->nome}}</p>
+                        @foreach($item->filiale as $filiale)
+                            <p class="font-bold">{{$filiale->nome}}</p>
+                        @endforeach
                     </div>
                     <div class="col-1">
                         <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$item->id}})"></i>

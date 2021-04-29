@@ -15,10 +15,11 @@ Route::get('/', [FrontController::class, 'inizio'])->name('inizio');
 require __DIR__.'/auth.php';
 
 Route::group([ 'middleware' => 'auth' ], function() {
-    Route::get('/clients/inserisci', [ClientController::class, 'inserisci'])->name('client.inserisci');
+    Route::get('/clients/inserisci/{id?}', [ClientController::class, 'inserisci'])->name('client.inserisci');
     Route::post('/clients/recall', [ClientController::class, 'recall'])->name('client.recall');
     Route::post('/clients/inserisci', [ClientController::class, 'postInserisci'])->name('client.postInserisci');
-    Route::get('/clients/{idAudio?}', [ClientController::class, 'index'])->where('idAudio', '[1-9]+')->name('client.index');
+    Route::patch('/clients/modifica', [ClientController::class, 'modifica'])->name('client.modifica');
+    Route::get('/clients/{idAudio?}/{idFiliale?}', [ClientController::class, 'index'])->where('idAudio', '[1-9]+')->name('client.index');
 });
 
 Route::group(['middleware' => ['auth','verifyIsAdmin'], 'prefix' => 'admin'], function(){
@@ -29,5 +30,6 @@ Route::group(['middleware' => ['auth','verifyIsAdmin'], 'prefix' => 'admin'], fu
     Route::get('/listino', [ListinoController::class, 'index'])->name('listino.index');
     Route::get('/personale', [UserController::class, 'audioprotesisti'])->name('personale.index');
     Route::get('/amministrazione', [UserController::class, 'amministrazione'])->name('amministrazione.index');
+    Route::get('/user/filiale/associa', [UserController::class, 'associaFiliale'])->name('user.associaFiliale');
 });
 

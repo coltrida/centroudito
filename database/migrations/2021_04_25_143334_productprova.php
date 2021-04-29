@@ -13,10 +13,10 @@ class Productprova extends Migration
      */
     public function up()
     {
-        Schema::create('productprova', function (Blueprint $table) {
+        Schema::create('product_prova', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_prova');
-            $table->bigInteger('id_product');
+            $table->bigInteger('id_prova')->unsigned();
+            $table->bigInteger('id_product')->unsigned();
             $table->string('prezzo')->nullable();
             $table->timestamps();
         });
