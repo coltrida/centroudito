@@ -13,5 +13,7 @@
             :idFiliale="$idFiliale"
             exportable
         />
+
+        <livewire:modal/>
     </div>
 @endsection

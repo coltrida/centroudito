@@ -59,7 +59,7 @@ class ClientDatatables extends LivewireDatatable
     {
         return [
             Column::callback(['id', 'nome'], function ($id, $nome) {
-                return view('components.button3', ['id' => $id, 'nome' => $nome]);
+                return view('livewire.buttons', ['id' => $id, 'nome' => $nome]);
             }),
             /*NumberColumn::name('id')->filterable(),*/
             Column::name('nome')->filterable()->searchable(),
