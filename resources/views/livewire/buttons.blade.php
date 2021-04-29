@@ -13,7 +13,9 @@
         <i class="fas fa-phone"></i>
     </a>
 
-    <a href="#" class="btn btn-sm btn-warning mr-1" title="note" style="box-shadow: 2px 2px 4px #000000;">
+    <a href="#" class="btn btn-sm btn-warning mr-1"
+        wire:click="$emit('clientSelectedNote', {{$id}})"
+        title="note" style="box-shadow: 2px 2px 4px #000000;">
         <i class="far fa-sticky-note"></i>
     </a>
     <a href="#" class="btn btn-sm mr-1" style="background-color: #c2a449; box-shadow: 2px 2px 4px #000000;" title="prove">

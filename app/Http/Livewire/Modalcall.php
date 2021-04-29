@@ -6,12 +6,13 @@ use App\Models\Client;
 use Livewire\Component;
 use function dd;
 
-class Modal extends Component
+class Modalcall extends Component
 {
     public $visibile = true;
     public $clientName;
     public $clientCognome;
     public $clientId;
+    public $clientCall;
 
     protected $listeners = [
         'clientSelectedRecall',
@@ -23,6 +24,7 @@ class Modal extends Component
         $client = Client::find($id);
         $this->clientName = $client->nome;
         $this->clientCognome = $client->cognome;
+        $this->clientCall = $client->datarecall ? $client->datarecall : null;
         $this->clientId = $id;
     }
 
@@ -35,6 +37,6 @@ class Modal extends Component
 
     public function render()
     {
-        return view('livewire.modal');
+        return view('livewire.modalcall');
     }
 }

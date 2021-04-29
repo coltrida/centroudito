@@ -62,8 +62,8 @@ class ClientDatatables extends LivewireDatatable
                 return view('livewire.buttons', ['id' => $id, 'nome' => $nome]);
             }),
             /*NumberColumn::name('id')->filterable(),*/
-            Column::name('nome')->filterable()->searchable(),
             Column::name('cognome')->filterable()->searchable(),
+            Column::name('nome')->filterable()->searchable(),
             Column::name('indirizzo')->filterable()->searchable(),
             Column::name('citta')->filterable()->searchable(),
             Column::name('cap')->filterable()->searchable(),

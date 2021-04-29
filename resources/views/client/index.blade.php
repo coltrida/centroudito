@@ -14,6 +14,7 @@
             exportable
         />
 
-        <livewire:modal/>
+        <livewire:modalcall/>
+        <livewire:modalnote/>
     </div>
 @endsection

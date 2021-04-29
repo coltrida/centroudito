@@ -17,7 +17,7 @@
             </div>
         </form>
         @foreach($canali as $item)
-                <div class="rounded border p-3 my-2" style="background-color: #124874; box-shadow: 2px 2px 4px #000000;">
+             <div class="rounded border p-3 my-2" style="background-color: #124874; box-shadow: 2px 2px 4px #000000;">
                 <div class="flex justify-between my-1 align-items-center">
                     <div class="flex">
                         <p class="font-bold">{{$item->name}}</p>
