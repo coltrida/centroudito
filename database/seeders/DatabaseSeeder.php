@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Client;
 use App\Models\Filiale;
+use App\Models\Fornitore;
+use App\Models\Listino;
 use App\Models\Marketing;
 use App\Models\Recapito;
 use App\Models\User;
@@ -105,15 +107,74 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        Fornitore::insert([
+            [
+                'nome' => 'PHONAK',
+            ],
+            [
+                'nome' => 'STARKEY',
+            ],
+            [
+                'nome' => 'OTICON',
+            ]
+        ]);
+
+        Listino::insert([
+            [
+                'nome' => 'M90',
+                'fornitore_id' => 1,
+                'categoria' => 'APA',
+                'costo' => 1000,
+                'prezzolistino' => 4000,
+                'iva' => 4
+            ],
+            [
+                'nome' => 'M70',
+                'fornitore_id' => 1,
+                'categoria' => 'APA',
+                'costo' => 800,
+                'prezzolistino' => 3500,
+                'iva' => 4
+            ],
+            [
+                'nome' => 'silver',
+                'fornitore_id' => 2,
+                'categoria' => 'APA',
+                'costo' => 300,
+                'prezzolistino' => 1500,
+                'iva' => 4
+            ],
+            [
+                'nome' => 'GET',
+                'fornitore_id' => 3,
+                'categoria' => 'APA',
+                'costo' => 150,
+                'prezzolistino' => 1200,
+                'iva' => 4
+            ],
+            [
+                'nome' => 'TV LINK',
+                'fornitore_id' => 2,
+                'categoria' => 'ACC',
+                'costo' => 200,
+                'prezzolistino' => 400,
+                'iva' => 22
+            ]
+
+        ]);
+
         Recapito::insert([
             [
                 'nome' => 'FARMACIA ROSSI',
+                'user_id' => 2,
             ],
             [
                 'nome' => 'FARMACIA BIANCHI',
+                'user_id' => 3,
             ],
             [
                 'nome' => 'FARMACIA VERDI',
+                'user_id' => 2,
             ]
         ]);
 

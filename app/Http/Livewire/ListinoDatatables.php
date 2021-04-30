@@ -2,12 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\FilialeService;
 use App\Services\FornitoreService;
 use App\Services\ListinoService;
 use Livewire\Component;
 use function session;
-use function throw_if;
 use function view;
 
 class ListinoDatatables extends Component

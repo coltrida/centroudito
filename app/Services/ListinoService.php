@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class ListinoService
 {
-    public function listino($ricerca)
+    public function listino($ricerca='')
     {
         if($ricerca == ''){
             return Listino::orderBy('fornitore_id')->orderBy('categoria')->get();

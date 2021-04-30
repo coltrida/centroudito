@@ -16,5 +16,6 @@
 
         <livewire:modalcall/>
         <livewire:modalnote/>
+        <livewire:modalappuntamenti/>
     </div>
 @endsection

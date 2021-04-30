@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->ruolo == config('enum.ruoli.audio') ? true : false;
     }
 
+    public function getIsAmministrazioneAttribute()
+    {
+        return $this->ruolo == config('enum.ruoli.segreteria') ? true : false;
+    }
+
     public function audiometrie()
     {
         return $this->hasMany(Audiometria::class);
@@ -58,9 +63,18 @@ class User extends Authenticatable
         return $this->belongsToMany(Filiale::class, 'filiale_user', 'user_id', 'filiale_id');
     }
 
-
     public function prova()
     {
         return $this->hasMany(Prova::class);
+    }
+
+    public function recapito()
+    {
+        return $this->hasMany(Recapito::class);
+    }
+
+    public function appuntamenti()
+    {
+        return $this->hasMany(Appuntamento::class);
     }
 }

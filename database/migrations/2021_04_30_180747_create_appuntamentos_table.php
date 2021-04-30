@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Productprova extends Migration
+class CreateAppuntamentosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class Productprova extends Migration
      */
     public function up()
     {
-        Schema::create('product_prova', function (Blueprint $table) {
+        Schema::create('appuntamentos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('prova_id')->unsigned();
-            $table->bigInteger('product_id')->unsigned();
-            $table->string('prezzo')->nullable();
+            $table->date('giorno');
+            $table->bigInteger('client_id');
+            $table->bigInteger('user_id');
+            $table->bigInteger('filiale_id')->nullable();
+            $table->bigInteger('recapito_id')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class Productprova extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('productprova');
+        Schema::dropIfExists('appuntamentos');
     }
 }

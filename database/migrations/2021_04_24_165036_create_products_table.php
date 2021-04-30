@@ -17,9 +17,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('matricola')->nullable();
             $table->string('stato')->nullable();
-            $table->bigInteger('id_prova')->nullable();
-            $table->bigInteger('id_filiale')->nullable();
-            $table->bigInteger('id_listino')->nullable();
+            $table->bigInteger('filiale_id')->nullable();
+            $table->bigInteger('listino_id')->nullable();
+            $table->bigInteger('fornitore_id')->nullable();
             $table->timestamps();
         });
     }

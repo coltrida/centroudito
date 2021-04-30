@@ -3,10 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Client;
-use App\Services\MarketingService;
 use App\Services\NoteService;
 use Livewire\Component;
-use function session;
 
 class Modalnote extends Component
 {

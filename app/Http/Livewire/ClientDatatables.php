@@ -77,7 +77,7 @@ class ClientDatatables extends LivewireDatatable
             Column::name('mail')->filterable()->searchable(),
             DateColumn::name('datarecall')->filterable(),
             DateColumn::name('created_at')->filterable(),
-            Column::delete()
+            /*Column::delete()*/
 
         ];
     }

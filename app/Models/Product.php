@@ -13,4 +13,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Prova::class);
     }
+
+    public function listino()
+    {
+        return $this->belongsTo(Listino::class);
+    }
 }

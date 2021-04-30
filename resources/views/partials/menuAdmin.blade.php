@@ -8,6 +8,10 @@
         <li>
             <hr class="dropdown-divider">
         </li>
+        <li><a class="dropdown-item" href="#">Importa</a></li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
         <li><a class="dropdown-item" href="{{route('client.index')}}">lista</a></li>
     </ul>
 </li>
@@ -53,7 +57,7 @@
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
         @foreach($filiali as $filiale)
-        <li><a class="dropdown-item" href="#">{{$filiale->nome}}</a></li>
+        <li><a class="dropdown-item" href="{{route('magazzino.index',  $filiale->id)}}">{{$filiale->nome}}</a></li>
         <li>
             <hr class="dropdown-divider">
         </li>

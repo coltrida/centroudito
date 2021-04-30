@@ -64,7 +64,7 @@
             <div class="rounded-lg @unless($this->hidePagination) rounded-b-none @endif">
                 <div class="table align-middle min-w-full">
                     @unless($this->hideHeader)
-                    <div class="table-row divide-x divide-gray-200">
+                    <div class="table-row divide-x divide-gray-200 align-items-center">
                         @foreach($this->columns as $index => $column)
                             @if($hideable === 'inline')
                                 @include('datatables::header-inline-hide', ['column' => $column, 'sort' => $sort])
@@ -80,7 +80,7 @@
                         @endforeach
                     </div>
 
-                    <div class="table-row divide-x divide-blue-200 bg-blue-100">
+                    <div class="table-row divide-x divide-blue-200 bg-blue-100 align-items-center">
                         @foreach($this->columns as $index => $column)
                             @if($column['hidden'])
                                 @if($hideable === 'inline')
@@ -112,7 +112,7 @@
                     </div>
                     @endif
                     @forelse($this->results as $result)
-                        <div class="table-row p-1 divide-x divide-gray-100 {{ isset($result->checkbox_attribute) && in_array($result->checkbox_attribute, $selected) ? 'bg-orange-100' : ($loop->even ? 'bg-gray-100' : 'bg-gray-50') }}">
+                        <div  class="table-row p-1 divide-x divide-gray-100 align-items-center {{ isset($result->checkbox_attribute) && in_array($result->checkbox_attribute, $selected) ? 'bg-orange-100' : ($loop->even ? 'bg-gray-100' : 'bg-gray-50') }}">
                             @foreach($this->columns as $column)
                                 @if($column['hidden'])
                                     @if($hideable === 'inline')
@@ -121,9 +121,10 @@
                                 @elseif($column['type'] === 'checkbox')
                                     @include('datatables::checkbox', ['value' => $result->checkbox_attribute])
                                 @else
-                                    <div class="px-6 py-2 whitespace-no-wrap text-sm leading-5 text-gray-900 table-cell @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif">
-                                        {!! $result->{$column['name']} !!}
-                                    </div>
+                                        <div class="px-6 py-2 whitespace-no-wrap text-sm leading-5 text-gray-900 table-cell @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif">
+                                            {!! $result->{$column['name']} !!}
+                                        </div>
+
                                 @endif
                             @endforeach
                         </div>

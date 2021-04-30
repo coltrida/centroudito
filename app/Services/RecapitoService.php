@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Recapito;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class RecapitoService

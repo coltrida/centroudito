@@ -14,7 +14,9 @@ class NoteService
 {
     public function note($id)
     {
-            return Client::find($id)->notes;
+        return Client::with(['notes' => function ($q){
+            $q->orderBy('created_at', 'desc');
+        }])->find($id)->notes;
     }
 
     public function inserisci($testo, $client_id)
