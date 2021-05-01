@@ -10,17 +10,32 @@ class Home extends Component
 {
     public function render(UserService $userService)
     {
-        $nomeVista = 'livewire.home-admin';
+        $parametri = [];
+        $nomeVista = 'livewire.home.home-admin';
+        $parametri = [
+            'audioprotesisti' => [],
+            'filiali' => [],
+            'amministrativi' => []
+        ];
         if (isset($userService->getUser()->name)){
             if ($userService->isAdmin()){
-                $nomeVista = 'livewire.home-admin';
+                $nomeVista = 'livewire.home.home-admin';
+                $parametri = [
+                    'audioprotesisti' => $userService->getAudioprotesisti(),
+                    'filiali' => $userService->getFiliali(),
+                    'amministrativi' => $userService->getAmministrazione()
+                ];
             } elseif ($userService->isAudio()){
-                $nomeVista = 'livewire.home-audio';
+                $nomeVista = 'livewire.home.home-audio';
+                $parametri = [
+                    'proveInCorso' => $userService->proveInCorso(),
+                    'finalizzati' => $userService->finalizzatiDelMese(),
+                ];
             } elseif ($userService->isAmministrazione()){
-                $nomeVista = 'livewire.home-amministrazione';
+                $nomeVista = 'livewire.home.home-amministrazione';
             }
         }
 
-        return view($nomeVista);
+        return view($nomeVista, $parametri);
     }
 }

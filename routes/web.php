@@ -8,9 +8,56 @@ use App\Http\Controllers\ListinoController;
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\RecapitoController;
 use App\Http\Controllers\UserController;
+use Asantibanez\LivewireCharts\Models\AreaChartModel;
+use Asantibanez\LivewireCharts\Models\ColumnChartModel;
+use Asantibanez\LivewireCharts\Models\LineChartModel;
+use Asantibanez\LivewireCharts\Models\PieChartModel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'inizio'])->name('inizio');
+
+Route::get('/prova', function (){
+    /*$pieChartModel =
+        (new PieChartModel())
+            ->setTitle('Expenses by Type')
+            ->addSlice('prova', 4.3, '#fc8181')
+            ->addSlice('prova2', 5.3, '#fc8ff')
+    ;*/
+    /*return view('prova', [
+        'pieChartModel' => $pieChartModel
+    ]);*/
+
+    /*$areaChartModel =
+        (new AreaChartModel())
+            ->setTitle('Expenses by Type')
+            ->addPoint('prova1', 3)
+            ->addPoint('prova1', 4)
+            ->addPoint('prova1', 5)
+    ;*/
+
+    $lineChartModel =
+        (new LineChartModel())
+            ->setTitle('Expenses by Type')
+            ->addPoint('Food', 100, '#f6ad55')
+            ->addPoint('Shopping', 200, '#fc8181')
+        ->singleLine()
+    ;
+    /*return view('prova', [
+        'lineChartModel' => $lineChartModel
+    ]);*/
+
+    $columnChartModel =
+        (new ColumnChartModel())
+            ->setTitle('Expenses by Type')
+            ->addColumn('Food', 5, '#f6ad55')
+            ->addColumn('Shopping', 4, '#fc8181')
+            ->addColumn('Travel', 3, '#90cdf4')
+    ;
+    return view('prova', [
+        'columnChartModel' => $columnChartModel,
+        'lineChartModel' => $lineChartModel,
+    ]);
+});
 
 require __DIR__.'/auth.php';
 

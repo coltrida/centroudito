@@ -44,7 +44,7 @@ class AudioDatatables extends Component
 
     public function render(UserService $userService, FilialeService $filialeService)
     {
-        return view('livewire.audio-datatables', [
+        return view('livewire.personale.audio-datatables', [
             'audioprotesisti' => $userService->getAudioprotesisti(),
             'filiali' => $filialeService->filiali()
         ]);

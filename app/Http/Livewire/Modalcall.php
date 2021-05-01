@@ -37,6 +37,6 @@ class Modalcall extends Component
 
     public function render()
     {
-        return view('livewire.modalcall');
+        return view('livewire.modalClient.modalcall');
     }
 }

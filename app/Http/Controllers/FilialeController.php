@@ -18,4 +18,5 @@ class FilialeController extends Controller
     {
         return view('magazzino.index', compact('idFiliale'));
     }
+
 }

@@ -2,10 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Services\FilialeService;
 use App\Services\FornitoreService;
 use App\Services\ListinoService;
 use App\Services\ProductService;
+use App\Services\UserService;
 use Livewire\Component;
+use function dd;
 use function session;
 
 class MagazzinoDatatable extends Component
@@ -15,10 +18,11 @@ class MagazzinoDatatable extends Component
     public $idFornitore;
     public $ricerca;
     public $matricola;
-    public $stato;
+    public $stato = 'filiale';
 
     public function aggiungi(ProductService $productService)
     {
+
         $reques = [
             'matricola' => $this->matricola,
             'stato' => $this->stato,
@@ -26,6 +30,7 @@ class MagazzinoDatatable extends Component
             'listino_id' => $this->idListino,
             'fornitore_id' => $this->idFornitore,
         ];
+
         if(!$productService->inserisci($reques)){
             session()->flash('message', 'Errore di inserimento');
         } else {
@@ -46,12 +51,16 @@ class MagazzinoDatatable extends Component
         }
     }
 
-    public function render(ProductService $productService, FornitoreService $fornitoreService, ListinoService $listinoService)
+    public function render(ProductService $productService,
+                           FornitoreService $fornitoreService,
+                           FilialeService $filialeService,
+                            UserService $userService)
     {
-        return view('livewire.magazzino-datatable', [
+        return view('livewire.magazzino.magazzino-datatable', [
             'products' => $productService->products($this->idFiliale, $this->ricerca),
             'fornitori' => $fornitoreService->fornitori(),
-            'listino' => $listinoService->listino(),
+            'listino' => $this->idFornitore ? $fornitoreService->listinoFromFornitore($this->idFornitore) : [],
+            'filiali' => $userService->isAdmin() ? $filialeService->filiali() : $userService->getFiliali()
         ]);
     }
 }

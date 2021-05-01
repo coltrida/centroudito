@@ -118,6 +118,7 @@
       <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
       <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
       <path value="$PROJECT_DIR$/vendor/mediconesystems/livewire-datatables" />
+      <path value="$PROJECT_DIR$/vendor/asantibanez/livewire-charts" />
     </include_path>
   </component>
   <component name="PhpUnit">

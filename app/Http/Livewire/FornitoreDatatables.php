@@ -59,7 +59,7 @@ class FornitoreDatatables extends Component
 
     public function render(FornitoreService $fornitoreService)
     {
-        return view('livewire.fornitore-datatables', [
+        return view('livewire.fornitori.fornitore-datatables', [
             'fornitori' => $fornitoreService->fornitori()
         ]);
     }

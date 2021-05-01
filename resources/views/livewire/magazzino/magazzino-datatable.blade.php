@@ -15,33 +15,48 @@
         @error('newComment') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
 
         <form class="my-4" wire:submit.prevent="aggiungi">
-            <div class="flex">
-                <select wire:model="idFornitore" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
-                    <option selected>Seleziona Fornitore</option>
-                    @foreach($fornitori as $item)
-                        <option value="{{$item->id}}">{{$item->nome}}</option>
-                    @endforeach
-                </select>
-                <select wire:model="idListino" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
-                    <option selected>listino</option>
-                    @foreach($listino as $item)
-                        <option value="{{$item->id}}">{{$item->nome}}</option>
-                    @endforeach
-                </select>
-                <input wire:model.lazy="matricola" type="text" style="color: black" class="w-full rounded border shadow p-2 mr-2 my-2" placeholder="Matricola">
+            <div class="row">
+                <div class="col">
+                    <select wire:model="idFornitore" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
+                        <option selected value=''>Seleziona Fornitore</option>
+                        @foreach($fornitori as $item)
+                            <option value="{{$item->id}}">{{$item->nome}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col">
+                    <select wire:model="idListino" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
+                        <option selected>listino</option>
+                        @foreach($listino as $item)
+                            <option value="{{$item->id}}">{{$item->nome}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col">
+                    <input wire:model.lazy="matricola" type="text" style="color: black" class="w-full rounded border shadow p-2 mr-2 my-2" placeholder="Matricola">
+                </div>
+                <div class="col">
+                    <select wire:model="idFiliale" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
+                        <option selected value="negozio">filiale</option>
+                        @foreach($filiali as $item)
+                            <option value="{{$item->id}}">{{$item->nome}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col">
+                    <select wire:model="stato" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
+                        <option value="filiale">filiale</option>
+                        <option value="prova">prova</option>
+                        <option value="vendita">vendita</option>
+                    </select>
+                </div>
             </div>
-            <div class="flex">
-                <select wire:model="stato" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
-                    <option selected value="negozio">negozio</option>
-                    <option value="prova">prova</option>
-                </select>
-            </div>
+
             <div class="py-2 flex justify-content-between">
                 <div>
                     <button type="submit" class="p-2 bg-blue-500 w-20 rounded shadow text-white">Aggiungi</button>
                 </div>
                 <div>
-                    {{--<input type="text" wire:model="ricerca" style="color: black" class="w-full rounded border shadow p-2 mr-2 my-2" placeholder="filtra">--}}
                     <div class="w-96 flex rounded-lg shadow-sm">
                         <div class="relative flex-grow focus-within:z-10">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -50,13 +65,6 @@
                                 </svg>
                             </div>
                             <input wire:model.debounce.500ms="ricerca" style="padding: 10px 0 10px 40px; color: black" class="form-input block bg-gray-50 focus:bg-white w-full rounded-md pl-10 transition ease-in-out duration-150 sm:text-sm sm:leading-5" placeholder="Search in Name">
-                            {{--<div class="absolute inset-y-0 right-0 pr-3 flex items-center">
-                                <button wire:click="$set('search', null)" class="text-gray-300 hover:text-red-600 focus:outline-none">
-                                    <svg class="h-5 w-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                </button>
-                            </div>--}}
                         </div>
                     </div>
                 </div>
@@ -73,13 +81,19 @@
                         <p class="font-bold">{{$item->stato}}</p>
                     </div>
                     <div class="col-2">
-                        <p class="font-bold">{{$item->filiale_id}}</p>
+                        <p class="font-bold">{{$item->filiale->nome}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold">{{$item->listino_id}}</p>
+                        <p class="font-bold">€ {{$item->listino->costo}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold">{{$item->fornitore_id}}</p>
+                        <p class="font-bold">€ {{$item->listino->prezzolistino}}</p>
+                    </div>
+                    <div class="col">
+                        <p class="font-bold">{{$item->listino->iva}} %</p>
+                    </div>
+                    <div class="col">
+                        <p class="font-bold">{{$item->fornitore->nome}}</p>
                     </div>
                     <div class="col-1">
                         <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$item->id}})"></i>

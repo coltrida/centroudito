@@ -33,4 +33,9 @@ class FornitoreService
     {
         return Fornitore::find($id)->delete();
     }
+
+    public function listinoFromFornitore($id)
+    {
+        return $id ? Fornitore::with('listino')->find($id)->listino : '';
+    }
 }

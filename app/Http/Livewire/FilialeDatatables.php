@@ -49,7 +49,7 @@ class FilialeDatatables extends Component
 
     public function render(FilialeService $filialeService)
     {
-        return view('livewire.filiale-datatables', [
+        return view('livewire.strutture.filiale-datatables', [
             'filiali' => $filialeService->filiali()
         ]);
     }

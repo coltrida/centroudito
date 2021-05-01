@@ -63,7 +63,7 @@ class Modalappuntamenti extends Component
     public function render(AppuntamentoService $appuntamentoService, UserService $userService)
     {
         //dd($userService->getFiliali());
-        return view('livewire.modalappuntamenti', [
+        return view('livewire.modalClient.modalappuntamenti', [
             'appuntamenti' => $this->clientId ? $appuntamentoService->appuntamenti($this->clientId) : [],
             'filiali' => $userService->getFiliali(),
             'recapiti' => $userService->getRecapitiOfUser(),

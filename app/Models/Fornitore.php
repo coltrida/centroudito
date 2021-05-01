@@ -10,4 +10,9 @@ class Fornitore extends Model
     use HasFactory;
 
     protected $table = 'fornitores';
+
+    public function listino()
+    {
+        return $this->hasMany(Listino::class);
+    }
 }

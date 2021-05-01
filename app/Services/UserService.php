@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use function config;
 use function dd;
@@ -69,5 +70,25 @@ class UserService
     public function isAmministrazione()
     {
         return Auth::user()->isAmministrazione ? true : false;
+    }
+
+    public function proveInCorso()
+    {
+        return User::with(['prova' => function ($q){
+            $q->with(['product'])->where('stato', 'inCorso');
+        }])->find(Auth::id())->prova;
+    }
+
+    public function finalizzatiDelMese()
+    {
+        $oggi = Carbon::now();
+
+        return User::with(['prova' => function ($q) use($oggi){
+            $q->with(['product'])->where([
+                ['stato', 'finalizzato'],
+                ['mese_fine', $oggi->month],
+                ['anno_fine', $oggi->year],
+            ]);
+        }])->find(Auth::id())->prova;
     }
 }

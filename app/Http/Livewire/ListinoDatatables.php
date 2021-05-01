@@ -52,7 +52,7 @@ class ListinoDatatables extends Component
 
     public function render(ListinoService $listinoService, FornitoreService $fornitoreService)
     {
-        return view('livewire.listino-datatables', [
+        return view('livewire.listino.listino-datatables', [
             'listino' => $listinoService->listino($this->ricerca),
             'fornitori' => $fornitoreService->fornitori()
         ]);

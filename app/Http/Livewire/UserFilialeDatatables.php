@@ -26,7 +26,7 @@ class UserFilialeDatatables extends Component
 
     public function render(UserService $userService, FilialeService $filialeService)
     {
-        return view('livewire.user-filiale-datatables', [
+        return view('livewire.personale.user-filiale-datatables', [
             'audioprotesisti' => $userService->getAudioprotesisti(),
             'amministrazione' => $userService->getAmministrazione(),
             'filiali' => $filialeService->filiali()

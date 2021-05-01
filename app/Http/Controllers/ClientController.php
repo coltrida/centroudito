@@ -8,6 +8,7 @@ use App\Services\FilialeService;
 use App\Services\MarketingService;
 use App\Services\RecapitoService;
 use App\Services\UserService;
+use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function abort;

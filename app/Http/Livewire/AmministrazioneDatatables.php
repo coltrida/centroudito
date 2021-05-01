@@ -44,7 +44,7 @@ class AmministrazioneDatatables extends Component
 
     public function render(UserService $userService, FilialeService $filialeService)
     {
-        return view('livewire.amministrazione-datatables', [
+        return view('livewire.personle.amministrazione-datatables', [
             'amministrazione' => $userService->getAmministrazione(),
             'filiali' => $filialeService->filiali()
         ]);

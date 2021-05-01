@@ -30,6 +30,8 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
         @livewireStyles
     </head>
     <body class="antialiased">
@@ -98,5 +100,6 @@
             @copyright coltricat 2021
         </div>
         @livewireScripts
+        @livewireChartsScripts
     </body>
 </html>

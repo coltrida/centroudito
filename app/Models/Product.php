@@ -18,4 +18,14 @@ class Product extends Model
     {
         return $this->belongsTo(Listino::class);
     }
+
+    public function filiale()
+    {
+        return $this->belongsTo(Filiale::class);
+    }
+
+    public function fornitore()
+    {
+        return $this->belongsTo(Fornitore::class);
+    }
 }

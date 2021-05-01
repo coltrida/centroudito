@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Models\Filiale;
 use App\Models\Product;
 use Illuminate\Support\Str;
+use function dd;
 use function trim;
 
 class ProductService
@@ -15,13 +16,13 @@ class ProductService
     {
         if($ricerca == ''){
             return Filiale::with(['products' => function ($q){
-                $q->orderBy('fornitore_id')->orderBy('listino_id');
+                $q->with(['filiale', 'fornitore', 'listino'])->orderBy('fornitore_id')->orderBy('listino_id');
             }])->find($idFiliale)->products;
 
             //return Product::orderBy('fornitore_id')->orderBy('listino_id')->get();
         } else {
             return Filiale::with(['products' => function ($q) use($ricerca){
-                $q->where('nome', 'like', '%'.$ricerca.'%');
+                $q->with(['filiale', 'fornitore', 'listino'])->where('nome', 'like', '%'.$ricerca.'%');
             }])->find($idFiliale)->products;
 
             /*return Product::whereHas('listino', function($q) use($ricerca){
@@ -45,4 +46,5 @@ class ProductService
     {
         return Product::find($id)->delete();
     }
+
 }

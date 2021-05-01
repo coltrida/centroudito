@@ -114,6 +114,10 @@
             <hr class="dropdown-divider">
         </li>
         <li><a class="dropdown-item" href="#">Invio sms</a></li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="#">Budgets</a></li>
     </ul>
 </li>
 <li class="nav-item dropdown">

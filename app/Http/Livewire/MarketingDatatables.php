@@ -34,7 +34,7 @@ class MarketingDatatables extends Component
 
     public function render(MarketingService $marketingService)
     {
-        return view('livewire.marketing-datatables', [
+        return view('livewire.marketing.marketing-datatables', [
             'canali' => $marketingService->canali()
         ]);
     }

@@ -44,7 +44,7 @@ class RecapitoDatatables extends Component
 
     public function render(RecapitoService $recapitoService)
     {
-        return view('livewire.recapito-datatables', [
+        return view('livewire.strutture.recapito-datatables', [
             'recapiti' => $recapitoService->recapiti()
         ]);
     }

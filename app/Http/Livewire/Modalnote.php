@@ -47,7 +47,7 @@ class Modalnote extends Component
 
     public function render(NoteService $noteService)
     {
-        return view('livewire.modalnote', [
+        return view('livewire.modalClient.modalnote', [
             'note' => $this->clientId ? $noteService->note($this->clientId) : []
         ]);
     }
