@@ -71,4 +71,11 @@ class ClientService
     {
         return $id != '' ? Client::find($id) : null;
     }
+
+    public function getProve($id)
+    {
+        return Client::with(['prova' => function ($q){
+            $q->with(['product'])->orderBy('inizio_prova', 'asc');
+        }])->find($id)->prova;
+    }
 }

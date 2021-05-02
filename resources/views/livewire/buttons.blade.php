@@ -18,7 +18,9 @@
         title="note" style="box-shadow: 2px 2px 4px #000000; width: 35px">
         <i class="far fa-sticky-note"></i>
     </a>
-    <a href="#" class="btn btn-sm mr-1" style="background-color: #c2a449; box-shadow: 2px 2px 4px #000000; width: 35px" title="prove">
+    <a href="#" class="btn btn-sm mr-1" style="background-color: #c2a449; box-shadow: 2px 2px 4px #000000; width: 35px"
+        wire:click="$emit('clientSelectedProva', {{$id}})"
+        title="prove">
         <i class="fas fa-assistive-listening-systems"></i>
     </a>
     <a href="#" class="btn btn-sm" style="background-color: #9153c2; box-shadow: 2px 2px 4px #000000; width: 35px" title="audiometrie">

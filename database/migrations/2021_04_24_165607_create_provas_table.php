@@ -17,7 +17,8 @@ class CreateProvasTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('client_id')->nullable();
-            $table->string('nr_ordine')->nullable();
+            $table->bigInteger('filiale_id')->nullable();
+            $table->string('nr_ordine')->autoIncrement();
             $table->string('tot')->nullable();
             $table->string('stato')->nullable();
             $table->date('inizio_prova')->nullable();

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Client;
 use App\Models\Filiale;
+use App\Models\FilialeUser;
 use App\Models\Fornitore;
 use App\Models\Listino;
 use App\Models\Marketing;
@@ -176,6 +177,33 @@ class DatabaseSeeder extends Seeder
                 'nome' => 'FARMACIA VERDI',
                 'user_id' => 2,
             ]
+        ]);
+
+        FilialeUser::insert([
+            [
+                'filiale_id' => 1,
+                'user_id' => 2,
+            ],
+            [
+                'filiale_id' => 2,
+                'user_id' => 2,
+            ],
+            [
+                'filiale_id' => 2,
+                'user_id' => 3,
+            ],
+            [
+                'filiale_id' => 1,
+                'user_id' => 4,
+            ],
+            [
+                'filiale_id' => 1,
+                'user_id' => 5,
+            ],
+            [
+                'filiale_id' => 2,
+                'user_id' => 5,
+            ],
         ]);
 
         for ($i = 1; $i <5; $i++){
