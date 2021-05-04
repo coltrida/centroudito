@@ -1,5 +1,5 @@
 @extends('stile')
 
 @section('main')
-        <livewire:marketing-datatables />
+    <livewire:marketing-datatables xmlns:livewire=""/>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\Client;
+use App\Models\Filiale;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -74,8 +75,32 @@ class ClientService
 
     public function getProve($id)
     {
+        /*dd(Client::with(['prova' => function ($q){
+            $q->with(['product'])->orderBy('inizio_prova', 'asc');
+        }])->find($id)->prova);*/
+
         return Client::with(['prova' => function ($q){
             $q->with(['product'])->orderBy('inizio_prova', 'asc');
         }])->find($id)->prova;
+    }
+
+    public function getRecallsOggi()
+    {
+        $oggi = Carbon::now()->format('Y-m-d');
+        return Filiale::with(['clients' => function ($q) use($oggi){
+            $q->where([['recall', '1'],['datarecall', $oggi]]);
+        }])->whereHas('clients', function($z) use($oggi){
+            $z->where([['recall', '1'],['datarecall', $oggi]]);
+        })->get();
+    }
+
+    public function getRecallsDomani()
+    {
+        $domani = Carbon::tomorrow()->format('Y-m-d');
+        return Filiale::with(['clients' => function ($q) use($domani){
+            $q->where([['recall', '1'],['datarecall', $domani]]);
+        }])->whereHas('clients', function($z) use($domani){
+            $z->where([['recall', '1'],['datarecall', $domani]]);
+        })->get();
     }
 }

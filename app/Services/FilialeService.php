@@ -16,6 +16,27 @@ class FilialeService
         return Filiale::with('users')->orderBy('nome')->get();
     }
 
+    public function caricaId($idSelezionato)
+    {
+        $vettore = [];
+        $filiali = Filiale::orderBy('nome')->get();
+        //dd($filiali);
+        foreach ($filiali as $filiale){
+            $vettore[$filiale->id] = $idSelezionato == $filiale->id ? 'true' : 'false';
+          //   $vettore[$filiale->id] = 'false';
+        }
+        /*if ($idSelezionato != ''){
+            $vettore[$idSelezionato] = 'true';
+        }*/
+        //dd($vettore);
+        return $vettore;
+    }
+
+    public function nomeFiliale($id)
+    {
+        return Filiale::find($id)->nome;
+    }
+
     public function inserisci($request)
     {
         return Filiale::insert([

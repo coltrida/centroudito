@@ -17,6 +17,7 @@ class Productprova extends Migration
             $table->id();
             $table->bigInteger('prova_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
+            $table->string('orecchio')->nullable();
             $table->string('prezzo')->nullable();
             $table->timestamps();
         });

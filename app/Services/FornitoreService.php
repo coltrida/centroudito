@@ -4,8 +4,10 @@
 namespace App\Services;
 
 
+use App\Models\Filiale;
 use App\Models\Fornitore;
 use Illuminate\Support\Str;
+use function dd;
 
 class FornitoreService
 {
@@ -37,5 +39,25 @@ class FornitoreService
     public function listinoFromFornitore($id)
     {
         return $id ? Fornitore::with('listino')->find($id)->listino : '';
+    }
+
+    public function productFromFornitore($id)
+    {
+        return $id ? Fornitore::with('product')->find($id)->product : '';
+    }
+
+    public function productFromFornitoreInFiliale($idFornitore, $idFiliale)
+    {
+        /*dd(Filiale::with(['products' => function ($q) use($idFornitore) {
+            $q->with(['filiale', 'fornitore', 'listino'])->whereHas('fornitore', function($z) use($idFornitore) {
+                $z->where('id', $idFornitore);
+            })->where('stato', 'FILIALE');
+        }])->find($idFiliale)->products);*/
+
+        return Filiale::with(['products' => function ($q) use($idFornitore) {
+            $q->with(['filiale', 'fornitore', 'listino'])->whereHas('fornitore', function($z) use($idFornitore) {
+                $z->where('id', $idFornitore);
+            })->where('stato', 'FILIALE');
+        }])->find($idFiliale)->products;
     }
 }

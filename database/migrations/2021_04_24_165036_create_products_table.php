@@ -20,6 +20,8 @@ class CreateProductsTable extends Migration
             $table->bigInteger('filiale_id')->nullable();
             $table->bigInteger('listino_id')->nullable();
             $table->bigInteger('fornitore_id')->nullable();
+            $table->bigInteger('ddt_id')->nullable();
+            $table->bigInteger('fattura_id')->nullable();
             $table->timestamps();
         });
     }

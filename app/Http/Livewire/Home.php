@@ -2,20 +2,64 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Filiale;
+use App\Services\ClientService;
+use App\Services\DdtService;
+use App\Services\FilialeService;
+use App\Services\ProductService;
 use App\Services\UserService;
 use Livewire\Component;
+
+use function array_push;
+use function array_splice;
+use function dd;
+use function session;
 use function view;
 
 class Home extends Component
 {
-    public function render(UserService $userService)
+    public $ddt = [];
+    public $matricola = [];
+    public $filialeSelezionata = '';
+
+    public function aggiungiAlDdt($product, $idFiliale, DdtService $ddtService)
+    {
+        $product['matricolaAssociata'] = $this->matricola[$product['id']];
+        array_push($this->ddt, $product);
+        $ddtService->inserimentoTemporaneoProdotto($product['id']);
+        $this->filialeSelezionata = $idFiliale;
+       // dd($this->aperto[$idFiliale]);
+    }
+
+    public function removeFromDdt($id, DdtService $ddtService)
+    {
+        array_splice($this->ddt, $id, 1);
+        $ddtService->eliminazioneTemporaneaProdotto($id);
+    }
+
+    public function produciDdt(DdtService $ddtService)
+    {
+        if(!$ddtService->produciDdt($this->ddt)){
+            session()->flash('message', 'Errore di produzione DDT');
+        } else {
+            session()->flash('message', 'DDT prodotto');
+        }
+        $this->ddt = [];
+    }
+
+    public function render(UserService $userService, ProductService $productService, ClientService $clientService, FilialeService $filialeService)
     {
         $parametri = [];
         $nomeVista = 'livewire.home.home-admin';
         $parametri = [
             'audioprotesisti' => [],
             'filiali' => [],
-            'amministrativi' => []
+            'amministrativi' => [],
+            'proveInCorso' => [],
+            'finalizzati' => [],
+            'FilialiprodottiRichiesti' => [],
+            'recallsOggi' => [],
+            'recallsDomani' => []
         ];
         if (isset($userService->getUser()->name)){
             if ($userService->isAdmin()){
@@ -33,6 +77,12 @@ class Home extends Component
                 ];
             } elseif ($userService->isAmministrazione()){
                 $nomeVista = 'livewire.home.home-amministrazione';
+                $parametri = [
+                    'FilialiprodottiRichiesti' => $productService->prodottiRichiestiTutteFiliali(),
+                    'recallsOggi' => $clientService->getRecallsOggi(),
+                    'recallsDomani' => $clientService->getRecallsDomani(),
+                    'aperto' => $filialeService->caricaId($this->filialeSelezionata)
+                ];
             }
         }
 

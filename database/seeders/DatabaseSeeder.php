@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'amministrativo',
-                'email' => 'amministrativo@amministrativo.it',
+                'email' => 'amm@amm.it',
                 'ruolo' => 'segreteria',
                 'email_verified_at' => now(),
                 'created_at' => now(),
@@ -138,7 +138,7 @@ class DatabaseSeeder extends Seeder
                 'iva' => 4
             ],
             [
-                'nome' => 'silver',
+                'nome' => 'SILVER',
                 'fornitore_id' => 2,
                 'categoria' => 'APA',
                 'costo' => 300,

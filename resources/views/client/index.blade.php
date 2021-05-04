@@ -17,6 +17,8 @@
         <livewire:modalcall/>
         <livewire:modalnote/>
         <livewire:modalappuntamenti/>
-        <livewire:modalprova/>
+        <livewire:modalprova
+            :filialeId="$idFiliale"
+        />
     </div>
 @endsection

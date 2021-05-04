@@ -11,7 +11,7 @@ class Product extends Model
 
     public function prova()
     {
-        return $this->belongsToMany(Prova::class);
+        return $this->belongsToMany(Prova::class, 'product_prova', 'product_id', 'prova_id');
     }
 
     public function listino()

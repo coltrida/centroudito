@@ -21,8 +21,13 @@ class Prova extends Model
         return $this->belongsTo(Client::class);
     }
 
+    /*public function listino()
+    {
+        return $this->belongsToMany(Listino::class, 'product_prova', 'prova_id', 'product_id');
+    }*/
+
     public function product()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class, 'product_prova', 'prova_id', 'product_id');
     }
 }

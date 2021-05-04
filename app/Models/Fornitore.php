@@ -15,4 +15,9 @@ class Fornitore extends Model
     {
         return $this->hasMany(Listino::class);
     }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

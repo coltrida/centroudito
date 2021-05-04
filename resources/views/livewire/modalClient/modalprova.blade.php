@@ -12,7 +12,7 @@
                 <button type="button" class="btn-close" wire:click="closeModal()" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body" style="height: 370px;">
+            <div class="modal-body" style="height: 470px;">
                 <form wire:submit.prevent="aggiungi">
                     <div class="row">
                         <div class="col">
@@ -31,13 +31,44 @@
                             </select>
                         </div>
                         <div class="col">
-                            <select wire:model="productId" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
-                                <option selected>prodotto</option>
-                                @foreach($listino as $item)
-                                    <option value="{{$item->id}}">{{$item->nome}}</option>
+                            <select wire:model="product" wire:click="scegliProdotto($event.target.value)" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
+                                <option value="">prodotto</option>
+                                @foreach($prodottiInMagazzino as $item)
+                                    <option value="{{$item}}">{{$item->listino->nome}} - {{$item->matricola}}</option>
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col">
+                            <select wire:model="orecchio" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
+                                <option value="">orecchio</option>
+                                <option value="sx">SX</option>
+                                <option value="dx">DX</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <input wire:model.lazy="importo" type="text" style="color: black" class="w-full rounded border shadow p-2 mr-2 my-2">
+                        </div>
+                    </div>
+
+                    <a wire:click="aggiungiAllaProva({{$product}})" class="btn btn-success">aggiungi alla prova</a>
+
+                    <div style="height: 190px; overflow: auto">
+                        @foreach($prodotti as $key => $item)
+                        <div class="rounded border p-1 my-2 mr-4" style="background-color: #052e3c; box-shadow: 2px 2px 4px #000000; color: white">
+                            <div class="row justify-between my-1 align-items-center">
+                                <div class="col-3">
+                                    <p >{{$item['listino']['nome']}}</p>
+                                </div>
+                                <div class="col-7">
+                                    <p>{{$item['prezzoProposto']}}</p>
+                                </div>
+                                <div class="col-2">
+                                    <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="removeFromProva({{$key}}, {{$item['prezzoProposto']}})"></i>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        @if($totale) <h3>Totale prova: € {{$totale}}</h3>  @endif
                     </div>
                     <button type="submit" class="p-2 bg-blue-500 w-20 rounded shadow text-white">Aggiungi</button>
                 </form>
@@ -46,17 +77,19 @@
                         <div class="rounded border p-3 my-2 mr-4" style="background-color: #052e3c; box-shadow: 2px 2px 4px #000000; color: white">
                             <div class="row justify-between my-1 align-items-center">
                                 <div class="col">
+                                    <p >{{$item->inizio_prova}}</p>
+                                </div>
+                                <div class="col">
                                     <p >{{$item->stato}}</p>
                                 </div>
-                                {{--<div class="col">
-                                    <p >{{isset($item->filiale->nome) ? $item->filiale->nome : ''}}</p>
+                                <div class="col">
+                                    <p >€ {{$item->tot}}</p>
                                 </div>
                                 <div class="col">
-                                    <p >{{isset($item->recapito->nome) ? $item->recapito->nome : ''}}</p>
+                                    @foreach($item->product as $prodotto)
+                                        <div >{{$prodotto->product_it}}</div>
+                                    @endforeach
                                 </div>
-                                <div class="col">
-                                    <p >{{$item->user->name}}</p>
-                                </div>--}}
                                 <div class="col">
                                     <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$item->id}})"></i>
                                 </div>

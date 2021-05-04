@@ -68,6 +68,7 @@ Route::group([ 'middleware' => 'auth' ], function() {
     Route::patch('/clients/modifica', [ClientController::class, 'modifica'])->name('client.modifica');
     Route::get('/clients/{idAudio?}/{idFiliale?}', [ClientController::class, 'index'])->where('idAudio', '[1-9]+')->name('client.index');
     Route::get('/magazzino/{idFiliale}', [FilialeController::class, 'magazzino'])->where('id', '[1-9]+')->name('magazzino.index');
+    Route::get('/magazzinoFiliale/{idFiliale}', [FilialeController::class, 'magazzinoFiliale'])->where('id', '[1-9]+')->name('magazzinoFiliale.index');
 });
 
 Route::group(['middleware' => ['auth','verifyIsAdmin'], 'prefix' => 'admin'], function(){
