@@ -16,6 +16,7 @@ class ListinoDatatables extends Component
     public $prezzolistino;
     public $iva;
     public $fornitore_id;
+    public $giorniDiReso;
     public $ricerca;
 
     public function aggiungi(ListinoService $listinoService)
@@ -25,6 +26,7 @@ class ListinoDatatables extends Component
             'nome' => $this->nome,
             'costo' => $this->costo,
             'prezzolistino' => $this->prezzolistino,
+            'giorniDiReso' => $this->giorniDiReso,
             'iva' => $this->iva,
             'fornitore_id' => $this->fornitore_id,
         ];

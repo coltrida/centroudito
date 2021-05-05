@@ -58,6 +58,10 @@ class FornitoreService
             $q->with(['filiale', 'fornitore', 'listino'])->whereHas('fornitore', function($z) use($idFornitore) {
                 $z->where('id', $idFornitore);
             })->where('stato', 'FILIALE');
-        }])->find($idFiliale)->products;
+        }])->find($idFiliale) ? Filiale::with(['products' => function ($q) use($idFornitore) {
+            $q->with(['filiale', 'fornitore', 'listino'])->whereHas('fornitore', function($z) use($idFornitore) {
+                $z->where('id', $idFornitore);
+            })->where('stato', 'FILIALE');
+        }])->find($idFiliale)->products : [];
     }
 }

@@ -74,6 +74,8 @@ class Home extends Component
                 $parametri = [
                     'proveInCorso' => $userService->proveInCorso(),
                     'finalizzati' => $userService->finalizzatiDelMese(),
+                    'appuntamentiOggi' => $userService->appuntamentiOggi(),
+                    'appuntamentiDomani' => $userService->appuntamentiDomani(),
                 ];
             } elseif ($userService->isAmministrazione()){
                 $nomeVista = 'livewire.home.home-amministrazione';

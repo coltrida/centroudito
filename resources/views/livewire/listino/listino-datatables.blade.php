@@ -34,6 +34,7 @@
                 <input wire:model.lazy="costo" type="text" style="color: black" class="w-full rounded border shadow p-2 mr-2 my-2" placeholder="costo">
                 <input wire:model.lazy="prezzolistino" type="text" style="color: black" class="w-full rounded border shadow p-2 mr-2 my-2" placeholder="prezzo di listino">
                 <input wire:model.lazy="iva" type="text" style="color: black" class="w-full rounded border shadow p-2 mr-2 my-2" placeholder="iva">
+                <input wire:model.lazy="giorniDiReso" type="text" style="color: black" class="w-full rounded border shadow p-2 mr-2 my-2" placeholder="Giorni di Reso">
             </div>
             <div class="py-2 flex justify-content-between">
                 <div>

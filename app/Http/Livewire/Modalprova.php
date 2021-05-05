@@ -3,19 +3,14 @@
 namespace App\Http\Livewire;
 
 use App\Models\Client;
-use App\Models\Ddt;
-use App\Services\AppuntamentoService;
 use App\Services\ClientService;
 use App\Services\FornitoreService;
 use App\Services\ProvaService;
-use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use function array_push;
-use function array_slice;
 use function dd;
 use function json_decode;
-use function throw_if;
 use function view;
 
 class Modalprova extends Component
@@ -26,7 +21,7 @@ class Modalprova extends Component
     public $clientId;
     public $filialeId;
     public $fornitoreId;
-    public $stato = 'inProva';
+    public $stato = 'PROVA';
     public $prodotti = [];
     public $product;
     public $importo;
@@ -35,6 +30,7 @@ class Modalprova extends Component
 
     protected $listeners = [
         'clientSelectedProva',
+        'produciFattura' => 'fattura'
     ];
 
     public function clientSelectedProva($id)
@@ -58,6 +54,7 @@ class Modalprova extends Component
         ];
         $provaService->inserisci($reques);
         $this->filialeId = '';
+        $this->fornitoreId = '';
         $this->stato = '';
         $this->totale = '';
         $this->prodotti = [];
@@ -66,6 +63,7 @@ class Modalprova extends Component
     public function aggiungiAllaProva($product)
     {
         $product['prezzoProposto'] = $this->importo;
+        $product['orecchio'] = $this->orecchio;
         array_push($this->prodotti, $product);
         //dd($this->prodotti);
         $this->totale += $this->importo;
@@ -87,6 +85,12 @@ class Modalprova extends Component
         $this->clientId = '';
         $this->clientName = '';
         $this->visibile = true;
+    }
+
+    public function fattura($idProva, ProvaService $provaService)
+    {
+        $this->visibile = true;
+        $provaService->fattura($idProva);
     }
 
     public function scegliProdotto($value)

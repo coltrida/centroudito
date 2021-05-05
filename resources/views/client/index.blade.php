@@ -20,5 +20,6 @@
         <livewire:modalprova
             :filialeId="$idFiliale"
         />
+        <livewire:modalfattura/>
     </div>
 @endsection

@@ -54,6 +54,11 @@ class MagazzinoFiliale extends Component
         }
     }
 
+    public function nonArrivato($id, ProductService $productService)
+    {
+
+    }
+
     public function render(ProductService $productService, FornitoreService $fornitoreService, FilialeService $filialeService)
     {
         return view('livewire.magazzino.magazzino-filiale', [

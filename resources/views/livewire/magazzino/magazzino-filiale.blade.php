@@ -101,6 +101,9 @@
                     <div class="col-1">
                         <i title="arrivato" class="fas fa-check-square text-green-200 hover:text-green-600 cursor-pointer" wire:click="arrivato({{$item->id}})"></i>
                     </div>
+                    <div class="col-1">
+                        <i title="non arrivato" class="fas fa-check-square text-red-200 hover:text-red-600 cursor-pointer" wire:click="nonArrivato({{$item->id}})"></i>
+                    </div>
 
                 </div>
             </div>

@@ -21,6 +21,7 @@ class CreateListinosTable extends Migration
             $table->string('costo')->nullable();
             $table->string('prezzolistino')->nullable();
             $table->string('iva')->nullable();
+            $table->string('giorniTempoDiReso')->nullable();
             $table->timestamps();
         });
     }

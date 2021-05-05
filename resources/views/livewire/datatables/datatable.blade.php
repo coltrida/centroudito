@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 @endif
-                    @if(Request::path() == 'clients')
+                    @if(Request::path() == 'clients' || substr(Request::path(), 0, 7)  == 'clients')
                         <a href="{{route('client.inserisci')}}" class="btn btn-primary ml-4">Inserisci Paziente</a>
                     {{--@elseif(Request::path() == 'admin/marketing')
                         <a href="#" class="btn btn-primary ml-4">Inserisci Canale Mkt</a>--}}

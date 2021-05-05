@@ -16,6 +16,8 @@ class CreateAppuntamentosTable extends Migration
         Schema::create('appuntamentos', function (Blueprint $table) {
             $table->id();
             $table->date('giorno');
+            $table->time('orario');
+            $table->string('nota');
             $table->bigInteger('client_id');
             $table->bigInteger('user_id');
             $table->bigInteger('filiale_id')->nullable();

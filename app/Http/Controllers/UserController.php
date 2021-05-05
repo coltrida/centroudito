@@ -21,4 +21,9 @@ class UserController extends Controller
     {
         return view('gestione.userFiliale');
     }
+
+    public function budget()
+    {
+        return view('gestione.assegnaBudget');
+    }
 }

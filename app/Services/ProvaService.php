@@ -4,6 +4,8 @@
 namespace App\Services;
 
 
+use App\Models\Fattura;
+use App\Models\Product;
 use App\Models\ProductProva;
 use App\Models\Prova;
 use Carbon\Carbon;
@@ -36,12 +38,40 @@ class ProvaService
             $productProva->product_id = $prodotti['id'];
             $productProva->prezzo = $prodotti['prezzoProposto'];
             $productProva->save();
+            $prodotto = Product::find($prodotti['id']);
+            $prodotto->stato = 'PROVA';
+            $prodotto->save();
         }
         //dd($request['prodotti']);
     }
 
     public function rimuovi($id)
     {
-        return Prova::find($id)->delete();
+        $oggi = Carbon::now();
+        $prova = Prova::with('product')->find($id);
+        $prova->stato = 'RESO';
+        $prova->fine_prova = $oggi->format('Y-m-d');
+        $prova->mese_fine = $oggi->month;
+        $prova->anno_fine = $oggi->year;
+        foreach ($prova->product as $prodotto){
+            $prodotto->stato = 'FILIALE';
+            $prodotto->save();
+        }
+        return $prova->save();
+    }
+
+    public function fattura($id)
+    {
+        $oggi = Carbon::now();
+        $prova = Prova::with('product')->find($id);
+        $prova->fine_prova = $oggi->format('Y-m-d');
+        $prova->stato = 'FATTURA';
+        $prova->mese_fine = $oggi->month;
+        $prova->anno_fine = $oggi->year;
+        foreach ($prova->product as $prodotto){
+            $prodotto->stato = 'FATTURA';
+            $prodotto->save();
+        }
+        return $prova->save();
     }
 }

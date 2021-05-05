@@ -80,7 +80,9 @@ class ClientService
         }])->find($id)->prova);*/
 
         return Client::with(['prova' => function ($q){
-            $q->with(['product'])->orderBy('inizio_prova', 'asc');
+            $q->with(['product' => function($q){
+                $q->with('listino');
+            }])->orderBy('inizio_prova', 'asc');
         }])->find($id)->prova;
     }
 

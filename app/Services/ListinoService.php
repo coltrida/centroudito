@@ -25,6 +25,7 @@ class ListinoService
             'categoria' => trim(Str::upper($request['categoria'])),
             'nome' => trim(Str::upper($request['nome'])),
             'costo' => trim($request['costo']),
+            'giorniTempoDiReso' => trim($request['giorniDiReso']),
             'fornitore_id' => $request['fornitore_id'],
             'prezzolistino' => trim($request['prezzolistino']),
             'iva' => trim($request['iva']),

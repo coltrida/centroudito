@@ -37,15 +37,27 @@
             </div>
 
             <div class="col-4">
-                <p class="font-bold text-lg ">Appuntamenti</p>
-                @foreach($proveInCorso as $prova)
+                <p class="font-bold text-lg ">Appuntamenti di Oggi</p>
+                @foreach($appuntamentiOggi as $appuntamento)
                     <div class="rounded border p-1 my-2" style="background-color: #537429; box-shadow: 2px 2px 4px #000000;">
                         <div class="row justify-between my-1 align-items-center">
                             <div class="col">
-                                <div class="font-bold">Inizio Prova:{{$prova->inizio_prova}}</div>
+                                <div class="font-bold">Inizio Prova:{{$appuntamento->giorno}}</div>
                                 <div class="text-right">
-                                    <div>Cliente: {{$prova->id_client}}</div>
-                                    <div>Tot: {{$prova->tot}}</div>
+                                    <div>Cliente: {{$appuntamento->client_id}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                <p class="font-bold text-lg ">Appuntamenti di Domani</p>
+                @foreach($appuntamentiDomani as $appuntamento)
+                    <div class="rounded border p-1 my-2" style="background-color: #537429; box-shadow: 2px 2px 4px #000000;">
+                        <div class="row justify-between my-1 align-items-center">
+                            <div class="col">
+                                <div class="font-bold">Inizio Prova:{{$appuntamento->giorno}}</div>
+                                <div class="text-right">
+                                    <div>Cliente: {{$appuntamento->client_id}}</div>
                                 </div>
                             </div>
                         </div>

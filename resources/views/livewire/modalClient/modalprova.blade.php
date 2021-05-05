@@ -56,13 +56,19 @@
                         @foreach($prodotti as $key => $item)
                         <div class="rounded border p-1 my-2 mr-4" style="background-color: #052e3c; box-shadow: 2px 2px 4px #000000; color: white">
                             <div class="row justify-between my-1 align-items-center">
-                                <div class="col-3">
+                                <div class="col">
                                     <p >{{$item['listino']['nome']}}</p>
                                 </div>
-                                <div class="col-7">
+                                <div class="col">
                                     <p>{{$item['prezzoProposto']}}</p>
                                 </div>
-                                <div class="col-2">
+                                <div class="col">
+                                    <p>{{$item['orecchio']}}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{$item['matricola']}}</p>
+                                </div>
+                                <div class="col-1">
                                     <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="removeFromProva({{$key}}, {{$item['prezzoProposto']}})"></i>
                                 </div>
                             </div>
@@ -87,13 +93,19 @@
                                 </div>
                                 <div class="col">
                                     @foreach($item->product as $prodotto)
-                                        <div >{{$prodotto->product_it}}</div>
+                                        <div >{{$prodotto->listino->nome}} - {{$prodotto->matricola}}</div>
                                     @endforeach
                                 </div>
-                                <div class="col">
-                                    <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$item->id}})"></i>
+                                <div class="col-1">
+                                    @if($item->stato == 'PROVA')
+                                    <i title="reso" class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$item->id}})"></i>
+                                    @endif
                                 </div>
-
+                                <div class="col-1">
+                                    @if($item->stato == 'PROVA')
+                                    <i title="vendita" class="fas fa-check-square text-green-200 hover:text-green-600 cursor-pointer" wire:click="$emit('produciFattura', {{$item->id}})"></i>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     @endforeach

@@ -80,5 +80,6 @@ Route::group(['middleware' => ['auth','verifyIsAdmin'], 'prefix' => 'admin'], fu
     Route::get('/personale', [UserController::class, 'audioprotesisti'])->name('personale.index');
     Route::get('/amministrazione', [UserController::class, 'amministrazione'])->name('amministrazione.index');
     Route::get('/user/filiale/associa', [UserController::class, 'associaFiliale'])->name('user.associaFiliale');
+    Route::get('/budget', [UserController::class, 'budget'])->name('user.budget');
 });
 

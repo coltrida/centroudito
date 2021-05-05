@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Models\Budget;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -90,5 +91,59 @@ class UserService
                 ['anno_fine', $oggi->year],
             ]);
         }])->find(Auth::id())->prova;
+    }
+
+    public function appuntamentiOggi()
+    {
+        $oggi = Carbon::now()->format('Y-m-d');
+        return User::with(['appuntamenti' => function ($q) use($oggi){
+            $q->where('giorno', $oggi);
+        }])->find(Auth::id())->appuntamenti;
+    }
+
+    public function appuntamentiDomani()
+    {
+        $domani = Carbon::tomorrow()->format('Y-m-d');
+        return User::with(['appuntamenti' => function ($q) use($domani){
+            $q->where('giorno', $domani);
+        }])->find(Auth::id())->appuntamenti;
+    }
+
+    public function associaBudget($request)
+    {
+        $budget = new Budget();
+        $budget->budgetAnno = $request['budget'];
+        $budget->premio = 0;
+        $budget->stipendio = $request['stipendioMese'];
+        $budget->provvigione = $request['provvigioni'];
+        $budget->gennaio = $request[0];
+        $budget->febbraio = $request[1];
+        $budget->marzo = $request[2];
+        $budget->aprile = $request[3];
+        $budget->maggio = $request[4];
+        $budget->giugno = $request[5];
+        $budget->luglio = $request[6];
+        $budget->agosto = $request[7];
+        $budget->settembre = $request[8];
+        $budget->ottobre = $request[9];
+        $budget->novembre = $request[10];
+        $budget->dicembre = $request[11];
+        $budget->save();
+
+        $user = User::find($request['audioId']);
+        $user->budget_id = $budget->id;
+        return $user->save();
+    }
+
+    public function getInfoBudget($id)
+    {
+        return User::with('budget')->find($id)->budget;
+    }
+
+    public function disassociaBudget($id)
+    {
+        $user = User::find($id);
+        $user->budget_id = null;
+        $user->save();
     }
 }

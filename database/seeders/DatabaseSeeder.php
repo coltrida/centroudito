@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Budget;
 use App\Models\Client;
 use App\Models\Filiale;
 use App\Models\FilialeUser;
@@ -51,6 +52,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'CACAO',
                 'email' => 'cacao@cacao.it',
                 'ruolo' => 'admin',
+                'budget_id' => null,
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -60,6 +62,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Davide Coltrioli',
                 'email' => 'audio@audio.it',
                 'ruolo' => 'audio',
+                'budget_id' => 1,
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -69,6 +72,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Cecchi Massimiliano',
                 'email' => 'audio2@audio.it',
                 'ruolo' => 'audio',
+                'budget_id' => null,
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -78,6 +82,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'audio3',
                 'email' => 'audio3@audio.it',
                 'ruolo' => 'audio',
+                'budget_id' => null,
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -87,6 +92,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'amministrativo',
                 'email' => 'amm@amm.it',
                 'ruolo' => 'segreteria',
+                'budget_id' => null,
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -222,5 +228,23 @@ class DatabaseSeeder extends Seeder
                 'filiale_id' => rand(1,2),
             ]);
         }
+
+        Budget::create([
+            'budgetAnno' => 100000,
+            'stipendio' => 1000,
+            'provvigione' => 10,
+            'gennaio' => 8,
+            'febbraio' => 10,
+            'marzo' => 8,
+            'aprile' => 10,
+            'maggio' => 8,
+            'giugno' => 8,
+            'luglio' => 8,
+            'agosto' => 8,
+            'settembre' => 8,
+            'ottobre' => 8,
+            'novembre' => 8,
+            'dicembre' => 8,
+        ]);
     }
 }

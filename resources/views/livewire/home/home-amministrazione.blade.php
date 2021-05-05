@@ -16,7 +16,7 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$filiale->nome}}" aria-expanded="false" aria-controls="collapseOne">
-                                Filiale: {{$filiale->nome}} {{$aperto[$filiale->id]}}
+                                Filiale: {{$filiale->nome}}
                             </button>
                         </h2>
 
