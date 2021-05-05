@@ -10,9 +10,23 @@
                             <div class="col">
                                 <div class="font-bold">{{$audioprotesista->name}}</div>
                                 <div class="text-right">
-                                    <div>Prove in corso:</div>
-                                    <div>Fatturato mese:</div>
-                                    <div>Target mese:</div>
+                                    <div>Prove in corso: {{$audioprotesista->prova_count}}</div>
+                                        @foreach($audioprotesista->provaInCorso as $prove)
+                                            <div class="row">
+                                                <div class="col"> {{$prove->inizio_prova}} </div>
+                                                <div class="col"> € {{$prove->tot}} </div>
+                                                <div class="col"> {{$prove->client_id}} </div>
+                                            </div>
+                                        @endforeach
+                                    <div>Fatturato mese: € {{$audioprotesista->prova_finalizzata_sum_tot}}</div>
+                                        @foreach($audioprotesista->provaFinalizzata as $prove)
+                                            <div class="row">
+                                                <div class="col"> {{$prove->inizio_prova}} </div>
+                                                <div class="col"> € {{$prove->tot}} </div>
+                                                <div class="col"> {{$prove->client_id}} </div>
+                                            </div>
+                                        @endforeach
+                                    <div>Target mese: {{isset($audioprotesista->budget_id) ? ( (int)$audioprotesista->budget->budgetAnno * (int)$audioprotesista->budget->target ) / 100 : null}}</div>
                                 </div>
                             </div>
                         </div>

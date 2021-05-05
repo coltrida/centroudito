@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Models\Ddt;
 use App\Models\Product;
+use function config;
 use function dd;
 
 class DdtService
@@ -13,14 +14,14 @@ class DdtService
     public function inserimentoTemporaneoProdotto($id)
     {
         $product = Product::find($id);
-        $product->stato = 'INDDT';
+        $product->stato = config('enum.statoAPA.ddt');
         $product->save();
     }
 
     public function eliminazioneTemporaneaProdotto($id)
     {
         $product = Product::find($id);
-        $product->stato = 'RICHIESTO';
+        $product->stato = config('enum.statoAPA.richiesto');
         $product->save();
     }
 

@@ -8,6 +8,8 @@ use App\Services\DdtService;
 use App\Services\FilialeService;
 use App\Services\ProductService;
 use App\Services\UserService;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 use function array_push;
@@ -67,11 +69,12 @@ class Home extends Component
                 $parametri = [
                     'audioprotesisti' => $userService->getAudioprotesisti(),
                     'filiali' => $userService->getFiliali(),
-                    'amministrativi' => $userService->getAmministrazione()
+                    'amministrativi' => $userService->getAmministrazione(),
                 ];
             } elseif ($userService->isAudio()){
                 $nomeVista = 'livewire.home.home-audio';
                 $parametri = [
+                    'budget' => $userService->getInfoBudget(Auth::id()),
                     'proveInCorso' => $userService->proveInCorso(),
                     'finalizzati' => $userService->finalizzatiDelMese(),
                     'appuntamentiOggi' => $userService->appuntamentiOggi(),

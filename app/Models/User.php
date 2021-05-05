@@ -68,6 +68,16 @@ class User extends Authenticatable
         return $this->hasMany(Prova::class);
     }
 
+    public function provaInCorso()
+    {
+        return $this->hasMany(Prova::class)->where('stato', config('enum.statoAPA.prova'));
+    }
+
+    public function provaFinalizzata()
+    {
+        return $this->hasMany(Prova::class)->where('stato', config('enum.statoAPA.fattura'));
+    }
+
     public function recapito()
     {
         return $this->hasMany(Recapito::class);

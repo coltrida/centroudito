@@ -18,8 +18,8 @@
                         <div class="col">
                             <select wire:model="stato" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
                                 <option selected>stato</option>
-                                    <option value="inProva">In Prova</option>
-                                    <option value="vendita">Vendita</option>
+                                    <option selected value="{{config('enum.statoAPA.prova')}}">In Prova</option>
+                                    <option value="{{config('enum.statoAPA.fattura')}}">Vendita</option>
                             </select>
                         </div>
                         <div class="col">
@@ -97,12 +97,12 @@
                                     @endforeach
                                 </div>
                                 <div class="col-1">
-                                    @if($item->stato == 'PROVA')
+                                    @if($item->stato == config('enum.statoAPA.prova'))
                                     <i title="reso" class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$item->id}})"></i>
                                     @endif
                                 </div>
                                 <div class="col-1">
-                                    @if($item->stato == 'PROVA')
+                                    @if($item->stato == config('enum.statoAPA.prova'))
                                     <i title="vendita" class="fas fa-check-square text-green-200 hover:text-green-600 cursor-pointer" wire:click="$emit('produciFattura', {{$item->id}})"></i>
                                     @endif
                                 </div>

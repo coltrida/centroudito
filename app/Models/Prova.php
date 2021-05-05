@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use function setlocale;
+use const LC_TIME;
 
 class Prova extends Model
 {
@@ -29,5 +32,19 @@ class Prova extends Model
     public function product()
     {
         return $this->belongsToMany(Product::class, 'product_prova', 'prova_id', 'product_id');
+    }
+
+    public function getGiorniInProvaAttribute()
+    {
+        setlocale(LC_TIME, 'it_IT');
+        Carbon::setLocale('it');
+
+        $created = new Carbon($this->inizio_prova);
+        $now = Carbon::now();
+        $difference = ($created->diff($now)->days < 1)
+            ? '1'
+            : $created->diffForHumans($now);
+        return $difference;
+        //return Carbon::make($this->inizio_prova)->diffForHumans();
     }
 }

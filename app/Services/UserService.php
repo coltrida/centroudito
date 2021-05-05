@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use function config;
 use function dd;
+use function setlocale;
+use const LC_TIME;
 
 class UserService
 {
@@ -35,7 +37,33 @@ class UserService
 
     public function getAudioprotesisti()
     {
-        return User::with('filiale')->where('ruolo', config('enum.ruoli.audio'))->get();
+        setlocale(LC_TIME, 'it_IT');
+        Carbon::setLocale('it');
+        $nomeMese = Carbon::now()->monthName;
+        $mese = Carbon::now()->month;
+        $anno = Carbon::now()->year;
+
+        /*dd(User::with(['filiale', 'provaInCorso', 'provaFinalizzata' => function($z) use($mese, $anno){
+            $z->where([['mese_fine', $mese], ['anno_fine', $anno]]);
+        }, "budget:id,budgetAnno,$nomeMese as target"])
+            ->withSum(['provaFinalizzata' => function($g) use($mese, $anno){
+                $g->where([['mese_fine', $mese], ['anno_fine', $anno]]);
+            }], 'tot')
+            ->withCount(['prova' => function($q){
+                $q->where('stato', config('enum.statoAPA.prova'));
+            }])
+            ->where('ruolo', config('enum.ruoli.audio'))->get());*/
+
+        return User::with(['filiale', 'provaInCorso', 'provaFinalizzata' => function($z) use($mese, $anno){
+            $z->where([['mese_fine', $mese], ['anno_fine', $anno]]);
+                }, "budget:id,budgetAnno,$nomeMese as target"])
+            ->withSum(['provaFinalizzata' => function($g) use($mese, $anno){
+                $g->where([['mese_fine', $mese], ['anno_fine', $anno]]);
+                }], 'tot')
+            ->withCount(['prova' => function($q){
+                $q->where('stato', config('enum.statoAPA.prova'));
+                }])
+            ->where('ruolo', config('enum.ruoli.audio'))->get();
     }
 
     public function getAmministrazione()
@@ -75,22 +103,21 @@ class UserService
 
     public function proveInCorso()
     {
-        return User::with(['prova' => function ($q){
-            $q->with(['product'])->where('stato', 'inCorso');
-        }])->find(Auth::id())->prova;
+        return User::with(['provaInCorso' => function ($q){
+            $q->with(['product']);
+        }])->find(Auth::id())->provaInCorso;
     }
 
     public function finalizzatiDelMese()
     {
         $oggi = Carbon::now();
 
-        return User::with(['prova' => function ($q) use($oggi){
+        return User::with(['provaFinalizzata' => function ($q) use($oggi){
             $q->with(['product'])->where([
-                ['stato', 'finalizzato'],
                 ['mese_fine', $oggi->month],
                 ['anno_fine', $oggi->year],
             ]);
-        }])->find(Auth::id())->prova;
+        }])->find(Auth::id())->provaFinalizzata;
     }
 
     public function appuntamentiOggi()
@@ -137,7 +164,11 @@ class UserService
 
     public function getInfoBudget($id)
     {
-        return User::with('budget')->find($id)->budget;
+        setlocale(LC_TIME, 'it_IT');
+        Carbon::setLocale('it');
+        $nomeMese = Carbon::now()->monthName;
+
+        return User::with("budget:id,budgetAnno,$nomeMese as target")->find($id)->budget;
     }
 
     public function disassociaBudget($id)

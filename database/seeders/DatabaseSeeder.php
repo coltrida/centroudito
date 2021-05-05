@@ -4,13 +4,16 @@ namespace Database\Seeders;
 
 use App\Models\Budget;
 use App\Models\Client;
+use App\Models\Ddt;
 use App\Models\Filiale;
 use App\Models\FilialeUser;
 use App\Models\Fornitore;
 use App\Models\Listino;
 use App\Models\Marketing;
+use App\Models\Product;
 use App\Models\Recapito;
 use App\Models\User;
+use Carbon\Carbon;
 use Hash;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
@@ -132,6 +135,7 @@ class DatabaseSeeder extends Seeder
                 'fornitore_id' => 1,
                 'categoria' => 'APA',
                 'costo' => 1000,
+                'giorniTempoDiReso' => 90,
                 'prezzolistino' => 4000,
                 'iva' => 4
             ],
@@ -140,6 +144,7 @@ class DatabaseSeeder extends Seeder
                 'fornitore_id' => 1,
                 'categoria' => 'APA',
                 'costo' => 800,
+                'giorniTempoDiReso' => 90,
                 'prezzolistino' => 3500,
                 'iva' => 4
             ],
@@ -148,6 +153,7 @@ class DatabaseSeeder extends Seeder
                 'fornitore_id' => 2,
                 'categoria' => 'APA',
                 'costo' => 300,
+                'giorniTempoDiReso' => 120,
                 'prezzolistino' => 1500,
                 'iva' => 4
             ],
@@ -156,6 +162,7 @@ class DatabaseSeeder extends Seeder
                 'fornitore_id' => 3,
                 'categoria' => 'APA',
                 'costo' => 150,
+                'giorniTempoDiReso' => 60,
                 'prezzolistino' => 1200,
                 'iva' => 4
             ],
@@ -164,6 +171,7 @@ class DatabaseSeeder extends Seeder
                 'fornitore_id' => 2,
                 'categoria' => 'ACC',
                 'costo' => 200,
+                'giorniTempoDiReso' => 90,
                 'prezzolistino' => 400,
                 'iva' => 22
             ]
@@ -245,6 +253,52 @@ class DatabaseSeeder extends Seeder
             'ottobre' => 8,
             'novembre' => 8,
             'dicembre' => 8,
+        ]);
+
+        Product::insert([
+            [
+                'matricola' => '123',
+                'stato' => config('enum.statoAPA.ddt'),
+                'filiale_id' => 2,
+                'listino_id' => 4,
+                'fornitore_id' => 3,
+                'ddt_id' => 1
+            ],
+            [
+                'matricola' => '234',
+                'stato' => config('enum.statoAPA.ddt'),
+                'filiale_id' => 2,
+                'listino_id' => 4,
+                'fornitore_id' => 3,
+                'ddt_id' => 1
+            ],
+            [
+                'matricola' => '456',
+                'stato' => config('enum.statoAPA.ddt'),
+                'filiale_id' => 2,
+                'listino_id' => 4,
+                'fornitore_id' => 3,
+                'ddt_id' => 1
+            ],
+            [
+                'matricola' => '567',
+                'stato' => config('enum.statoAPA.ddt'),
+                'filiale_id' => 2,
+                'listino_id' => 4,
+                'fornitore_id' => 3,
+                'ddt_id' => 1
+            ],
+        ]);
+
+        Ddt::insert([
+            'filiale_id' => 2,
+            'nome_destinazione' => 'CENTRO UDITO LUCCA',
+            'indirizzo_destinazione' => 'VIA VICOLO STRETTO 23',
+            'citta_destinazione' => 'GARFAGNANA DI BARGA',
+            'cap_destinazione' => 584652,
+            'provincia_destinazione' => 'LU',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
     }
 }

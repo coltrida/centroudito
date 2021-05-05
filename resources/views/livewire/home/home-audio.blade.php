@@ -4,11 +4,18 @@
         <div class="row justify-between my-1 align-items-start">
             <div class="col-4">
                 <p class="font-bold text-lg ">Finalizzati nel mese</p>
+                <div class="rounded border p-1 my-2" style="background-color: #537429; box-shadow: 2px 2px 4px #000000;">
+                    <div class="row justify-between my-1 align-items-center">
+                        <div class="col">
+                            <div class="font-bold">Budget del mese: € {{ ( (int)$budget->budgetAnno * (int)$budget->target ) / 100 }}</div>
+                        </div>
+                    </div>
+                </div>
                 @foreach($finalizzati as $prova)
                     <div class="rounded border p-1 my-2" style="background-color: #537429; box-shadow: 2px 2px 4px #000000;">
                         <div class="row justify-between my-1 align-items-center">
                             <div class="col">
-                                <div class="font-bold">Inizio Prova:{{$prova->inizio_prova}}</div>
+                                <div class="font-bold">Cliente: {{$prova->client->nome}} {{$prova->client->cognome}}</div>
                                 <div class="text-right">
                                     <div>Cliente: {{$prova->id_client}}</div>
                                     <div>Tot: {{$prova->tot}}</div>
@@ -25,9 +32,16 @@
                     <div class="rounded border p-1 my-2" style="background-color: #537429; box-shadow: 2px 2px 4px #000000;">
                         <div class="row justify-between my-1 align-items-center">
                             <div class="col">
-                                <div class="font-bold">Inizio Prova:{{$prova->inizio_prova}}</div>
+                                <div class="font-bold">Giorni in Prova: {{$prova->giorniInProva}}</div>
                                 <div class="text-right">
-                                    <div>Cliente: {{$prova->id_client}}</div>
+                                    <div>Cliente: {{$prova->client->nome}} {{$prova->client->cognome}}</div>
+                                    @foreach($prova->product as $product)
+                                        <div class="row">
+                                            <div class="col">matricola: {{$product->matricola}}</div>
+                                            <div class="col"> {{$product->listino->nome}}</div>
+                                        </div>
+
+                                    @endforeach
                                     <div>Tot: {{$prova->tot}}</div>
                                 </div>
                             </div>

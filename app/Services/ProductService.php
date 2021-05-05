@@ -8,6 +8,7 @@ use App\Models\Filiale;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use function config;
 use function dd;
 use function trim;
 
@@ -37,7 +38,7 @@ class ProductService
             return Filiale::with(['products' => function ($q) use($ricerca){
                 $q->with(['filiale', 'fornitore', 'listino'])->whereHas('listino', function($z) use($ricerca){
                     $z->where('nome', 'like', '%'.$ricerca.'%');
-                })->where('stato', 'FILIALE')->orWhere([['matricola', 'like', '%'.$ricerca.'%'], ['stato', 'FILIALE']]);
+                })->where('stato', config('enum.statoAPA.filiale'))->orWhere([['matricola', 'like', '%'.$ricerca.'%'], ['stato', config('enum.statoAPA.filiale')]]);
             }])->find($idFiliale)->products;
         }
     }
@@ -46,13 +47,13 @@ class ProductService
     {
         if($ricerca == ''){
             return Filiale::with(['products' => function ($q){
-                $q->with(['filiale', 'fornitore', 'listino'])->where('stato', 'INDDT')->orderBy('fornitore_id')->orderBy('listino_id');
+                $q->with(['filiale', 'fornitore', 'listino'])->where('stato', config('enum.statoAPA.ddt'))->orderBy('fornitore_id')->orderBy('listino_id');
             }])->find($idFiliale)->products;
         } else {
             return Filiale::with(['products' => function ($q) use($ricerca){
                 $q->with(['filiale', 'fornitore', 'listino'])->whereHas('listino', function($z) use($ricerca){
                     $z->where('nome', 'like', '%'.$ricerca.'%');
-                })->where('stato', 'INDDT')->orWhere([['matricola', 'like', '%'.$ricerca.'%'], ['stato', 'INDDT']]);
+                })->where('stato', config('enum.statoAPA.ddt'))->orWhere([['matricola', 'like', '%'.$ricerca.'%'], ['stato', config('enum.statoAPA.ddt')]]);
             }])->find($idFiliale)->products;
         }
     }
@@ -61,13 +62,13 @@ class ProductService
     {
         if($ricerca == ''){
             return Filiale::with(['products' => function ($q){
-                $q->with(['filiale', 'fornitore', 'listino'])->where('stato', 'RICHIESTO')->orderBy('fornitore_id')->orderBy('listino_id');
+                $q->with(['filiale', 'fornitore', 'listino'])->where('stato', config('enum.statoAPA.richiesto'))->orderBy('fornitore_id')->orderBy('listino_id');
             }])->find($idFiliale)->products;
         } else {
             return Filiale::with(['products' => function ($q) use($ricerca){
                 $q->with(['filiale', 'fornitore', 'listino'])->whereHas('listino', function($z) use($ricerca){
                     $z->where('nome', 'like', '%'.$ricerca.'%');
-                })->where('stato', 'RiCHIESTO');
+                })->where('stato', config('enum.statoAPA.richiesto'));
             }])->find($idFiliale)->products;
         }
     }
@@ -82,15 +83,15 @@ class ProductService
 
         if($ricerca == ''){
             return Filiale::with(['products' => function ($q){
-                $q->with(['filiale', 'fornitore', 'listino'])->where('stato', 'RICHIESTO')->orderBy('fornitore_id')->orderBy('listino_id');
+                $q->with(['filiale', 'fornitore', 'listino'])->where('stato', config('enum.statoAPA.richiesto'))->orderBy('fornitore_id')->orderBy('listino_id');
             }])->whereHas('products', function($z){
-                $z->where('stato', 'RICHIESTO');
+                $z->where('stato', config('enum.statoAPA.richiesto'));
             })->get();
         } else {
             return Filiale::with(['products' => function ($q) use($ricerca){
                 $q->with(['filiale', 'fornitore', 'listino'])->whereHas('listino', function($z) use($ricerca){
                     $z->where('nome', 'like', '%'.$ricerca.'%');
-                })->where('stato', 'RiCHIESTO');
+                })->where('stato', config('enum.statoAPA.richiesto'));
             }])->get()->products;
         }
     }
@@ -114,7 +115,7 @@ class ProductService
     public function arrivato($id)
     {
         $product = Product::find($id);
-        $product->stato = 'FILIALE';
+        $product->stato = config('enum.statoAPA.filiale');
         $res = $product->save();
         return $res;
     }
