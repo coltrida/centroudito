@@ -58,7 +58,7 @@
                 <select class="form-select" aria-label="Default select example" name="filiale_id" id="filiale_id">
                     <option selected></option>
                     @foreach($filiali as $filiale)
-                        <option @if(isset($client->nome)) {{$filiale->id == $client->filiale_id ? 'selected' : ''}} @endif  value="{{$filiale->id}}">{{$filiale->nome}}</option>
+                        <option @if(isset($client->nome)) {{$filiale->id == $client->filiale_id ? 'selected' : ''}} @else {{$filiale->id == $idFiliale ? 'selected' : ''}} @endif  value="{{$filiale->id}}">{{$filiale->nome}}</option>
                     @endforeach
                 </select>
             </div>

@@ -7,6 +7,7 @@ use App\Services\ClientService;
 use App\Services\DdtService;
 use App\Services\FilialeService;
 use App\Services\ProductService;
+use App\Services\ProvaService;
 use App\Services\UserService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,10 @@ class Home extends Component
     public $ddt = [];
     public $matricola = [];
     public $filialeSelezionata = '';
+
+    protected $listeners = [
+        'clientFattura',
+    ];
 
     public function aggiungiAlDdt($product, $idFiliale, DdtService $ddtService)
     {
@@ -47,6 +52,16 @@ class Home extends Component
             session()->flash('message', 'DDT prodotto');
         }
         $this->ddt = [];
+    }
+
+    public function clientFattura($id, ProvaService $provaService)
+    {
+        $provaService->fattura($id);
+    }
+
+    public function reso($id, ProvaService $provaService)
+    {
+        $provaService->rimuovi($id);
     }
 
     public function render(UserService $userService, ProductService $productService, ClientService $clientService, FilialeService $filialeService)

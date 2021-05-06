@@ -62,7 +62,7 @@ Route::get('/prova', function (){
 require __DIR__.'/auth.php';
 
 Route::group([ 'middleware' => 'auth' ], function() {
-    Route::get('/clients/inserisci/{id?}', [ClientController::class, 'inserisci'])->name('client.inserisci');
+    Route::get('/clients/inserisci/{idFiliale?}/{id?}', [ClientController::class, 'inserisci'])->name('client.inserisci');
     Route::post('/clients/recall', [ClientController::class, 'recall'])->name('client.recall');
     Route::post('/clients/inserisci', [ClientController::class, 'postInserisci'])->name('client.postInserisci');
     Route::patch('/clients/modifica', [ClientController::class, 'modifica'])->name('client.modifica');
@@ -74,6 +74,7 @@ Route::group([ 'middleware' => 'auth' ], function() {
 Route::group(['middleware' => ['auth','verifyIsAdmin'], 'prefix' => 'admin'], function(){
     Route::get('/marketing', [MarketingController::class, 'index'])->name('marketing.index');
     Route::get('/filiali', [FilialeController::class, 'index'])->name('filiale.index');
+    Route::get('/recall', [ClientController::class, 'regoleRecall'])->name('imposta.recall');
     Route::get('/recapiti', [RecapitoController::class, 'index'])->name('recapiti.index');
     Route::get('/fornitori', [FornitoreController::class, 'index'])->name('fornitori.index');
     Route::get('/listino', [ListinoController::class, 'index'])->name('listino.index');

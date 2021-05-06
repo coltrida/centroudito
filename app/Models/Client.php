@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use function config;
 
 class Client extends Model
 {
@@ -34,6 +35,16 @@ class Client extends Model
     public function prova()
     {
         return $this->hasMany(Prova::class);
+    }
+
+    public function provaInCorso()
+    {
+        return $this->hasMany(Prova::class)->where('stato', config('enum.statoAPA.prova'));
+    }
+
+    public function provaFattura()
+    {
+        return $this->hasMany(Prova::class)->where('stato', config('enum.statoAPA.fattura'));
     }
 
     public function recapito()

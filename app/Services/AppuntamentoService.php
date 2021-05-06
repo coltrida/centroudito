@@ -29,8 +29,10 @@ class AppuntamentoService
         //dd($request);
         return Appuntamento::insert([
             'giorno' => $request['giorno'],
+            'orario' => $request['ore'],
             'client_id' => $request['client_id'],
             'recapito_id' => $request['recapito_id'],
+            'nota' => $request['note'],
             'user_id' => $request['user_id'],
             'filiale_id' => $request['filiale_id'],
             'created_at' => Carbon::now()

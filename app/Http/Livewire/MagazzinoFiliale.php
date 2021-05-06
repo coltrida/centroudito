@@ -65,6 +65,7 @@ class MagazzinoFiliale extends Component
             'prodottiRichiesti' => $productService->prodottiRichiesti($this->idFiliale, $this->ricerca),
             'prodottiInFiliale' => $productService->prodottiInFiliale($this->idFiliale, $this->ricerca),
             'prodottiInArrivo' => $productService->prodottiInArrivo($this->idFiliale, $this->ricerca),
+            'prodottiInProva' => $productService->prodottiInProva($this->idFiliale, $this->ricerca),
             'fornitori' => $fornitoreService->fornitori(),
             'listino' => $this->idFornitore ? $fornitoreService->listinoFromFornitore($this->idFornitore) : [],
             'magazzino' => $filialeService->nomeFiliale($this->idFiliale)

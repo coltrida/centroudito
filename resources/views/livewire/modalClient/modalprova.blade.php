@@ -23,7 +23,7 @@
                             </select>
                         </div>
                         <div class="col">
-                            <select wire:model="fornitoreId" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
+                            <select wire:model="fornitoreId" wire:change="scegliFornitore($event.target.value)" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
                                 <option selected>fornitore</option>
                                 @foreach($fornitori as $item)
                                     <option value="{{$item->id}}">{{$item->nome}}</option>
@@ -69,7 +69,7 @@
                                     <p>{{$item['matricola']}}</p>
                                 </div>
                                 <div class="col-1">
-                                    <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="removeFromProva({{$key}}, {{$item['prezzoProposto']}})"></i>
+                                    <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="removeFromProva({{$key}}, {{$item['id']}}, {{$item['prezzoProposto']}})"></i>
                                 </div>
                             </div>
                         </div>
@@ -78,34 +78,35 @@
                     </div>
                     <button type="submit" class="p-2 bg-blue-500 w-20 rounded shadow text-white">Aggiungi</button>
                 </form>
-                <div style="height: 230px; overflow: auto">
+                <div style="height: 100px; overflow: auto">
                     @foreach($prove as $item)
-                        <div class="rounded border p-3 my-2 mr-4" style="background-color: #052e3c; box-shadow: 2px 2px 4px #000000; color: white">
+                        <div class="rounded border my-2 mr-4" style="background-color: #052e3c; box-shadow: 2px 2px 4px #000000; color: white">
                             <div class="row justify-between my-1 align-items-center">
                                 <div class="col">
-                                    <p >{{$item->inizio_prova}}</p>
+                                    <p style="font-size: 12px; padding-left: 10px">{{$item->inizio_prova}}</p>
                                 </div>
                                 <div class="col">
-                                    <p >{{$item->stato}}</p>
+                                    <p style="font-size: 12px">{{$item->stato}}</p>
                                 </div>
                                 <div class="col">
-                                    <p >€ {{$item->tot}}</p>
+                                    <p style="font-size: 12px">€ {{$item->tot}}</p>
                                 </div>
                                 <div class="col">
                                     @foreach($item->product as $prodotto)
-                                        <div >{{$prodotto->listino->nome}} - {{$prodotto->matricola}}</div>
+                                        <div style="font-size: 12px">{{$prodotto->listino->nome}} - {{$prodotto->matricola}}</div>
                                     @endforeach
+                                </div>
+                                <div class="col-1">
+                                    @if($item->stato == config('enum.statoAPA.prova'))
+                                        <i title="vendita" class="fas fa-check-square text-green-200 hover:text-green-600 cursor-pointer" wire:click="$emit('clientFattura', {{$item->id}})"></i>
+                                    @endif
                                 </div>
                                 <div class="col-1">
                                     @if($item->stato == config('enum.statoAPA.prova'))
                                     <i title="reso" class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$item->id}})"></i>
                                     @endif
                                 </div>
-                                <div class="col-1">
-                                    @if($item->stato == config('enum.statoAPA.prova'))
-                                    <i title="vendita" class="fas fa-check-square text-green-200 hover:text-green-600 cursor-pointer" wire:click="$emit('produciFattura', {{$item->id}})"></i>
-                                    @endif
-                                </div>
+
                             </div>
                         </div>
                     @endforeach

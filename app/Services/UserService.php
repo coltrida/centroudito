@@ -124,7 +124,7 @@ class UserService
     {
         $oggi = Carbon::now()->format('Y-m-d');
         return User::with(['appuntamenti' => function ($q) use($oggi){
-            $q->where('giorno', $oggi);
+            $q->with('client')->where('giorno', $oggi);
         }])->find(Auth::id())->appuntamenti;
     }
 
@@ -132,7 +132,7 @@ class UserService
     {
         $domani = Carbon::tomorrow()->format('Y-m-d');
         return User::with(['appuntamenti' => function ($q) use($domani){
-            $q->where('giorno', $domani);
+            $q->with('client')->where('giorno', $domani);
         }])->find(Auth::id())->appuntamenti;
     }
 

@@ -114,19 +114,49 @@
             <div class="rounded border p-3 my-2" style="background-color: #124874; box-shadow: 2px 2px 4px #000000;">
                 <div class="row justify-between my-1 align-items-center">
                     <div class="col">
-                        <p class="font-bold">{{$item->listino->nome}}</p>
+                        <p >{{$item->listino->nome}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold">{{$item->stato}}</p>
+                        <p>{{$item->stato}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold">{{$item->fornitore->nome}}</p>
+                        <p >{{$item->fornitore->nome}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold">{{$item->matricola}}</p>
+                        <p >{{$item->matricola}}</p>
                     </div>
-                    <div class="col-1">
+                    <div class="col">
+                        <p >{{$item->giorniInProva}}</p>
+                    </div>
 
+                </div>
+            </div>
+        @endforeach
+
+        @if($prodottiInProva->count() > 0) <h2 class="mt-4">PRODOTTI IN PROVA</h2> @endif
+        @foreach($prodottiInProva as $item)
+            <div class="rounded border p-3 my-2" style="background-color: #124874; box-shadow: 2px 2px 4px #000000;">
+                <div class="row justify-between my-1 align-items-center">
+                    <div class="col">
+                        <p >{{$item->listino->nome}}</p>
+                    </div>
+                    <div class="col">
+                        <p >{{$item->stato}}</p>
+                    </div>
+                    <div class="col">
+                        <p >{{$item->fornitore->nome}}</p>
+                    </div>
+                    <div class="col">
+                        <p >{{$item->matricola}}</p>
+                    </div>
+                    <div class="col">
+                        <p >{{$item->user->name}}</p>
+                    </div>
+                    <div class="col">
+                        <p >{{$item->client->nome}} {{$item->client->cognome}}</p>
+                    </div>
+                    <div class="col">
+                        <p >{{$item->prova[0]->giorniInProva}}</p>
                     </div>
 
                 </div>

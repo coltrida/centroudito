@@ -19,6 +19,8 @@ class Modalappuntamenti extends Component
     public $filialeId;
     public $recapitoId;
     public $giorno;
+    public $ore;
+    public $note;
 
     protected $listeners = [
         'clientSelectedAppuntamenti',
@@ -37,6 +39,8 @@ class Modalappuntamenti extends Component
     {
         $reques = [
             'giorno' => $this->giorno,
+            'ore' => $this->ore,
+            'note' => $this->note,
             'client_id' => $this->clientId,
             'user_id' => Auth::id(),
             'filiale_id' => $this->filialeId,
@@ -44,6 +48,8 @@ class Modalappuntamenti extends Component
         ];
         $appuntamentoService->inserisci($reques);
         $this->giorno = '';
+        $this->ore = '';
+        $this->note = '';
         $this->filialeId = '';
         $this->recapitoId = '';
     }

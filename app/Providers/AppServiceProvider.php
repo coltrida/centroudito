@@ -31,9 +31,13 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view)
         {
             $filiali = Filiale::orderBy('nome')->get();
+            //dd($filiali);
             $view->with('filiali', $filiali );
             if (isset(Auth::user()->name)){
-                $filialiAudio = User::find(Auth::id())->filiale()->get();
+                $filialiAudio = User::with(['filiale' => function($q){
+                    $q->orderBy('nome');
+                }] )->find(Auth::id())->filiale;
+                //dd($filialiAudio);
                 $view->with('filialiAudio', $filialiAudio );
             }
         });

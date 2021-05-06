@@ -10,6 +10,7 @@ use App\Models\ProductProva;
 use App\Models\Prova;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use function config;
 use function dd;
 use function trim;
 
@@ -37,9 +38,13 @@ class ProvaService
             $productProva->prova_id = $prova->id;
             $productProva->product_id = $prodotti['id'];
             $productProva->prezzo = $prodotti['prezzoProposto'];
+            $productProva->orecchio = $prodotti['orecchio'];
             $productProva->save();
+
             $prodotto = Product::find($prodotti['id']);
-            $prodotto->stato = 'PROVA';
+            $prodotto->stato = config('enum.statoAPA.prova');
+            $prodotto->user_id = $request['user_id'];
+            $prodotto->client_id = $request['client_id'];
             $prodotto->save();
         }
         //dd($request['prodotti']);
@@ -49,12 +54,14 @@ class ProvaService
     {
         $oggi = Carbon::now();
         $prova = Prova::with('product')->find($id);
-        $prova->stato = 'RESO';
+        $prova->stato = config('enum.statoAPA.reso');
         $prova->fine_prova = $oggi->format('Y-m-d');
         $prova->mese_fine = $oggi->month;
         $prova->anno_fine = $oggi->year;
         foreach ($prova->product as $prodotto){
-            $prodotto->stato = 'FILIALE';
+            $prodotto->stato = config('enum.statoAPA.filiale');
+            $prodotto->user_id = null;
+            $prodotto->client_id = null;
             $prodotto->save();
         }
         return $prova->save();
@@ -65,13 +72,20 @@ class ProvaService
         $oggi = Carbon::now();
         $prova = Prova::with('product')->find($id);
         $prova->fine_prova = $oggi->format('Y-m-d');
-        $prova->stato = 'FATTURA';
+        $prova->stato = config('enum.statoAPA.fattura');
         $prova->mese_fine = $oggi->month;
         $prova->anno_fine = $oggi->year;
         foreach ($prova->product as $prodotto){
-            $prodotto->stato = 'FATTURA';
+            $prodotto->stato = config('enum.statoAPA.fattura');
             $prodotto->save();
         }
         return $prova->save();
+    }
+
+    public function infoprova($id)
+    {
+        return Prova::with(['client', 'product' => function($q){
+            $q->with('listino');
+        }])->find($id);
     }
 }

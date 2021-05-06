@@ -109,7 +109,7 @@
         <li>
             <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="#">Tempi Recall</a></li>
+        <li><a class="dropdown-item" href="{{route('imposta.recall')}}">Tempi Recall</a></li>
         <li>
             <hr class="dropdown-divider">
         </li>

@@ -55,6 +55,22 @@
                     </div>
 
                 </div>
+
+                <div class="row justify-between my-1 align-items-center">
+                    <div class="col">fatturato</div>
+                    <div class="col">fatturato</div>
+                    <div class="col">fatturato</div>
+                    <div class="col">fatturato</div>
+                    <div class="col">fatturato</div>
+                    <div class="col">fatturato</div>
+                    <div class="col">fatturato</div>
+                    <div class="col">fatturato</div>
+                    <div class="col">fatturato</div>
+                    <div class="col">fatturato</div>
+                    <div class="col">fatturato</div>
+                    <div class="col">fatturato</div>
+                </div>
+
             </div>
         @endforeach
 

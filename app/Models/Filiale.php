@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use function config;
 
 class Filiale extends Model
 {
@@ -13,7 +14,8 @@ class Filiale extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'filiale_user', 'filiale_id', 'user_id')->withPivot(['id']);
+        return $this->belongsToMany(User::class, 'filiale_user', 'filiale_id', 'user_id')
+            ->withPivot(['id']);
     }
 
     public function clients()
@@ -24,5 +26,12 @@ class Filiale extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function audio()
+    {
+        return $this->belongsToMany(User::class, 'filiale_user', 'filiale_id', 'user_id')
+            ->where('ruolo', config('enum.ruoli.audio'))
+            ->withPivot(['id']);
     }
 }

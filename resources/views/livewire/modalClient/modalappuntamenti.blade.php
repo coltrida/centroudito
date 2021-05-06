@@ -19,6 +19,9 @@
                             <input wire:model="giorno" class="w-full rounded border shadow p-2 mr-2 my-2" type="date">
                         </div>
                         <div class="col">
+                            <input wire:model="ore" class="w-full rounded border shadow p-2 mr-2 my-2" type="time">
+                        </div>
+                        <div class="col">
                             <select wire:model="filialeId" class="w-full rounded border shadow p-2 mr-2 my-2" style="color: black" aria-label="Default select example">
                                 <option selected>filiale</option>
                                 @foreach($filiali as $item)
@@ -35,6 +38,11 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <input wire:model="note" class="w-full rounded border shadow p-2 mr-2 my-2" type="text">
+                        </div>
+                    </div>
                     <button type="submit" class="p-2 bg-blue-500 w-20 rounded shadow text-white">Aggiungi</button>
                 </form>
                 <div style="height: 230px; overflow: auto">
@@ -45,15 +53,22 @@
                                     <p >{{$item->giorno}}</p>
                                 </div>
                                 <div class="col">
-                                    <p >{{isset($item->filiale->nome) ? $item->filiale->nome : ''}}</p>
+                                    <p >{{$item->orario}}</p>
                                 </div>
+                                @if(isset($item->filiale->nome))
                                 <div class="col">
-                                    <p >{{isset($item->recapito->nome) ? $item->recapito->nome : ''}}</p>
+                                    <p >{{$item->filiale->nome}}</p>
                                 </div>
+                                @endif
+                                @if(isset($item->recapito->nome))
                                 <div class="col">
-                                    <p >{{$item->user->name}}</p>
+                                    <p >{{$item->recapito->nome}}</p>
                                 </div>
-                                <div class="col">
+                                @endif
+                                <div class="col-4">
+                                    <p >{{$item->nota}}</p>
+                                </div>
+                                <div class="col-1">
                                     <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$item->id}})"></i>
                                 </div>
 

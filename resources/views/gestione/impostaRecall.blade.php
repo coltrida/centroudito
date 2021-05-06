@@ -1,6 +1,5 @@
 @extends('stile')
 
 @section('main')
-    <livewire:home/>
-    <livewire:fattura/>
+    <livewire:user-filiale-datatables />
 @endsection

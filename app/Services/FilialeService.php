@@ -13,7 +13,13 @@ class FilialeService
 {
     public function filiali()
     {
-        return Filiale::with('users')->orderBy('nome')->get();
+        /*dd(Filiale::with(['audio' => function($q){
+            $q->with('provaFinalizzata');
+        }])->orderBy('nome')->get());*/
+
+        return Filiale::with(['audio' => function($q){
+            $q->with('provaFinalizzata');
+        }])->orderBy('nome')->get();
     }
 
     public function caricaId($idSelezionato)

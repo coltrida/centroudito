@@ -31,7 +31,13 @@ class Prova extends Model
 
     public function product()
     {
-        return $this->belongsToMany(Product::class, 'product_prova', 'prova_id', 'product_id');
+        return $this->belongsToMany(Product::class, 'product_prova', 'prova_id', 'product_id')
+            ->withPivot('prezzo');
+    }
+
+    public function fattura()
+    {
+        return $this->hasOne(Fattura::class);
     }
 
     public function getGiorniInProvaAttribute()
@@ -42,8 +48,8 @@ class Prova extends Model
         $created = new Carbon($this->inizio_prova);
         $now = Carbon::now();
         $difference = ($created->diff($now)->days < 1)
-            ? '1'
-            : $created->diffForHumans($now);
+            ? '0'
+            : $created->diff($now)->days;
         return $difference;
         //return Carbon::make($this->inizio_prova)->diffForHumans();
     }

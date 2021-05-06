@@ -25,12 +25,13 @@ class ClientController extends Controller
         return view('client.index', ['idAudio' => $idAudio, 'idFiliale' => $idFiliale ]);
     }
 
-    public function inserisci(ClientService $clientService, MarketingService $marketingService, RecapitoService $recapitoService, FilialeService $filialeService, $id='')
+    public function inserisci(ClientService $clientService, MarketingService $marketingService, RecapitoService $recapitoService, FilialeService $filialeService, $idFiliale, $id='')
     {
         return view('client.inserisci', [
             'client' => $clientService->getClient($id),
             'canali' => $marketingService->canali(),
             'filiali' => $filialeService->filiali(),
+            'idFiliale' => $idFiliale,
             'recapiti' => $recapitoService->recapiti()
         ]);
     }
@@ -40,7 +41,7 @@ class ClientController extends Controller
         if (!$clientService->inserisci($request)) {
             return redirect()->route('client.index')->withMessage("Errore nell'inserimento cliente");
         }
-        return redirect()->route('client.index')->withMessage("Cliente Inserito");
+        return redirect()->route('client.index', ['idAudio' => Auth::id(), 'idFiliale' => $request->filiale_id])->withMessage("Cliente Inserito");
     }
 
     public function modifica(InsertClientRequest $request, ClientService $clientService)
@@ -57,5 +58,10 @@ class ClientController extends Controller
             return redirect()->back()->withMessage("Errore nell'inserimento recall");
         }
         return redirect()->back()->withMessage("recall Inserito");
+    }
+
+    public function regoleRecall()
+    {
+        return view('gestione.impostaRecall');
     }
 }

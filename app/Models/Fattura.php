@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Fattura extends Model
 {
     use HasFactory;
+
+    protected $table = 'fatturas';
+
+    public function rata()
+    {
+        return $this->hasMany(Ratefattura::class);
+    }
 }

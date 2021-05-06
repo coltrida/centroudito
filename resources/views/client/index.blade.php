@@ -21,5 +21,6 @@
             :filialeId="$idFiliale"
         />
         <livewire:modalfattura/>
+        <livewire:fattura/>
     </div>
 @endsection

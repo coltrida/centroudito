@@ -44,7 +44,7 @@
     </a>
 
     <a href="#" class="btn btn-sm btn-warning mr-1"
-       wire:click="$emit('clientSelectedNote', {{$id}})"
+       wire:click="$emit('listaFatture', {{$id}})"
        title="fatture" style="color: white; background-color: #616161; border-color: #8b8b8b; box-shadow: 2px 2px 4px #000000; width: 35px">
         <i class="fas fa-file-alt"></i>
     </a>

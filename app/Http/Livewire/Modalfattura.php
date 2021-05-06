@@ -3,14 +3,16 @@
 namespace App\Http\Livewire;
 
 
+use App\Services\FatturaService;
 use Livewire\Component;
 
 class Modalfattura extends Component
 {
     public $visibile = true;
+    public $listaFatture = [];
 
     protected $listeners = [
-        'produciFattura'
+        'listaFatture'
     ];
 
     public function closeModal()
@@ -20,9 +22,10 @@ class Modalfattura extends Component
         $this->visibile = true;
     }
 
-    public function produciFattura($id)
+    public function listaFatture($id, FatturaService $fatturaService)
     {
         $this->visibile = false;
+        $this->listaFatture = $fatturaService->listaFattureFromClient($id);
     }
 
     public function render()

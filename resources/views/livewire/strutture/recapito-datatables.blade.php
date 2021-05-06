@@ -31,16 +31,22 @@
             <div class="rounded border p-3 my-2" style="background-color: #124874; box-shadow: 2px 2px 4px #000000;">
                 <div class="row justify-between my-1 align-items-center">
                     <div class="col">
-                        <p class="font-bold">{{$item->nome}}</p>
+                        <p >{{$item->nome}}</p>
                     </div>
                     <div class="col-3">
-                        <p class="font-bold">{{$item->indirizzo}}</p>
+                        <p >{{$item->indirizzo}}</p>
                     </div>
                     <div class="col">
-                        <p class="font-bold">{{$item->citta}}</p>
+                        <p >{{$item->citta}}</p>
                     </div>
                     <div class="col-1">
-                        <p class="font-bold">{{$item->provincia}}</p>
+                        <p >{{$item->provincia}}</p>
+                    </div>
+                    <div class="col">
+                        <p >costo annuale</p>
+                    </div>
+                    <div class="col">
+                        <p >fatturato</p>
                     </div>
                     <div class="col-1">
                         <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$item->id}})"></i>

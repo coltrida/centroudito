@@ -79,11 +79,11 @@ class ClientService
             $q->with(['product'])->orderBy('inizio_prova', 'asc');
         }])->find($id)->prova);*/
 
-        return Client::with(['prova' => function ($q){
+        return Client::with(['provaInCorso' => function ($q){
             $q->with(['product' => function($q){
                 $q->with('listino');
             }])->orderBy('inizio_prova', 'asc');
-        }])->find($id)->prova;
+        }])->find($id)->provaInCorso;
     }
 
     public function getRecallsOggi()
@@ -104,5 +104,12 @@ class ClientService
         }])->whereHas('clients', function($z) use($domani){
             $z->where([['recall', '1'],['datarecall', $domani]]);
         })->get();
+    }
+
+    public function inserisciCodfisc($id, $codfisc)
+    {
+        $client = Client::find($id);
+        $client->codfisc = $codfisc;
+        return $client->save();
     }
 }
