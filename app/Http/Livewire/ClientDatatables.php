@@ -26,7 +26,9 @@ class ClientDatatables extends LivewireDatatable
 
     public function builder()
     {
-        return $this->idAudio != '' ? Client::query()->where('filiale_id', $this->idFiliale) : Client::query();
+        return $this->idAudio != ''
+            ? Client::query()->where('filiale_id', $this->idFiliale)->where('tipo', '!=', 'DEC')
+            : Client::query()->where('tipo', '!=', 'DEC');
     }
 
 //    public function columns()
@@ -58,8 +60,8 @@ class ClientDatatables extends LivewireDatatable
     public function columns()
     {
         return [
-            Column::callback(['id', 'nome'], function ($id, $nome) {
-                return view('livewire.buttons', ['id' => $id, 'nome' => $nome]);
+            Column::callback(['id', 'filiale_id'], function ($id, $filiale_id) {
+                return view('livewire.buttons', ['id' => $id, 'filiale_id' => $filiale_id]);
             }),
             /*NumberColumn::name('id')->filterable(),*/
             Column::name('cognome')->filterable()->searchable(),
@@ -76,6 +78,7 @@ class ClientDatatables extends LivewireDatatable
             Column::name('fonte')->filterable()->searchable(),
             Column::name('mail')->filterable()->searchable(),
             DateColumn::name('datarecall')->filterable(),
+            DateColumn::name('datanascita')->filterable(),
             DateColumn::name('created_at')->filterable(),
             /*Column::delete()*/
 

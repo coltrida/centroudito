@@ -89,7 +89,7 @@ class Home extends Component
             } elseif ($userService->isAudio()){
                 $nomeVista = 'livewire.home.home-audio';
                 $parametri = [
-                    'budget' => $userService->getInfoBudget(Auth::id()),
+                    'budget' => $userService->getBudgetDelMese(Auth::id()),
                     'proveInCorso' => $userService->proveInCorso(),
                     'finalizzati' => $userService->finalizzatiDelMese(),
                     'appuntamentiOggi' => $userService->appuntamentiOggi(),

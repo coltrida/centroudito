@@ -1,6 +1,6 @@
 <div class="flex space-x-1 justify-around p-0 m-0 mb-1" style="border-bottom: none" xmlns:wire="http://www.w3.org/1999/xhtml">
 
-    <a href="{{route('client.inserisci', $id)}}" class="btn btn-sm btn-primary"
+    <a href="{{route('client.inserisci',['id' => $id, 'idFiliale' => $filiale_id])}}" class="btn btn-sm btn-primary"
        style="box-shadow: 2px 2px 4px #000000; width: 35px"
        title="modifica">
         <i class="fas fa-edit"></i>

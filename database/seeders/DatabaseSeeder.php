@@ -12,6 +12,7 @@ use App\Models\Listino;
 use App\Models\Marketing;
 use App\Models\Product;
 use App\Models\Recapito;
+use App\Models\Tipologia;
 use App\Models\User;
 use Carbon\Carbon;
 use Hash;
@@ -361,5 +362,24 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             ]);
+
+        Tipologia::insert([
+            [
+                'nome' => 'PC',
+                'recall' => 1
+            ],
+            [
+                'nome' => 'CL',
+                'recall' => 10
+            ],
+            [
+                'nome' => 'CLC',
+                'recall' => 20
+            ],
+            [
+                'nome' => 'DEC',
+                'recall' => null
+            ],
+        ]);
     }
 }

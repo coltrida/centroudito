@@ -24,13 +24,18 @@
                     </div>
                 </div>
                 @endif
-                    @if(Request::path() == 'clients' || substr(Request::path(), 0, 7)  == 'clients')
+                    @if(substr(Request::path(), 0, 7)  == 'clients' && substr(Request::path(), 10, 1))
                         <a href="{{route('client.inserisci', ['idFiliale' => substr(Request::path(), 10, 1)])}}" class="btn btn-primary ml-4">
                             Inserisci Paziente
                         </a>
                     <h1 style="margin-left: 100px; color: white; font-weight: bold">{{$filiali->first(function ($obj){return $obj->id == substr(Request::path(), 10, 1);})->nome}}</h1>
-                    {{--@elseif(Request::path() == 'admin/marketing')
-                        <a href="#" class="btn btn-primary ml-4">Inserisci Canale Mkt</a>--}}
+                    @elseif(Request::path() == 'admin/marketing')
+                        <a href="#" class="btn btn-primary ml-4">Inserisci Canale Mkt</a>
+                    @endif
+                    @if(Request::path() == 'clients')
+                        <a href="{{route('client.inserisci')}}" class="btn btn-primary ml-4">
+                            Inserisci Paziente
+                        </a>
                     @endif
             </div>
 

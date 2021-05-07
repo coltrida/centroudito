@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Models\Client;
 use App\Models\Filiale;
+use App\Models\Tipologia;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -35,8 +36,18 @@ class ClientService
             'filiale_id' => $request->filiale_id,
             'recapito_id' => $request->recapito_id,
             'mail' => trim(Str::upper($request->mail)),
-            'tipo' => trim(Str::upper($request->tipo))
+            'tipo' => $request->tipo,
+            'recall' => 1,
+            'datarecall' => $this->calcolaRecall($request->tipo),
+            'datanascita' => $request->datanascita
         ]);
+    }
+
+    public function calcolaRecall($tipo)
+    {
+        $oggi = Carbon::now();
+        $tipo = Tipologia::where('nome', $tipo)->first();
+        return $oggi->addDays($tipo->recall)->format('Y-m-d');
     }
 
     public function modifica($request)
@@ -90,19 +101,26 @@ class ClientService
     {
         $oggi = Carbon::now()->format('Y-m-d');
         return Filiale::with(['clients' => function ($q) use($oggi){
-            $q->where([['recall', '1'],['datarecall', $oggi]]);
+            $q->where([['recall'],['datarecall', $oggi]]);
         }])->whereHas('clients', function($z) use($oggi){
-            $z->where([['recall', '1'],['datarecall', $oggi]]);
+            $z->where([['recall'],['datarecall', $oggi]]);
         })->get();
     }
 
     public function getRecallsDomani()
     {
         $domani = Carbon::tomorrow()->format('Y-m-d');
-        return Filiale::with(['clients' => function ($q) use($domani){
-            $q->where([['recall', '1'],['datarecall', $domani]]);
+
+        /*dd(Filiale::with(['clients' => function ($q) use($domani){
+            $q->where([['datarecall', $domani]]);
         }])->whereHas('clients', function($z) use($domani){
-            $z->where([['recall', '1'],['datarecall', $domani]]);
+            $z->where([['datarecall', $domani]]);
+        })->get());*/
+
+        return Filiale::with(['clients' => function ($q) use($domani){
+            $q->where([['datarecall', $domani]]);
+        }])->whereHas('clients', function($z) use($domani){
+            $z->where([['datarecall', $domani]]);
         })->get();
     }
 

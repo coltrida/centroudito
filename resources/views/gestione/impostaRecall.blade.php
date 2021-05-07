@@ -1,5 +1,5 @@
 @extends('stile')
 
 @section('main')
-    <livewire:user-filiale-datatables />
+    <livewire:imposta-recall />
 @endsection

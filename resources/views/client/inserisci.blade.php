@@ -74,7 +74,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="mb-3 col-4">
+            <div class="mb-3 col-3">
                 <label for="mail" class="form-label">email</label>
                 <input type="text" @if(isset($client->nome)) value="{{$client->mail}}" @endif class="form-control" id="mail" name="mail" placeholder="e-mail">
             </div>
@@ -82,12 +82,12 @@
                 <label for="tipo" class="form-label">Tipo @error('tipo') <span class="text-red-500 text-xs"> - {{ $message }}</span> @enderror</label>
                 <select class="form-select" aria-label="Default select example" name="tipo" id="tipo">
                     <option selected></option>
-                    @foreach(config('enum.tipi') as $tipo)
-                        <option @if(isset($client->nome)) {{$tipo == $client->tipo ? 'selected' : ''}} @endif value="{{$tipo}}">{{$tipo}}</option>
+                    @foreach($tipi as $tipo)
+                        <option @if(isset($client->nome)) {{$tipo->nome == $client->tipo ? 'selected' : ''}} @endif value="{{$tipo->nome}}">{{$tipo->nome}}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="mb-3 col-3">
+            <div class="mb-3 col-2">
                 <label for="fonte" class="form-label">Canale Mkt @error('fonte') <span class="text-red-500 text-xs"> - {{ $message }}</span> @enderror</label>
                 <select class="form-select" aria-label="Default select example" name="fonte" id="fonte">
                     <option selected></option>
@@ -95,6 +95,10 @@
                         <option @if(isset($client->nome)) {{$canale->name == $client->fonte ? 'selected' : ''}} @endif value="{{$canale->name}}">{{$canale->name}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="mb-3 col-2">
+                <label for="fonte" class="form-label">Data Nascita</label>
+                <input type="date" @if(isset($client->nome)) value="{{$client->datanascita}}" @endif class="form-control" name="datanascita">
             </div>
         </div>
         @if(isset($client->nome))

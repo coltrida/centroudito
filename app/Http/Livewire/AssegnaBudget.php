@@ -40,6 +40,7 @@ class AssegnaBudget extends Component
     public $dicembre = 0;
     public $getDicembre = 0;
     public $verifica = 0;
+    public $modifica = 0;
 
     public function associa(UserService $userService)
     {
@@ -48,6 +49,7 @@ class AssegnaBudget extends Component
             'stipendioMese' => $this->stipendioMese,
             'provvigioni' => $this->provvigioni,
             'budget' => $this->budget,
+            'modifica' => $this->modifica,
             $this->gennaio,
             $this->febbraio,
             $this->marzo,
@@ -86,12 +88,14 @@ class AssegnaBudget extends Component
         $this->utile = 0;
         $this->budget = 0;
         $this->idUserSelezionato = 0;
+        $this->modifica = 0;
 
     }
 
     public function modifica($id, UserService $userService)
     {
         $this->audioId = $id;
+        $this->modifica = 1;
         $this->budget = $userService->getInfoBudget($id)->budgetAnno;
         $this->stipendioMese = $userService->getInfoBudget($id)->stipendio;
         $this->provvigioni = $userService->getInfoBudget($id)->provvigione;
@@ -109,7 +113,7 @@ class AssegnaBudget extends Component
         $this->novembre = $userService->getInfoBudget($id)->novembre;
         $this->dicembre = $userService->getInfoBudget($id)->dicembre;
 
-        $userService->disassociaBudget($id);
+        //$userService->disassociaBudget($id);
 
     }
 

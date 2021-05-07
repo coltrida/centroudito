@@ -128,16 +128,32 @@
                     <div class="rounded border p-1 my-2" style="background-color: #537429; box-shadow: 2px 2px 4px #000000;">
                         @foreach($filiale->clients as $item)
                             <div class="row justify-between my-1 align-items-center">
-                                <div class="col">
-                                    {{$item->nome}}
+                                <div class="col-10">
+                                    <div class="row">
+                                        <div class="col">
+                                            {{$item->nome}}
+                                        </div>
+                                        <div class="col">
+                                            {{$item->cognome}}
+                                        </div>
+                                        <div class="col">
+                                            {{$item->telefono}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{$item->indirizzo}}
+                                        </div>
+                                        <div class="col">
+                                            {{$item->citta}}
+                                        </div>
+                                        <div class="col">
+                                            {{$item->provincia}}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    {{$item->cognome}}
-                                </div>
-                                <div class="col">
-                                    {{$item->telefono}}
-                                </div>
-                                <div class="col">
+
+                                <div class="col-2">
                                     <a class="btn btn-success">fatta</a>
                                 </div>
                             </div>
@@ -150,16 +166,31 @@
                     <div class="rounded border p-1 my-2" style="background-color: #537429; box-shadow: 2px 2px 4px #000000;">
                         @foreach($filiale->clients as $item)
                             <div class="row justify-between my-1 align-items-start">
-                                <div class="col">
-                                    {{$item->nome}}
+                                <div class="col-10">
+                                    <div class="row">
+                                        <div class="col">
+                                            {{$item->nome}}
+                                        </div>
+                                        <div class="col">
+                                            {{$item->cognome}}
+                                        </div>
+                                        <div class="col">
+                                            {{$item->telefono}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{$item->indirizzo}}
+                                        </div>
+                                        <div class="col">
+                                            {{$item->citta}}
+                                        </div>
+                                        <div class="col">
+                                            {{$item->provincia}}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    {{$item->cognome}}
-                                </div>
-                                <div class="col">
-                                    {{$item->telefono}}
-                                </div>
-                                <div class="col">
+                                <div class="col-2">
                                     <a class="btn btn-success">fatta</a>
                                 </div>
                             </div>

@@ -6,7 +6,10 @@
     @endif
 
     <div class="row">
-        <button wire:click="associa()" {{$audioId && $stipendioMese && $provvigioni && $budget ? '' : 'disabled'}} class="btn btn-success">ASSOCIA</button>
+        <button wire:click="associa()" {{$audioId && $stipendioMese && $provvigioni && $budget ? '' : 'disabled'}}
+            class="btn btn-success">
+                {{$modifica == 0  ? 'ASSOCIA' : 'MODIFICA'}}
+        </button>
     </div>
 
     <div class="rounded border p-3 my-2" style="background-color: #124874; box-shadow: 2px 2px 4px #000000;">

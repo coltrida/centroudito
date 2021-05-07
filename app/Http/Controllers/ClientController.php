@@ -7,6 +7,7 @@ use App\Services\ClientService;
 use App\Services\FilialeService;
 use App\Services\MarketingService;
 use App\Services\RecapitoService;
+use App\Services\TipologiaService;
 use App\Services\UserService;
 use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Illuminate\Http\Request;
@@ -25,13 +26,14 @@ class ClientController extends Controller
         return view('client.index', ['idAudio' => $idAudio, 'idFiliale' => $idFiliale ]);
     }
 
-    public function inserisci(ClientService $clientService, MarketingService $marketingService, RecapitoService $recapitoService, FilialeService $filialeService, $idFiliale, $id='')
+    public function inserisci(ClientService $clientService, TipologiaService $tipologiaService, MarketingService $marketingService, RecapitoService $recapitoService, FilialeService $filialeService, $idFiliale, $id='')
     {
         return view('client.inserisci', [
             'client' => $clientService->getClient($id),
             'canali' => $marketingService->canali(),
             'filiali' => $filialeService->filiali(),
             'idFiliale' => $idFiliale,
+            'tipi' => $tipologiaService->tipologie(),
             'recapiti' => $recapitoService->recapiti()
         ]);
     }

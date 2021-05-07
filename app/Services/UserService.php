@@ -56,7 +56,7 @@ class UserService
 
         return User::with(['filiale', 'provaInCorso', 'provaFinalizzata' => function($z) use($mese, $anno){
             $z->where([['mese_fine', $mese], ['anno_fine', $anno]]);
-                }, "budget:id,budgetAnno,$nomeMese as target"])
+                }, "budget"])
             ->withSum(['provaFinalizzata' => function($g) use($mese, $anno){
                 $g->where([['mese_fine', $mese], ['anno_fine', $anno]]);
                 }], 'tot')
@@ -138,37 +138,75 @@ class UserService
 
     public function associaBudget($request)
     {
-        $budget = new Budget();
-        $budget->budgetAnno = $request['budget'];
-        $budget->premio = 0;
-        $budget->stipendio = $request['stipendioMese'];
-        $budget->provvigione = $request['provvigioni'];
-        $budget->gennaio = $request[0];
-        $budget->febbraio = $request[1];
-        $budget->marzo = $request[2];
-        $budget->aprile = $request[3];
-        $budget->maggio = $request[4];
-        $budget->giugno = $request[5];
-        $budget->luglio = $request[6];
-        $budget->agosto = $request[7];
-        $budget->settembre = $request[8];
-        $budget->ottobre = $request[9];
-        $budget->novembre = $request[10];
-        $budget->dicembre = $request[11];
-        $budget->save();
+        //dd($request);
+        if ($request['modifica'] == 0){
+            $budget = new Budget();
+            $budget->budgetAnno = $request['budget'];
+            $budget->premio = 0;
+            $budget->stipendio = $request['stipendioMese'];
+            $budget->provvigione = $request['provvigioni'];
+            $budget->gennaio = $request[0];
+            $budget->febbraio = $request[1];
+            $budget->marzo = $request[2];
+            $budget->aprile = $request[3];
+            $budget->maggio = $request[4];
+            $budget->giugno = $request[5];
+            $budget->luglio = $request[6];
+            $budget->agosto = $request[7];
+            $budget->settembre = $request[8];
+            $budget->ottobre = $request[9];
+            $budget->novembre = $request[10];
+            $budget->dicembre = $request[11];
+            $budget->save();
 
-        $user = User::find($request['audioId']);
-        $user->budget_id = $budget->id;
-        return $user->save();
+            $user = User::find($request['audioId']);
+            $user->budget_id = $budget->id;
+            return $user->save();
+        } else {
+            $budget = User::with('budget')->find($request['audioId'])->budget;
+            $budget->budgetAnno = $request['budget'];
+            $budget->premio = 0;
+            $budget->stipendio = $request['stipendioMese'];
+            $budget->provvigione = $request['provvigioni'];
+            $budget->gennaio = $request[0];
+            $budget->febbraio = $request[1];
+            $budget->marzo = $request[2];
+            $budget->aprile = $request[3];
+            $budget->maggio = $request[4];
+            $budget->giugno = $request[5];
+            $budget->luglio = $request[6];
+            $budget->agosto = $request[7];
+            $budget->settembre = $request[8];
+            $budget->ottobre = $request[9];
+            $budget->novembre = $request[10];
+            $budget->dicembre = $request[11];
+            return $budget->save();
+        }
+
     }
 
     public function getInfoBudget($id)
     {
         setlocale(LC_TIME, 'it_IT');
         Carbon::setLocale('it');
+        //$nomeMese = Carbon::now()->monthName;
+
+        //dd(User::with("budget:id,budgetAnno,$nomeMese as target")->find($id)->budget);
+
+        //return User::with("budget:id,budgetAnno,$nomeMese as target")->find($id)->budget;
+        return User::with("budget")->find($id)->budget;
+    }
+
+    public function getBudgetDelMese($id)
+    {
+        setlocale(LC_TIME, 'it_IT');
+        Carbon::setLocale('it');
         $nomeMese = Carbon::now()->monthName;
 
+        //dd(User::with("budget:id,budgetAnno,$nomeMese as target")->find($id)->budget);
+
         return User::with("budget:id,budgetAnno,$nomeMese as target")->find($id)->budget;
+        //return User::with("budget")->find($id)->budget;
     }
 
     public function disassociaBudget($id)
