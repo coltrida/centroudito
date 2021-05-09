@@ -23,7 +23,9 @@
         title="prove">
         <i class="fas fa-assistive-listening-systems"></i>
     </a>
-    <a href="#" class="btn btn-sm" style="background-color: #9153c2; box-shadow: 2px 2px 4px #000000; width: 35px" title="audiometrie">
+    <a href="#" class="btn btn-sm" style="background-color: #9153c2; box-shadow: 2px 2px 4px #000000; width: 35px"
+        wire:click="$emit('clientSelectedAudiogramma', {{$id}})"
+        title="audiometrie">
         <i class="fas fa-chart-bar"></i>
     </a>
 </div>

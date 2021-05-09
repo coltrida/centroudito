@@ -15,6 +15,7 @@ class CreateAudiometriasTable extends Migration
     {
         Schema::create('audiometrias', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('client_id')->unsigned();
             $table->string('_250d')->nullable();
             $table->string('_500d')->nullable();
             $table->string('_1000d')->nullable();
@@ -27,7 +28,6 @@ class CreateAudiometriasTable extends Migration
             $table->string('_2000s')->nullable();
             $table->string('_4000s')->nullable();
             $table->string('_8000s')->nullable();
-            $table->bigInteger('id_client')->unsigned();
             $table->timestamps();
         });
     }

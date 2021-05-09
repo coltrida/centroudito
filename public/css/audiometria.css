@@ -1,0 +1,28 @@
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    position: relative;
+    font-size: 10px;
+    border-radius: 5px;
+    padding: 0 5px;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+}
+
+.sinistro {
+    color: blue;
+    border: 2px solid blue;
+}
+
+.destro {
+    color: red;
+    border: 2px solid red;
+}
+
+
+input[type="radio"]:checked + label {
+    background-color: #2d995b;
+}
