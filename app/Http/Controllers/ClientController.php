@@ -41,7 +41,7 @@ class ClientController extends Controller
     public function postInserisci(InsertClientRequest $request, ClientService $clientService)
     {
         if (!$clientService->inserisci($request)) {
-            return redirect()->route('client.index')->withMessage("Errore nell'inserimento cliente");
+            return redirect()->route('client.index', ['idAudio' => Auth::id(), 'idFiliale' => $request->filiale_id])->withMessage("Errore nell'inserimento cliente");
         }
         return redirect()->route('client.index', ['idAudio' => Auth::id(), 'idFiliale' => $request->filiale_id])->withMessage("Cliente Inserito");
     }
@@ -49,9 +49,9 @@ class ClientController extends Controller
     public function modifica(InsertClientRequest $request, ClientService $clientService)
     {
         if (!$clientService->modifica($request)) {
-            return redirect()->route('client.index')->withMessage("Errore nella modifica cliente");
+            return redirect()->route('client.index', ['idAudio' => Auth::id(), 'idFiliale' => $request->filiale_id])->withMessage("Errore nella modifica cliente");
         }
-        return redirect()->route('client.index')->withMessage("Cliente {$request->nome} {$request->cognome} Modificato");
+        return redirect()->route('client.index', ['idAudio' => Auth::id(), 'idFiliale' => $request->filiale_id])->withMessage("Cliente {$request->nome} {$request->cognome} Modificato");
     }
 
     public function recall(Request $request, ClientService $clientService)

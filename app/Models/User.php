@@ -92,4 +92,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Budget::class);
     }
+
+    public function client()
+    {
+        return $this->hasMany(Client::class);
+    }
 }

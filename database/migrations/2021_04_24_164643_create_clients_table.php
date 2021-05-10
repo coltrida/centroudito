@@ -29,6 +29,8 @@ class CreateClientsTable extends Migration
             $table->char('recall')->nullable();
             $table->date('datarecall')->nullable();
             $table->date('datanascita')->nullable();
+            $table->integer('meseNascita')->nullable();
+            $table->integer('giornoNascita')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('filiale_id')->unsigned();
             $table->bigInteger('recapito_id')->unsigned()->nullable();

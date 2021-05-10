@@ -94,6 +94,7 @@ class Home extends Component
                     'finalizzati' => $userService->finalizzatiDelMese(),
                     'appuntamentiOggi' => $userService->appuntamentiOggi(),
                     'appuntamentiDomani' => $userService->appuntamentiDomani(),
+                    'compleanniOggi' => $clientService->compleanniOggi(),
                 ];
             } elseif ($userService->isAmministrazione()){
                 $nomeVista = 'livewire.home.home-amministrazione';

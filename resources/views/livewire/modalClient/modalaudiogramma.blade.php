@@ -12,11 +12,13 @@
                 <button type="button" class="btn-close" wire:click="closeModal()" aria-label="Close"></button>
             </div>
             @if($visualizza)
+                @if(count($audiometrie) > 0)
                 <div class="modal-body" style="height: 440px;">
                     <livewire:livewire-line-chart
                         :line-chart-model="$lineChartModel"
                     />
                 </div>
+                @endif
                 <a class="btn btn-primary" wire:click="cambia(0)">Nuovo</a>
             @else
                 <div class="modal-body" style="height: 440px;">
@@ -82,10 +84,10 @@
                 </div>
                 <a class="btn btn-primary" wire:click="cambia(1)">salva</a>
             @endif
-            @if(count($audiometrie) > 0)<h3>Vecchie Audiometrie</h3>@endif
-            @foreach($audiometrie as $audiometria)
-                {{$audiometria->created_at}}
-            @endforeach
+            @if(count($audiometrie) > 1)<h3>Vecchie Audiometrie</h3>@endif
+            @for($i = 1; $i < count($audiometrie); $i++)
+                {{$audiometrie[$i]->created_at}}
+            @endfor
         </div>
     </div>
 </div>

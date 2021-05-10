@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Models\Client;
 use App\Models\Filiale;
 use App\Models\Tipologia;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -39,7 +40,9 @@ class ClientService
             'tipo' => $request->tipo,
             'recall' => 1,
             'datarecall' => $this->calcolaRecall($request->tipo),
-            'datanascita' => $request->datanascita
+            'datanascita' => $request->datanascita,
+            'meseNascita' => $request->datanascita ? Carbon::make($request->datanascita)->month : null,
+            'giornoNascita' => $request->datanascita ? Carbon::make($request->datanascita)->day : null,
         ]);
     }
 
@@ -66,7 +69,10 @@ class ClientService
             'filiale_id' => $request->filiale_id,
             'recapito_id' => $request->recapito_id,
             'mail' => trim(Str::upper($request->mail)),
-            'tipo' => trim(Str::upper($request->tipo))
+            'tipo' => trim(Str::upper($request->tipo)),
+            'datanascita' => $request->datanascita,
+            'meseNascita' => $request->datanascita ? Carbon::make($request->datanascita)->month : null,
+            'giornoNascita' => $request->datanascita ? Carbon::make($request->datanascita)->day : null,
         ]);
 
     }
@@ -111,12 +117,6 @@ class ClientService
     {
         $domani = Carbon::tomorrow()->format('Y-m-d');
 
-        /*dd(Filiale::with(['clients' => function ($q) use($domani){
-            $q->where([['datarecall', $domani]]);
-        }])->whereHas('clients', function($z) use($domani){
-            $z->where([['datarecall', $domani]]);
-        })->get());*/
-
         return Filiale::with(['clients' => function ($q) use($domani){
             $q->where([['datarecall', $domani]]);
         }])->whereHas('clients', function($z) use($domani){
@@ -129,5 +129,14 @@ class ClientService
         $client = Client::find($id);
         $client->codfisc = $codfisc;
         return $client->save();
+    }
+
+    public function compleanniOggi()
+    {
+        $meseOggi = Carbon::now()->month;
+        $giornoOggi = Carbon::now()->day;
+        return User::with(['client' => function($q) use($meseOggi, $giornoOggi) {
+            $q->compleanno($meseOggi, $giornoOggi);
+        }])->find(Auth::id())->client;
     }
 }

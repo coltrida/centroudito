@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use function config;
+use function dd;
+use function substr;
 
 class Client extends Model
 {
@@ -60,5 +63,15 @@ class Client extends Model
     public function audiometria()
     {
         return $this->hasMany(Audiometria::class);
+    }
+
+    public function getEtaAttribute()
+    {
+        return $this->datanascita ? Carbon::now()->year - substr($this->datanascita, 0, 4) : null;
+    }
+
+    public function scopeCompleanno($query, $mese, $giorno)
+    {
+        return $query->where([['meseNascita',$mese], ['giornoNascita', $giorno]]);
     }
 }
