@@ -17,8 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->bigInteger('ruolo_id')->unsigned();
+            $table->bigInteger('budget_id')->nullable();
+            $table->bigInteger('fatturati_id')->nullable();
+            $table->bigInteger('delta_id')->nullable();
+            $table->bigInteger('pezzi_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('cleanpassword')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
