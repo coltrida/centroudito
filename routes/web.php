@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+//------------- ADMIN ------------------//
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::get('/admin/filiali', [AdminController::class, 'filiali'])->name('admin.filiali');
+Route::get('/admin/personale', [AdminController::class, 'personale'])->name('admin.personale');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

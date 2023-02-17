@@ -16,6 +16,11 @@ use const LC_TIME;
 
 class UserService
 {
+    public function lista()
+    {
+        return User::with('ruolo')->orderBy('name')->get();
+    }
+
     public function audio()
     {
         return User::audio()->orderBy('name')->get();
