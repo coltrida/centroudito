@@ -6,6 +6,7 @@ use App\Services\CategoriaService;
 use App\Services\FilialeService;
 use App\Services\FornitoriService;
 use App\Services\ListinoService;
+use App\Services\MarketingService;
 use App\Services\RecapitoService;
 use App\Services\RuoloService;
 use App\Services\UserService;
@@ -171,5 +172,56 @@ class AdminController extends Controller
     {
         $listinoService->rimuovi($id);
         return \Redirect::route('admin.listino');
+    }
+
+    // ------------------------------ MARKETING ------------------------------------//
+
+    public function marketing(MarketingService $marketingService)
+    {
+        $canali = $marketingService->canali();
+        return view('admin.marketing.index', compact('canali'));
+    }
+
+    public function salvaMarketing(Request $request, MarketingService $marketingService)
+    {
+        $marketingService->addCanale($request);
+        return \Redirect::route('admin.marketing');
+    }
+
+    public function eliminaMarketing($id, MarketingService $marketingService)
+    {
+        $marketingService->eliminaCanale($id);
+
+        return back()->with('message','Canale Eliminato');
+    }
+
+    // ------------------------------ BUDGET ------------------------------------//
+
+    public function budget(UserService $userService)
+    {
+        return view('admin.budget.index');
+    }
+
+    public function audioSenzaBgt(Request $request, UserService $userService)
+    {
+        return $userService->audioSenzaBgt($request);
+    }
+
+    public function audioConBgt(Request $request, UserService $userService)
+    {
+        return $userService->audioConBgt($request);
+    }
+
+    public function salvaBudget(Request $request, MarketingService $marketingService)
+    {
+        $marketingService->addCanale($request);
+        return \Redirect::route('admin.budget');
+    }
+
+    public function eliminaBudget($id, MarketingService $marketingService)
+    {
+        $marketingService->eliminaCanale($id);
+
+        return back()->with('message','Canale Eliminato');
     }
 }

@@ -18,28 +18,28 @@
             <div class="col-9">
                 <div class="row">
                     <div class="form-floating col-5">
-                        <input type="text" class="form-control" id="nome" name="nome">
-                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="name@example.com">
+                        <label for="nome" class="ml-2 text-gray-600">Nome</label>
                     </div>
 
                     <div class="form-floating col-4">
-                        <select class="form-control" aria-label="Default select example" name="fornitore_id" id="fornitore_id">
+                        <select class="form-select" aria-label="Floating label select example" name="fornitore_id" id="fornitore_id">
                             <option selected></option>
                             @foreach($fornitori as $item)
                                 <option value={{$item->id}}>{{$item->nome}}</option>
                             @endforeach
                         </select>
-                        <label for="fornitore_id">Fornitore</label>
+                        <label for="fornitore_id" class="ml-2 text-gray-600">Fornitore</label>
                     </div>
 
                     <div class="form-floating col-3">
-                        <select class="form-control" aria-label="Default select example" name="categoria_id" id="categoria_id">
+                        <select class="form-select" aria-label="Floating label select example" name="categoria_id" id="categoria_id">
                             <option selected></option>
                             @foreach($categorie as $item)
                                 <option value={{$item->id}}>{{$item->nome}}</option>
                             @endforeach
                         </select>
-                        <label for="categoria_id">Categoria</label>
+                        <label for="categoria_id" class="ml-2 text-gray-600">Categoria</label>
                     </div>
 
 
@@ -47,28 +47,28 @@
 
                 <div class="row mt-5">
                     <div class="form-floating col-3">
-                        <input type="number" class="form-control" id="costo" name="costo">
-                        <label for="costo">Costo</label>
+                        <input type="number" class="form-control" id="costo" name="costo" placeholder="name@example.com">
+                        <label for="costo" class="ml-2 text-gray-600">Costo</label>
                     </div>
 
                     <div class="form-floating col-3">
-                        <input type="number" class="form-control" id="prezzolistino" name="prezzolistino">
-                        <label for="prezzolistino">prezzo lis</label>
+                        <input type="number" class="form-control" id="prezzolistino" name="prezzolistino" placeholder="name@example.com">
+                        <label for="prezzolistino" class="ml-2 text-gray-600">prezzo lis</label>
                     </div>
 
                     <div class="form-floating col-2">
-                        <input type="number" class="form-control" id="scontoMax" name="scontoMax">
-                        <label for="scontoMax">scontoMax</label>
+                        <input type="number" class="form-control" id="scontoMax" name="scontoMax" placeholder="name@example.com">
+                        <label for="scontoMax" class="ml-2 text-gray-600">scontoMax</label>
                     </div>
 
                     <div class="form-floating col-2">
-                        <input type="number" class="form-control" id="iva" name="iva">
-                        <label for="iva">iva</label>
+                        <input type="number" class="form-control" id="iva" name="iva" placeholder="name@example.com">
+                        <label for="iva" class="ml-2 text-gray-600">iva</label>
                     </div>
 
                     <div class="form-floating col-2">
-                        <input type="number" class="form-control" id="giorniTempoDiReso" name="giorniTempoDiReso">
-                        <label for="giorniTempoDiReso">giorniTempoDiReso</label>
+                        <input type="number" class="form-control" id="giorniTempoDiReso" name="giorniTempoDiReso" placeholder="name@example.com">
+                        <label for="giorniTempoDiReso" class="ml-2 text-gray-600">giorni Reso</label>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                                 <input type="hidden" name='idFiliali[{{$i}}]' value='{{$filiali[$i]->id}}'>
                             </div>
                             <div class="col">
-                                <label for='soglie[{{$i}}]'>{{$filiali[$i]->nome}}</label>
+                                <label for='soglie[{{$i}}]' class="ml-2 text-gray-600">{{$filiali[$i]->nome}}</label>
                             </div>
                         </div>
 

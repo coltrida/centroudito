@@ -41,4 +41,15 @@ Route::middleware('guest')->group(function () {
     Route::get('/admin/listino/aggiungi', [AdminController::class, 'aggiungiListino'])->name('admin.listino.aggiungi');
     Route::post('/admin/listino/aggiungi', [AdminController::class, 'salvaListino'])->name('admin.listino.salva');
     Route::get('/admin/listino/elimina/{id}', [AdminController::class, 'eliminaListino'])->name('admin.listino.elimina');
+
+    //------------- MARKETING ------------------//
+    Route::get('/admin/marketing', [AdminController::class, 'marketing'])->name('admin.marketing');
+    Route::post('/admin/marketing/aggiungi', [AdminController::class, 'salvaMarketing'])->name('admin.marketing.salva');
+    Route::get('/admin/marketing/elimina/{id}', [AdminController::class, 'eliminaMarketing'])->name('admin.marketing.elimina');
+
+    //------------- BUDGET ------------------//
+    Route::get('/admin/budget', [AdminController::class, 'budget'])->name('admin.budget');
+    Route::post('/admin/budget/audioSenzaBgt', [AdminController::class, 'audioSenzaBgt'])->name('admin.budget.audioSenzaBgt');
+    Route::post('/admin/budget/audioConBgt', [AdminController::class, 'audioConBgt'])->name('admin.budget.audioConBgt');
+    Route::get('/admin/budget/elimina/{id}', [AdminController::class, 'eliminaBudget'])->name('admin.budget.elimina');
 });

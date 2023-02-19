@@ -56,14 +56,14 @@
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="{{route('admin.categorie')}}">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-fw fa-book"></i>
                     <span>Categorie</span></a>
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="{{route('admin.filiali')}}">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-fw fa-city"></i>
                     <span>Filiali</span></a>
             </li>
 
@@ -76,22 +76,36 @@
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="{{route('admin.personale')}}">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-fw fa-user"></i>
                     <span>Personale</span></a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="{{route('admin.fornitori')}}">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-fw fa-truck"></i>
                     <span>Fornitori</span></a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="{{route('admin.listino')}}">
-                    <i class="fas fa-fw fa-chart-area"></i>
+                    <i class="fas fa-fw fa-list"></i>
                     <span>Listino</span></a>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.marketing')}}">
+                    <i class="fas fa-fw fa-credit-card"></i>
+                    <span>Marketing</span></a>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.budget')}}">
+                    <i class="fas fa-fw fa-money-bill"></i>
+                    <span>Budget</span></a>
             </li>
 
             <!-- Divider -->

@@ -19,7 +19,7 @@ class MarketingService
     public function addCanale($request)
     {
         return Marketing::create([
-            'name' => trim(Str::upper($request->nome)),
+            'name' => trim(Str::upper($request->name)),
             'cod' => trim(Str::upper($request->cod)),
         ]);
     }

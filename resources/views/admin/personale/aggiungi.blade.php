@@ -15,29 +15,29 @@
     @csrf
 
     <div class="row">
-        <div class="form-floating col-3">
-            <input type="text" class="form-control" id="name" name="name">
-            <label for="name">Nome</label>
+        <div class="form-floating col-4">
+            <input type="text" class="form-control" id="name" name="name" placeholder="name@example.com">
+            <label for="name" class="ml-2 text-gray-600">Nome</label>
         </div>
 
         <div class="form-floating col-5">
-            <input type="email" class="form-control" id="email" name="email">
-            <label for="email">email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+            <label for="email" class="ml-2 text-gray-600">email</label>
         </div>
 
-        <div class="form-floating col-4">
-            <select class="form-control" aria-label="Default select example" name="ruolo_id">
+        <div class="form-floating col-3">
+            <select class="form-select" aria-label="Floating label select example" name="ruolo_id">
                 <option selected></option>
                 @foreach($ruoli as $ruolo)
                     <option value={{$ruolo->id}}>{{$ruolo->nome}}</option>
                 @endforeach
             </select>
-            <label for="email">Ruolo</label>
+            <label for="email" class="ml-2 text-gray-600">Ruolo</label>
         </div>
 
     </div>
 
-        <button type="submit" class="btn btn-primary">Inserisci</button>
+        <button type="submit" class="btn btn-primary mt-5">Inserisci</button>
 
     </form>
 

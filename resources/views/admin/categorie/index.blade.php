@@ -32,11 +32,17 @@
         <div class="col-6">
             <form action="{{route('admin.categoria.salva')}}" method="post">
                 @csrf
-                <div class="form-floating col-12">
-                    <input type="text" class="form-control" id="nome" name="nome">
-                    <label for="nome">Nome Categoria</label>
+                <div class="row">
+                    <div class="form-floating col-8">
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="name@example.com">
+                        <label for="nome" class="ml-2 text-gray-600">Nome Categoria</label>
+                    </div>
+                    <div class="form-floating col-4">
+                        <button type="submit" class="btn btn-primary ml-2">Inserisci</button>
+                    </div>
+
                 </div>
-                <button type="submit" class="btn btn-primary ml-2">Inserisci</button>
+
             </form>
         </div>
     </div>
