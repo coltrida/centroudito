@@ -51,6 +51,7 @@ class RecapitoService
             'citta' => $request->citta != 'undefined' ? trim(Str::upper($request->citta)) : null,
             'telefono' => $request->telefono != 'undefined' ? $request->telefono : null,
             'user_id' => $request->user_id,
+            'filiale_id' => $request->filiale_id,
             'provincia' => $request->provincia != 'undefined' ? trim(Str::upper($request->provincia)) : null,
             'informazioni' => $request->informazioni != 'undefined' ? trim(Str::upper($request->informazioni)) : null,
         ]);
