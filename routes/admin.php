@@ -49,7 +49,7 @@ Route::middleware('guest')->group(function () {
 
     //------------- BUDGET ------------------//
     Route::get('/admin/budget', [AdminController::class, 'budget'])->name('admin.budget');
-    Route::post('/admin/budget/audioSenzaBgt', [AdminController::class, 'audioSenzaBgt'])->name('admin.budget.audioSenzaBgt');
-    Route::post('/admin/budget/audioConBgt', [AdminController::class, 'audioConBgt'])->name('admin.budget.audioConBgt');
+    Route::post('/admin/budget/sceltaAnno', [AdminController::class, 'sceltaAnno'])->name('admin.budget.sceltaAnno');
+    Route::post('/admin/budget/salva', [AdminController::class, 'salvaBudget'])->name('admin.budget.salva');
     Route::get('/admin/budget/elimina/{id}', [AdminController::class, 'eliminaBudget'])->name('admin.budget.elimina');
 });

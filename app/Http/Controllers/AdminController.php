@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Services\CategoriaService;
 use App\Services\FilialeService;
 use App\Services\FornitoriService;
@@ -202,26 +203,27 @@ class AdminController extends Controller
         return view('admin.budget.index');
     }
 
-    public function audioSenzaBgt(Request $request, UserService $userService)
+    public function sceltaAnno(Request $request, UserService $userService)
     {
-        return $userService->audioSenzaBgt($request);
+        $audioSenzaBgt = $userService->audioSenzaBgt($request);
+        $audioConBgt = $userService->audioConBgt($request);
+        $anno = $request->anno;
+        return view('admin.budget.index', compact('audioSenzaBgt', 'audioConBgt', 'anno'));
     }
 
-    public function audioConBgt(Request $request, UserService $userService)
+    public function salvaBudget(Request $request, UserService $userService)
     {
-        return $userService->audioConBgt($request);
+        $userService->assegnaBgt($request);
+        $audioSenzaBgt = $userService->audioSenzaBgt($request);
+        $audioConBgt = $userService->audioConBgt($request);
+        $anno = $request->anno;
+        return view('admin.budget.index', compact('audioSenzaBgt', 'audioConBgt', 'anno'));
     }
 
-    public function salvaBudget(Request $request, MarketingService $marketingService)
+    public function eliminaBudget($id, UserService $userService)
     {
-        $marketingService->addCanale($request);
-        return \Redirect::route('admin.budget');
-    }
+        $userService->eliminaBgt($id);
 
-    public function eliminaBudget($id, MarketingService $marketingService)
-    {
-        $marketingService->eliminaCanale($id);
-
-        return back()->with('message','Canale Eliminato');
+        return \Redirect::route('admin.budget')->with('message','Budget Eliminato');
     }
 }

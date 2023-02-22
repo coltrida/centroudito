@@ -182,6 +182,11 @@ class UserService
         }])->find($request->idAudio);
     }
 
+    public function eliminaBgt($id)
+    {
+        Budget::find($id)->delete();
+    }
+
     public function modificaBgt($request)
     {
         $budget = Budget::find($request->idBudget);
