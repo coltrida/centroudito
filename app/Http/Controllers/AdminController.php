@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Services\CategoriaService;
 use App\Services\FilialeService;
 use App\Services\FornitoriService;
@@ -48,6 +47,25 @@ class AdminController extends Controller
     public function listaFilialiAudio($id, FilialeService $filialeService)
     {
         return $filialeService->filialiAudio($id);
+    }
+
+    public function associaFilialeAudio(FilialeService $filialeService, UserService $userService)
+    {
+        $associazioni = $filialeService->associazioni();
+        $utenti = $userService->lista();
+        return view('admin.filiali.associazioniUtenti', compact('associazioni', 'utenti'));
+    }
+
+    public function eseguiAssociaFilialeAudio(Request $request, FilialeService $filialeService)
+    {
+        $filialeService->aggiungiAssociazione($request);
+        return \Redirect::back();
+    }
+
+    public function eliminaAssociazione($id, FilialeService $filialeService)
+    {
+        $filialeService->eliminaAssociazione($id);
+        return \Redirect::back();
     }
 
     // ------------------------------ RECAPITI ------------------------------------//

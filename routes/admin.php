@@ -12,6 +12,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/admin/filiali/aggiungi', [AdminController::class, 'salvaFiliale'])->name('admin.filiali.salva');
     Route::get('/admin/filiali/elimina/{id}', [AdminController::class, 'eliminaFiliale'])->name('admin.filiali.elimina');
     Route::get('/admin/filiali/audio/{id}', [AdminController::class, 'listaFilialiAudio'])->name('admin.filiali.audio');
+    Route::get('/admin/filiali/associaAudio', [AdminController::class, 'associaFilialeAudio'])->name('admin.filiali.associaAudio');
+    Route::post('/admin/filiali/associaAudio', [AdminController::class, 'eseguiAssociaFilialeAudio'])->name('admin.filiali.eseguiAssociaAudio');
+    Route::get('/admin/filiali/eliminaAssociazione/{id}', [AdminController::class, 'eliminaAssociazione'])->name('admin.filiali.eliminaAssociazione');
 
     //------------- RECAPITI ------------------//
     Route::get('/admin/recapiti', [AdminController::class, 'recapiti'])->name('admin.recapiti');

@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Federico Cosseddu',
-                'email' => 'federico.cosseddu@centrouditogroup.it',
+                'email' => 'cacao@cacao.it',
                 'ruolo' => 2,
                 'budget_id' => 1,
                 'email_verified_at' => now(),
@@ -99,7 +99,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Athanasia Papatheodoru',
-                'email' => 'athanasia.papatheodoru@centrouditogroup.it',
+                'email' => 'cacao2@cacao.it',
                 'ruolo' => 2,
                 'budget_id' => 5,
                 'email_verified_at' => now(),

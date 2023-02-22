@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\FilialeService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(FilialeService $filialeService)
     {
-        return view('home');
+        $filiali = [];
+        if (\Auth::user()){
+            $filiali = $filialeService->filialiAudio(\Auth::id());
+        }
+        return view('home', compact('filiali'));
     }
 }

@@ -79,26 +79,11 @@ class FilialeService
 
     public function aggiungiAssociazione($request)
     {
-        foreach($request->Audio as $audio){
+        foreach($request->filiali as $filialeId){
             FilialeUser::create([
-                'user_id' => $audio['id'],
-                'filiale_id' => $request->idFiliale,
+                'user_id' => $request->userId,
+                'filiale_id' => $filialeId,
             ]);
-            /*$associazione = new FilialeUser();
-            $associazione->user_id = $audio['id'];
-            $associazione->filiale_id = $request->idFiliale;
-            $associazione->save();*/
-        }
-
-        foreach($request->Amm as $amm){
-            FilialeUser::create([
-                'user_id' => $amm['id'],
-                'filiale_id' => $request->idFiliale,
-            ]);
-            /*$associazione = new FilialeUser();
-            $associazione->user_id = $amm['id'];
-            $associazione->filiale_id = $request->idFiliale;
-            $associazione->save();*/
         }
 
         return Filiale::with('users:id,name')->orderBy('nome')->get();

@@ -26,21 +26,21 @@ class FilialeSeeder extends Seeder
             ],
             [
                 'nome' => 'CIVITANOVA',
-                'indirizzo' => '........',
+                'indirizzo' => 'VIA ROMA 5',
                 'citta' => 'CIVITANOVA',
-                'telefono' => '........',
-                'cap' => '........',
+                'telefono' => '0733666',
+                'cap' => '68254',
                 'provincia' => 'MC',
-                'informazioni' => '..........'
+                'informazioni' => 'VICINO AL COMUNE'
             ],
             [
                 'nome' => 'LUCCA',
-                'indirizzo' => '........',
+                'indirizzo' => 'VIA PRINCIPALE 4',
                 'citta' => 'LUCCA',
-                'telefono' => '........',
-                'cap' => '........',
+                'telefono' => '065484544',
+                'cap' => '05225',
                 'provincia' => 'LU',
-                'informazioni' => '..........'
+                'informazioni' => 'NIENTE DI CHE'
             ],
             [
                 'nome' => 'ANCONA',

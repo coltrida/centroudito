@@ -60,11 +60,18 @@
                     <span>Categorie</span></a>
             </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{{route('admin.filiali')}}">
-                    <i class="fas fa-fw fa-city"></i>
-                    <span>Filiali</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                   aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Filiali</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('admin.filiali')}}">Lista</a>
+                        <a class="collapse-item" href="{{route('admin.filiali.associaAudio')}}">Associa Pers.</a>
+                    </div>
+                </div>
             </li>
 
             <li class="nav-item">
