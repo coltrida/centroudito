@@ -29,6 +29,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                     <form action="{{route('client.elimina')}}" method="post">
                         @csrf
+                        @method('DELETE')
                         <input type="hidden" name="idClientElimina" id="idClientElimina">
 
                         @if(isset($clients[0]))
@@ -46,14 +47,20 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <div>
             <h1 class="h3 mb-0 text-gray-800">
-                Clienti
-                @if(isset($clients[0]))
-                    - {{$clients[0]->filiale->nome}}
-                @endif
+                Clienti {{$filiale->nome}}
             </h1>
         </div>
         <div>
-            <a class="btn btn-success" href="{{route('client.aggiungi', $clients[0]->filiale->id)}}">Aggiungi</a>
+            <form class="d-flex" role="search" method="post" action="{{route('client.ricerca')}}" id="ricercaForm">
+                @csrf
+                <input type="hidden" name="idFiliale" value="{{$filiale->id}}">
+                <input class="form-control me-2 border-dark shadow" type="search" name="testo" id="testoRicerca" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-primary" type="submit">Search</button> &nbsp;
+                <button class="btn btn-outline-warning" type="reset" id="resetBtn">Reset</button>
+            </form>
+        </div>
+        <div>
+            <a class="btn btn-success" href="{{route('client.aggiungiModifica', $filiale->id)}}">Aggiungi</a>
         </div>
     </div>
 
@@ -83,13 +90,13 @@
                             <a style="text-decoration: none" href="#" data-bs-toggle="modal" data-bs-target="#confermaElimina" title="elimina">
                                 <i id="{{$item}}" class="fas fa-fw fa-trash" style="color: red"></i>
                             </a>
-                            <a style="text-decoration: none" href="#" title="modifica">
+                            <a style="text-decoration: none" href="{{route('client.aggiungiModifica', ['idFiliale' => $clients[0]->filiale->id, 'idClient' => $item->id])}}" title="modifica">
                                 <i class="fas fa-fw fa-pencil"></i>
                             </a>
                             <a style="text-decoration: none" href="#" title="Audiogramma">
                                 <i class="fas fa-fw fa-headphones" style="color: green"></i>
                             </a>
-                            <a style="text-decoration: none" href="#" title="Appuntamento">
+                            <a style="text-decoration: none" href="{{route('appuntamenti', $item->id)}}" title="Appuntamento">
                                 <i class="fas fa-fw fa-calendar" style="color: purple"></i>
                             </a>
                             <a style="text-decoration: none" href="#" title="Prova">
@@ -133,3 +140,4 @@
 @endsection
 
 @extends('partial.gestioneModal')
+@extends('partial.resetRicerca')

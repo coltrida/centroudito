@@ -19,7 +19,7 @@ class ClientSeeder extends Seeder
     public function run()
     {
 
-        Client::create([
+        /*Client::create([
             'nome' => 'MASSIMO',
             'cognome' => 'TRAINITI',
             'indirizzo' => 'VIA TEVERE 29',
@@ -32,7 +32,7 @@ class ClientSeeder extends Seeder
             'marketing_id' => 4,
             'mese' => 11,
             'anno' => 2021,
-        ]);
+        ]);*/
 
         for ($i = 1; $i < 3000; $i++){
             Client::create([

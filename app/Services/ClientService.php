@@ -110,7 +110,7 @@ class ClientService
             ->where(function($query) use($testo) {
                 $query->where('nome', 'like', '%'.$testo.'%')
                         ->orWhere('cognome', 'like', '%'.$testo.'%')
-                        ->orWhere('fullname', 'like', '%'.$testo.'%');
+                        /*->orWhere('fullname', 'like', '%'.$testo.'%')*/;
             })
             ->whereHas('tipologia', function($q){
                 $q->where('nome', '!=', 'DEC');
@@ -292,8 +292,6 @@ class ClientService
             ->unique('provincia')
             ->pluck('provincia');
     }
-
-
 
     public function importClientsFromNoah($request)
     {

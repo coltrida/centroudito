@@ -177,7 +177,7 @@ class AppuntamentiService
         $newAppuntamento->tipo = $request->tipo;
         $newAppuntamento->client_id = $request->client_id;
         $newAppuntamento->user_id = $request->user_id;
-        $newAppuntamento->preso_id = $request->telefonista_id;
+        $newAppuntamento->preso_id = \Auth::id();
         $newAppuntamento->filiale_id = $request->filiale_id;
         $newAppuntamento->recapito_id = $request->recapito_id;
         $newAppuntamento->mese = $giornoDiOggi->month;
@@ -185,7 +185,7 @@ class AppuntamentiService
         $newAppuntamento->save();
 
         $dove = $request->filiale_id ? 'Filiale di '.Filiale::find($request->filiale_id)->nome : 'Recapito '.Recapito::find($request->recapito_id)->nome;
-        $utente = User::find($request->telefonista_id);
+        $utente = \Auth::user();
         $cliente = Client::find($request->client_id);
         $propieta = 'appuntamento';
         $testo = $utente->name.' ha fissato un appuntamento per '.$cliente->cognome.' '.$cliente->nome.' per il giorno '.$dataApppuntamentoFormattata.' alle ore '.$request->orario.' presso '.$dove;
@@ -253,9 +253,9 @@ class AppuntamentiService
         return Appuntamento::with('filiale', 'recapito', 'client')->find($appuntamento->id);
     }
 
-    public function eliminaAppuntamento($id, $idUser)
+    public function eliminaAppuntamento($id)
     {
-        $utente = User::find($idUser);
+        $utente = \Auth::user();
         $appuntamento = Appuntamento::with('client')->find($id);
         $propieta = 'appuntamento';
         $testo = $utente->name.' ha eliminato un appuntamento con id = '.$id.' per il giorno '.$appuntamento->giorno.' delle ore '.$appuntamento->orario;

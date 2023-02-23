@@ -18,9 +18,16 @@ Route::middleware('auth')->group(function () {
 
     //------------- CLIENTI ------------------//
     Route::get('/clients/{idFiliale}', [HomeController::class, 'clientsFiliale'])->name('clients');
-    Route::get('/client/aggiungi/{idFiliale}', [HomeController::class, 'aggiungiClient'])->name('client.aggiungi');
+    Route::get('/client/aggiungiModifica/{idFiliale}/{idClient?}', [HomeController::class, 'aggiungiModificaClient'])->name('client.aggiungiModifica');
     Route::post('/client/aggiungi', [HomeController::class, 'salvaClient'])->name('client.salva');
-    Route::post('/client/elimina', [HomeController::class, 'eliminaClient'])->name('client.elimina');
+    Route::post('/client/ricerca', [HomeController::class, 'ricercaClient'])->name('client.ricerca');
+    Route::patch('/client/modifica', [HomeController::class, 'modificaClient'])->name('client.modifica');
+    Route::delete('/client/elimina', [HomeController::class, 'eliminaClient'])->name('client.elimina');
+
+    //------------- APPUNTAMENTI ------------------//
+    Route::get('/appuntamenti/{idClient}', [HomeController::class, 'appuntamentiClient'])->name('appuntamenti');
+    Route::post('/appuntamento/aggiungi', [HomeController::class, 'aggiungiAppuntamento'])->name('appuntamento.aggiungi');
+    Route::delete('/appuntamento/elimina', [HomeController::class, 'eliminaAppuntamento'])->name('appuntamento.elimina');
 });
 
 require __DIR__.'/admin.php';
