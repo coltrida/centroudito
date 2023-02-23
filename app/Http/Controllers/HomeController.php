@@ -42,11 +42,12 @@ class HomeController extends Controller
     public function salvaClient(Request $request , ClientService $clientService)
     {
         $clientService->aggiungi($request);
-        return \Redirect::route('clients', $request->filiale_id);
+        return \Redirect::route('clients', $request->filiale_id)->with('message','Paziente Inserito');
     }
 
-    public function eliminaClient($id)
+    public function eliminaClient(Request $request, ClientService $clientService)
     {
-
+        $clientService->elimina($request);
+        return \Redirect::route('clients', $request->filiale_id)->with('message','Paziente Eliminato');
     }
 }

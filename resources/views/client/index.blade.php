@@ -1,6 +1,47 @@
 @extends('layouts.style')
 
 @section('content')
+    <div class="modal fade" id="exampleModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Info</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ Session::get('message') }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confermaElimina"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma Eliminazione <span id="nomeClienteElimina"></span></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Sei sicuro di voler eliminare il paziente?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <form action="{{route('client.elimina')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="idClientElimina" id="idClientElimina">
+
+                        @if(isset($clients[0]))
+                            <input type="hidden" name="filiale_id" value="{{$clients[0]->filiale->id}}">
+                        @endif
+                        <button type="submit" class="btn btn-primary">Conferma</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <div>
@@ -39,8 +80,8 @@
                 @foreach($clients as $item)
                     <tr>
                         <td>
-                            <a style="text-decoration: none" href="{{route('client.elimina', $item->id)}}" title="elimina">
-                                <i class="fas fa-fw fa-trash" style="color: red"></i>
+                            <a style="text-decoration: none" href="#" data-bs-toggle="modal" data-bs-target="#confermaElimina" title="elimina">
+                                <i id="{{$item}}" class="fas fa-fw fa-trash" style="color: red"></i>
                             </a>
                             <a style="text-decoration: none" href="#" title="modifica">
                                 <i class="fas fa-fw fa-pencil"></i>
@@ -91,3 +132,4 @@
 
 @endsection
 
+@extends('partial.gestioneModal')

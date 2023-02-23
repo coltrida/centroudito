@@ -57,7 +57,7 @@ class ClientService
             ->whereHas('tipologia', function($q){
                 $q->where('nome', '!=', 'DEC');
             })
-            ->orderBy('cognome')
+            ->latest()
         //    ->get();
             ->paginate(10);
     }
@@ -157,9 +157,9 @@ class ClientService
 
     public function elimina($request)
     {
-        $client = Client::find($request->clientId);
+        $client = Client::find($request->idClientElimina);
         $client->audiometria->each->delete();
-        $utente = User::find($request->userId);
+        $utente = User::find(\Auth::id());
         $propieta = 'CLIENT';
         $testo = $utente->name.' ha eliminato il nominativo '.$client->cognome.' '.$client->nome;
 

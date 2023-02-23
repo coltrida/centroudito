@@ -17,6 +17,13 @@
                 $('#exampleModal').modal('hide');
             });
 
+            $('.fa-trash').on('click', function (evt) {
+                evt.preventDefault();
+                let client = JSON.parse($(this).attr('id'))
+                $('#nomeClienteElimina').html(client.nome + ' ' + client.cognome);
+                $('#idClientElimina').val(client.id);
+            });
+
         });
     </script>
 @stop

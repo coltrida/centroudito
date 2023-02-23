@@ -90,9 +90,10 @@
     </div>
 </main>
 
-
-<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
-
+@section('footer')
+    <script src="{{asset('/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+@show
 
 </body>
 </html>
