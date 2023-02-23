@@ -144,7 +144,7 @@ class ClientService
             $this->inserisciRecallAutomatico($client, $client->id);
         }
 
-        $utente = User::find($request->eseguito_id);
+        $utente = \Auth::user();
         $propieta = 'CLIENT';
         $testo = $sonoInModificaUtente ? $utente->name.' ha modificato il nominativo '.$client->cognome.' '.$client->nome :
             $utente->name.' ha inserito il nominativo '.$client->cognome.' '.$client->nome;

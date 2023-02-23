@@ -217,7 +217,7 @@ class User extends Authenticatable
 
     public function getIsAdminAttribute()
     {
-        return $this->ruolo->nome == 'admin' ? true : false;
+        return $this->ruolo->nome === 'admin';
     }
 
     public function budget()
@@ -488,4 +488,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Risultatitel::class);
     }
+
+
+
 }

@@ -15,6 +15,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //------------- RECAPITI ------------------//
+    Route::get('/clients/{idFiliale}', [HomeController::class, 'clientsFiliale'])->name('clients');
+    Route::get('/client/aggiungi/{idFiliale}', [HomeController::class, 'aggiungiClient'])->name('client.aggiungi');
+    Route::post('/client/aggiungi', [HomeController::class, 'salvaClient'])->name('client.salva');
+    Route::get('/client/elimina/{id}', [HomeController::class, 'eliminaClient'])->name('client.elimina');
 });
 
 require __DIR__.'/admin.php';

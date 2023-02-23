@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark shadow">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{route('home')}}">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -16,8 +16,11 @@
                                 Clienti
                             </a>
                             <ul class="dropdown-menu">
+                                @if(Auth::user()->is_admin)
+                                    <li><a class="dropdown-item fw-semibold" href="#">RIEPILOGO</a></li>
+                                @endif
                                 @foreach($filiali as $item)
-                                    <li><a class="dropdown-item" href="#">{{$item->nome}}</a></li>
+                                    <li><a class="dropdown-item" href="{{route('clients', $item->id)}}">{{$item->nome}}</a></li>
                                 @endforeach
                             </ul>
                         </li>

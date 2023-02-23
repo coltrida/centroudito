@@ -10,7 +10,7 @@
     <title>Centro Udito</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbar-fixed/">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Favicons -->
@@ -84,7 +84,7 @@
 
 @extends('partial.nav_home')
 
-<main class="container">
+<main class="container-fluid">
     <div class="bg-light p-2 rounded">
         @yield('content')
     </div>
