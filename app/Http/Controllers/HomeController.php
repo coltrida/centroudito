@@ -8,6 +8,7 @@ use App\Services\ClientService;
 use App\Services\DottoreService;
 use App\Services\FilialeService;
 use App\Services\MarketingService;
+use App\Services\ProvaService;
 use App\Services\RecapitoService;
 use App\Services\TipologiaService;
 use App\Services\UserService;
@@ -107,5 +108,20 @@ class HomeController extends Controller
     {
         $appuntamentiService->eliminaAppuntamento($request->idAppuntamento);
         return \Redirect::route('clients', $request->filiale_id)->with('message','Appuntamento Eliminato');
+    }
+
+    //------------------------------- PROVE -------------------------------------//
+
+    public function prova($idClient, ProvaService $provaService, ClientService $clientService, MarketingService $marketingService)
+    {
+        $provePassate = $provaService->provePassate($idClient);
+        $cliente = $clientService->cliente($idClient);
+        $canali = $marketingService->canali();
+        return view('prove.index', compact('provePassate', 'cliente', 'canali'));
+    }
+
+    public function aggiungiProva(Request $request, ProvaService $provaService)
+    {
+
     }
 }

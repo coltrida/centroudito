@@ -28,6 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/appuntamenti/{idClient}', [HomeController::class, 'appuntamentiClient'])->name('appuntamenti');
     Route::post('/appuntamento/aggiungi', [HomeController::class, 'aggiungiAppuntamento'])->name('appuntamento.aggiungi');
     Route::delete('/appuntamento/elimina', [HomeController::class, 'eliminaAppuntamento'])->name('appuntamento.elimina');
+
+    //------------- PROVE ------------------//
+    Route::get('/prova/{idClient}', [HomeController::class, 'prova'])->name('prova');
+    Route::post('/prova/aggiungi', [HomeController::class, 'aggiungiProva'])->name('prova.aggiungi');
+
 });
 
 require __DIR__.'/admin.php';

@@ -99,7 +99,7 @@
                             <a style="text-decoration: none" href="{{route('appuntamenti', $item->id)}}" title="Appuntamento">
                                 <i class="fas fa-fw fa-calendar" style="color: purple"></i>
                             </a>
-                            <a style="text-decoration: none" href="#" title="Prova">
+                            <a style="text-decoration: none" href="{{route('prova', $item->id)}}" title="Prova">
                                 <i class="fa fa-assistive-listening-systems" style="color: orange"></i>
                             </a>
                             <a style="text-decoration: none" href="#" title="Documenti">
