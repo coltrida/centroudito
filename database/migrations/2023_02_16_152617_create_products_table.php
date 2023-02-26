@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('matricola')->nullable();
-            $table->bigInteger('stato_id')->nullable();
-            $table->bigInteger('filiale_id')->nullable();
-            $table->bigInteger('listino_id')->nullable();
+            $table->bigInteger('stato_id')->nullable()->index();
+            $table->bigInteger('filiale_id')->nullable()->index();
+            $table->bigInteger('listino_id')->nullable()->index();
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('client_id')->nullable();
             $table->bigInteger('fornitore_id')->nullable();

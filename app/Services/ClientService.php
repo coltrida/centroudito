@@ -33,7 +33,7 @@ class ClientService
             'marketing', 'user:id,name', 'filiale:id,nome', 'recapito:id,nome', 'audiometria', 'prova' => function($q){
                 $q->with('copiaComm')->first();
             }])
-                ->orderBy('cognome')->get();
+                ->latest()->get();
     }
 
     public function clienteFiliale($idFiliale)

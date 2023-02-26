@@ -45,7 +45,7 @@ class RecapitoSeeder extends Seeder
                 'telefono' => '0583174896',
                 'informazioni' => 'STUDI MEDICI, SOPRA LA FARMACIA COMUNALE',
                 'user_id' => $idCosseddu,
-                'filiale_id' => $idLucca,
+                'filiale_id' => $idPisa,
                 'codiceIdentificativo' => 'R1'
             ],
             [

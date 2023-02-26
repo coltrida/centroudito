@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('client_id')->nullable();
             $table->bigInteger('filiale_id')->nullable();
+            $table->bigInteger('recapito_id')->nullable();
             $table->bigInteger('marketing_id')->nullable();
             $table->string('tot')->nullable();
             $table->string('mercato')->nullable();

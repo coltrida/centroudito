@@ -36,12 +36,51 @@ class ProvaService
 
     public function nuova($request)
     {
-        $idMktMedico = Marketing::where('name', 'MEDICO')->first()->id;
+     //   $idMktMedico = Marketing::where('name', 'MEDICO')->first()->id;
         $client = Client::with('tipologia', 'appuntamentisospesi')->find($request->client_id);
-        $this->controlloAppuntamentiInSospesoEAggiornamentoIntervenuto($client->appuntamentisospesi);
-        $this->seCodiceMktMedicoAggiornaDatiClient($request, $idMktMedico, $client);
+     //   $this->controlloAppuntamentiInSospesoEAggiornamentoIntervenuto($client->appuntamentisospesi);
+     //   $this->seCodiceMktMedicoAggiornaDatiClient($request, $idMktMedico, $client);
+        $this->cambiaStatoApaDaProvaAInProva($request);
         $progressivo = $this->calcolaProgressivoProva();
+
         return $this->creaProvaConValoriPassati($request, $client, $progressivo);
+    }
+
+    public function cambiaStatoApaDaProvaAInProva($request)
+    {
+        $idApaInProva = StatoApa::where('nome', 'INPROVA')->first()->id;
+        foreach ($request->prodotti as $item){
+            $product = Product::find($item->id);
+            $product->stato_id = $idApaInProva;
+            $product->save();
+        }
+    }
+
+    public function preCaricaElementi($request)
+    {
+        $idStatoInProva = StatoApa::where('nome', 'PROVA')->first()->id;
+        foreach ($request->prodotti as $item){
+            $product = Product::find($item);
+            $product->stato_id = $idStatoInProva;
+            $product->client_id = $request->client_id;
+            $product->user_id = $request->user_id;
+            $product->save();
+        }
+    }
+
+    public function eliminaProdottoDallaProva($id)
+    {
+        $product = Product::find($id);
+        $idStatoProdottoInFiliale = StatoApa::where('nome', 'FILIALE')->first()->id;
+        $product->stato_id = $idStatoProdottoInFiliale;
+        $product->client_id = null;
+        $product->save();
+    }
+
+    public function eleInProva($idClient)
+    {
+        $idStatoInProva = StatoApa::where('nome', 'PROVA')->first()->id;
+        return Product::with('listino')->where('stato_id', $idStatoInProva)->where('client_id', $idClient)->get();
     }
 
     public function addEle($request)
@@ -154,7 +193,7 @@ class ProvaService
     public function provePassate($idClient)
     {
         return Client::with(['prova' => function($q){
-            $q->with('copiaComm', 'marketing', 'fattura');
+            $q->with('copiaComm', 'marketing', 'fattura', 'stato');
         }])
             ->find($idClient)
             ->prova;
@@ -298,19 +337,28 @@ class ProvaService
 
     private function creaProvaConValoriPassati($request, $client, $progressivo)
     {
-        return Prova::create([
+        $prova = Prova::create([
             'user_id' => $request->user_id,
             'progressivo' => $progressivo,
             'client_id' => $request->client_id,
             'marketing_id' => $request->marketing_id,
             'mercato' => $request->mercato,
+            'tot' => $request->tot,
+            'giorni_prova' => 0,
             'filiale_id' => $request->filiale_id,
-            'stato_id' => StatoApa::where('nome', 'NUOVO')->first()->id,
+            'stato_id' => StatoApa::where('nome', 'INPROVA')->first()->id,
             'inizio_prova' => Carbon::now()->format('Y-m-d'),
             'mese_inizio' => Carbon::now()->month,
             'anno_inizio' => Carbon::now()->year,
             'tipologia' => $client->tipologia->nome == 'CL' ? 'Riacquisto' : 'Nuovo',
         ]);
+
+        for($i = 0; $i < count($request->prodotti); $i++){
+            $prova->product()->attach($request->prodotti[$i], ['prezzo' => $request->prezzi[$i]]);
+        }
+
+
+        return $prova;
     }
 
     private function aggiornamentoStatoProdottiRimessiInFiliale($prova)

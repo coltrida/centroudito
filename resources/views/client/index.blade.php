@@ -78,6 +78,7 @@
                 <th scope="col">tel1</th>
                 <th scope="col">tel2</th>
                 <th scope="col">tel3</th>
+                <th scope="col">Recapito</th>
                 <th scope="col">Data Nascita</th>
                 <th scope="col">email</th>
                 <th scope="col">Fonte</th>
@@ -122,6 +123,7 @@
                         <td>{{$item->telefono}}</td>
                         <td>{{$item->telefono2}}</td>
                         <td>{{$item->telefono3}}</td>
+                        <td>{{$item->recapito->nome}}</td>
                         <td>{{$item->datanascita}}</td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->marketing->name}}</td>
@@ -129,7 +131,7 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="15">
+                    <td colspan="16">
                         {{$clients->links()}}
                     </td>
                 </tr>

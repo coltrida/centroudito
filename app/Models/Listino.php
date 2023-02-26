@@ -72,6 +72,11 @@ class Listino extends Model
         });
     }
 
+    public function scopeFromfornitorecategoria($query, $idFornitore, $idCategoria)
+    {
+        return $query->where('fornitore_id', $idFornitore)->where('categoria_id', $idCategoria);
+    }
+
     public function scopeApparecchi($query)
     {
         return $query->whereHas('categoria', function ($stato){

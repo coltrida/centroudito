@@ -79,6 +79,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/navbar-fixed.css')}}" rel="stylesheet">
+    @livewireStyles
 </head>
 <body>
 
@@ -90,10 +91,10 @@
     </div>
 </main>
 
-@section('footer')
-    <script src="{{asset('/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
-@show
-
+    @section('footer')
+        <script src="{{asset('/vendor/jquery/jquery.min.js')}}"></script>
+        <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+    @show
+    @livewireScripts
 </body>
 </html>

@@ -10,13 +10,11 @@ use App\Models\Filiale;
 use App\Models\Listino;
 use App\Models\Product;
 use App\Models\Richiesta;
+use App\Models\StatoApa;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Storage;
-use function array_push;
-use function create_function;
-use function dd;
 
 class ProductService
 {
@@ -103,6 +101,16 @@ class ProductService
                 }]);
             }])->filiale()->orderBy('listino_id');
         }])->find($id)->products;
+    }
+
+    public function listaSpecificoProdottoInFiliale($idListino, $idFiliale)
+    {
+        $idStatoInFiliale = StatoApa::where('nome', 'FILIALE')->first()->id;
+        return Product::
+              where('filiale_id', $idFiliale)
+            ->where('listino_id', $idListino)
+            ->where('stato_id', $idStatoInFiliale)
+            ->get();
     }
 
     public function controlloSoglie($id)
@@ -245,13 +253,16 @@ class ProductService
         return $nuovoDDT->id;
     }
 
-    public function switchInProva($request)
+    public function switchInProva($dati)
     {
-        $product = Product::find($request->idProduct);
-        $product->stato_id = 3;
-        $product->user_id = $request->user_id;
-        $product->client_id = $request->client_id;
-        $product->save();
+        $idProdottoProva = StatoApa::where('nome', 'PROVA')->first()->id;
+        foreach ($dati['prodotti'] as $item){
+            $product = Product::find($item);
+            $product->stato_id = $idProdottoProva;
+            $product->user_id = $dati['user_id'];
+            $product->client_id = $dati['client_id'];
+            $product->save();
+        }
     }
 
     public function switchImmatricolato($request)
@@ -265,7 +276,7 @@ class ProductService
     public function switchRimuoviDallaProva($id)
     {
         $product = Product::find($id);
-        $product->stato_id = 5;
+        $product->stato_id = StatoApa::where('nome', 'FILIALE')->first()->id;
         $product->user_id = null;
         $product->client_id = null;
         $product->save();
