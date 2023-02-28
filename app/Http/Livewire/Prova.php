@@ -100,6 +100,10 @@ class Prova extends Component
             $this->tot += $item->listino->prezzolistino;
         }
 
+        $this->productsInFiliale = $this->productsInFiliale->filter(function($item) {
+            return (!in_array($item->id, $this->prodottiSelezionati));
+        });
+
         $this->showEleInProva = true;
         $this->prodottiSelezionati = [];
     }

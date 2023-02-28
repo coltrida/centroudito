@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\AppuntamentoController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DocumentiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProController;
 use App\Http\Controllers\ProfileController;
@@ -36,6 +37,11 @@ Route::middleware('auth')->group(function () {
 
     //------------- PROVE ------------------//
     Route::get('/prova/{idClient}', [ProvaController::class, 'prova'])->name('prova');
+
+    //------------- DOCUMENTI ------------------//
+    Route::get('/documenti/{idClient}', [DocumentiController::class, 'documenti'])->name('documenti');
+    Route::get('/aggiungiDocumento/{idClient}', [DocumentiController::class, 'aggiungiDocumento'])->name('aggiungiDocumento');
+    Route::post('/salvaDocumento', [DocumentiController::class, 'salvaDocumento'])->name('salvaDocumento');
 
 
 });

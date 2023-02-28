@@ -137,7 +137,7 @@ class ProvaService
         return $provaSalvata;
     }
 
-    public function reso($idProva, $request)
+    public function reso($idProva)
     {
         $prova = Prova::with(['product', 'stato', 'user', 'client' => function($c){
             $c->with('appuntamentisospesi');
@@ -154,9 +154,9 @@ class ProvaService
         $provaSalvata = Prova::with('product', 'stato', 'user', 'client', 'copiaComm')->find($idProva);
         $this->comunicaProvaSalvataAdAdmin($provaSalvata);
         $testoLog = $prova->user->name.' ha reso la prova per il paziente '.$prova->client->cognome.' '.$prova->client->nome;
-        $this->scriviSuLog($request, $provaSalvata, $tipoInformazione, $testoLog);
+//        $this->scriviSuLog($request, $provaSalvata, $tipoInformazione, $testoLog);
 
-        return $provaSalvata;
+  //      return $provaSalvata;
     }
 
     public function salvaFattura($request)
@@ -185,7 +185,7 @@ class ProvaService
         $this->comunicaProvaSalvataAdAdmin($provaFattura);
 
         $testoLog = $provaFattura->user->name.' ha fatturato la prova per il paziente '.$provaFattura->client->cognome.' '.$provaFattura->client->nome;
-        $this->scriviSuLog($request, $provaFattura, $tipoInformazione, $testoLog);
+     //   $this->scriviSuLog($request, $provaFattura, $tipoInformazione, $testoLog);
 
         return $provaFattura;
     }
@@ -193,7 +193,7 @@ class ProvaService
     public function provePassate($idClient)
     {
         return Client::with(['prova' => function($q){
-            $q->with('copiaComm', 'marketing', 'fattura', 'stato');
+            $q->with('copiaComm', 'marketing', 'fattura', 'stato', 'product');
         }])
             ->find($idClient)
             ->prova;
@@ -296,7 +296,7 @@ class ProvaService
 
     private function produciPdfCopiaCommEdInformativa($provaSalvata, $filename, $filenameInformativa)
     {
-        $pdf = App::make('dompdf.wrapper');
+        /*$pdf = App::make('dompdf.wrapper');
         if (!Storage::disk('public')->exists('/documenti/'.$provaSalvata->client->id.'/')) {
             Storage::makeDirectory('/documenti/'.$provaSalvata->client->id.'/');
         }
@@ -305,24 +305,23 @@ class ProvaService
 
         $pdf2 = App::make('dompdf.wrapper');
         $pdf2->loadHTML(view('pdf.informativa', compact('provaSalvata')))
-            ->save("storage/documenti/".$provaSalvata->client->id.'/'.$filenameInformativa);
+            ->save("storage/documenti/".$provaSalvata->client->id.'/'.$filenameInformativa);*/
     }
 
     private function creaPdfFattura($fattura)
     {
-        //return $fattura;
         $pdf = App::make('dompdf.wrapper');
-        if (!Storage::disk('public')->exists('/documenti/'.$fattura->prova->client_id.'/')) {
-            Storage::makeDirectory('/documenti/'.$fattura->prova->client_id.'/');
+        if (!Storage::disk('public')->exists('/documenti/'.$fattura->prova->client_id.'/fatture/')) {
+            Storage::disk('public')->makeDirectory('/documenti/'.$fattura->prova->client_id.'/fatture/');
         }
-        $link = "storage/documenti/".$fattura->prova->client_id."/Fattura".$fattura->prova->mese_fine.$fattura->prova->anno_fine.".pdf";
+        $link = "/storage/documenti/".$fattura->prova->client_id."/fatture/".$fattura->id.".pdf";
         $pdf->loadHTML(view('pdf.fattura', compact('fattura')))
-            ->save("storage/fatture/2021/$fattura->id.pdf")
-            ->save($link);
+            ->save(base_path()."/storage/app/public/fatture/2023/$fattura->id.pdf")
+            ->save(base_path()."/storage/app/public/documenti/".$fattura->prova->client_id."/fatture/".$fattura->id.".pdf");
         Documento::create([
             'client_id' => $fattura->prova->client_id,
             'tipo' => 'fattura',
-            'link' => '/'.$link,
+            'link' => $link,
         ]);
     }
 
@@ -429,6 +428,7 @@ class ProvaService
         $fattura->save();
 
         Informazione::create([
+            'client_id' => $request->client_id,
             'giorno' => Carbon::now()->format('Y-m-d'),
             'tipo' => 'ACCONTO',
             'note' => 'Acconto di € '.number_format( (float) $request->acconto, '0', ',', '.')

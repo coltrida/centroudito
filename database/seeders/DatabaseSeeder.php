@@ -47,8 +47,8 @@ class DatabaseSeeder extends Seeder
         Storage::disk('public')->deleteDirectory('/documenti/');
         Storage::disk('public')->deleteDirectory('/fatture/');
         Storage::disk('public')->deleteDirectory('/recapiti/');
-        Storage::makeDirectory('/documenti');
-        Storage::makeDirectory('/fatture/2023/');
-        Storage::makeDirectory('/recapiti');
+        Storage::disk('public')->makeDirectory('/documenti');
+        Storage::disk('public')->makeDirectory('/fatture/2023/');
+        Storage::disk('public')->makeDirectory('/recapiti');
     }
 }

@@ -103,13 +103,13 @@
                             <a style="text-decoration: none" href="{{route('prova', $item->id)}}" title="Prova">
                                 <i class="fa fa-assistive-listening-systems" style="color: orange"></i>
                             </a>
-                            <a style="text-decoration: none" href="#" title="Documenti">
+                            <a style="text-decoration: none" href="{{route('documenti', $item->id)}}" title="Documenti">
                                 <i class="fas fa-fw fa-file" style="color: darkblue"></i>
                             </a>
                             <a style="text-decoration: none" href="#" title="Recall">
                                 <i class="fas fa-fw fa-phone" style="color: darkgreen"></i>
                             </a>
-                            <a style="text-decoration: none" href="#" title="Informazioni">
+                            <a style="text-decoration: none" href="#" title="Storico">
                                 <i class="fas fa-fw fa-info-circle" style="color: black"></i>
                             </a> &nbsp;&nbsp;
                         </td>
