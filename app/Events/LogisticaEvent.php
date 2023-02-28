@@ -14,14 +14,16 @@ class LogisticaEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $richiesta;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($richiesta)
     {
-        //
+        $this->richiesta = $richiesta;
     }
 
     /**
@@ -31,6 +33,10 @@ class LogisticaEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new Channel('logisticaChannel');
+    }
+
+    public function broadcastAs(){
+        return 'task-created';
     }
 }

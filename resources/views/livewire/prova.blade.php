@@ -1,6 +1,4 @@
 <div>
-
-
     <div class="modal fade" id="listaProductsInMagazzino" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
          aria-hidden="true">
         <div class="modal-dialog">
@@ -28,11 +26,8 @@
                     @endforeach
                     <input type="button" wire:click="aggiungiProddottiAllaProva" data-bs-dismiss="modal" class="btn btn-primary mt-3" value="Aggiungi">
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <h3>Prova per {{$cliente->nome.' '.$cliente->cognome}}</h3>

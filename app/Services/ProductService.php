@@ -91,7 +91,7 @@ class ProductService
         ]);
     }
 
-    public function presenti($id)
+    /*public function presenti($id)
     {
         $nomeFiliale = Filiale::find($id)->nome;
         return Filiale::with(['products' => function($q) use($nomeFiliale){
@@ -101,6 +101,16 @@ class ProductService
                 }]);
             }])->filiale()->orderBy('listino_id');
         }])->find($id)->products;
+    }*/
+
+    public function presenti($id)
+    {
+        $idStatoInFiliale = StatoApa::where('nome', 'FILIALE')->first()->id;
+        return Filiale::with(['products' => function($q) use($idStatoInFiliale){
+            $q->where('stato_id', $idStatoInFiliale)->with(['listino' => function($l){
+                $l->with(['fornitore', 'categoria']);
+            }])->filiale()->orderBy('listino_id');
+        }])->find($id);
     }
 
     public function listaSpecificoProdottoInFiliale($idListino, $idFiliale)
@@ -200,7 +210,7 @@ class ProductService
         $propieta = 'product';
         $filiale = $richiesta->filiale;
         $prodotto = $richiesta->listino;
-        $utente = User::find($request->user_id);
+        $utente = \Auth::user();
         $testo = $utente->name.' ha richiesto '.$request->quantita. ' '. $prodotto->nome .' per la filiale '.$filiale->nome;
         $log = new LoggingService();
         $log->scriviLog($filiale->nome, $utente, $utente->name, $propieta, $testo);
