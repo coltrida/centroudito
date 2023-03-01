@@ -78,6 +78,11 @@ class Filiale extends Model
         return $this->hasMany(Client::class, 'filiale_id', 'id');
     }
 
+    public function prove()
+    {
+        return $this->hasMany(Prova::class, 'filiale_id', 'id');
+    }
+
     public function products()
     {
         return $this->hasMany(Product::class)

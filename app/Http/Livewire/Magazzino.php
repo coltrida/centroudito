@@ -11,7 +11,6 @@ use Livewire\Component;
 class Magazzino extends Component
 {
     public $prodottiPresenti;
-/*    public $prodottiRichiesti;*/
     public $prodottiInArrivo;
     public $filiale;
     public $prodotti = [];
@@ -29,7 +28,6 @@ class Magazzino extends Component
     {
         $this->filiale = $productService->presenti($idFiliale);
         $this->prodottiPresenti = $this->filiale->products;
-
         $this->prodottiInArrivo = $productService->inArrivo($idFiliale);
         $this->fornitori = $fornitoriService->fornitori();
         $this->categorie = $categoriaService->lista();
@@ -38,6 +36,11 @@ class Magazzino extends Component
     public function getProdottirichiestiProperty(ProductService $productService)
     {
         return $productService->richiesti($this->filiale->id);
+    }
+
+    public function getBtnattivoProperty()
+    {
+        return $this->idListino && $this->idCategoria && $this->idFornitore && $this->quantita;
     }
 
     public function fornitoreSelezionato($idFornitore, ListinoService $listinoService)
@@ -73,6 +76,7 @@ class Magazzino extends Component
             'quantita' => $this->quantita,
         ]);
         $productService->richiestaProdotti($request);
+        $this->idFornitore = $this->idCategoria = $this->idListino = $this->quantita= null;
     }
 
     public function render()

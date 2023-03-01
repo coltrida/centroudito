@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
     //------------- PROVE ------------------//
     Route::get('/prova/{idClient}', [ProvaController::class, 'prova'])->name('prova');
+    Route::get('/listaProve/{idFiliale}', [ProvaController::class, 'listaProve'])->name('listaProve');
 
     //------------- DOCUMENTI ------------------//
     Route::get('/documenti/{idClient}', [DocumentiController::class, 'documenti'])->name('documenti');

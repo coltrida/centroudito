@@ -42,7 +42,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 @foreach($filiali as $item)
-                                    <li><a class="dropdown-item" href="#">{{$item->nome}}</a></li>
+                                    <li><a class="dropdown-item" href="{{route('listaProve', $item->id)}}">{{$item->nome}}</a></li>
                                 @endforeach
                             </ul>
                         </li>

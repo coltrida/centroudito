@@ -8,6 +8,7 @@ use App\Events\ProveEvent;
 use App\Models\Client;
 use App\Models\Documento;
 use App\Models\Fattura;
+use App\Models\Filiale;
 use App\Models\Informazione;
 use App\Models\Listino;
 use App\Models\Marketing;
@@ -32,6 +33,16 @@ class ProvaService
     public function lista()
     {
         return Ruolo::where('nome', '!=', 'admin')->orderBy('nome')->get();
+    }
+
+    public function listaByFiliale($idFiliale)
+    {
+        $idProvaInCorso = StatoApa::where('nome', 'INPROVA')->first()->id;
+        return Filiale::with(['prove' => function($q) use($idProvaInCorso){
+            $q->where('stato_id', $idProvaInCorso)->with(['client','product' => function($p){
+                $p->with('listino');
+            }]);
+        }])->find($idFiliale);
     }
 
     public function nuova($request)
@@ -220,6 +231,8 @@ class ProvaService
             $prova->delete();
         }
     }
+
+
 
     private function controlloAppuntamentiInSospesoEAggiornamentoIntervenuto($appuntamenti)
     {

@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-3">
                     <select class="form-select border-dark shadow" aria-label="Default select example"
-                            id="fornitore_id"
+                            id="fornitore_id" wire:model="idFornitore"
                             wire:change="fornitoreSelezionato($event.target.value)">
                         <option selected></option>
                         @foreach($fornitori as $item)
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-2">
                     <select class="form-select border-dark shadow" aria-label="Default select example"
-                            id="categoria_id"
+                            id="categoria_id" wire:model="idCategoria"
                             wire:change="categoriaSelezionata($event.target.value)">
                         <option selected></option>
                         @foreach($categorie as $item)
@@ -49,7 +49,8 @@
                 </div>
                 <div class="col-3">
                     <select class="form-select border-dark shadow" aria-label="Default select example"
-                            id="listino_id" name="listino_id" wire:change="prodottoSelezionato($event.target.value)">
+                            id="listino_id" wire:model="idListino"
+                            wire:change="prodottoSelezionato($event.target.value)">
                         <option selected></option>
                         @foreach($prodotti as $item)
                             <option
@@ -62,7 +63,7 @@
                     <input type="number" class="form-control border-dark shadow" wire:model="quantita">
                 </div>
                 <div class="col-1">
-                    <button type="button" class="btn btn-primary" wire:click="richiestaProdotti">
+                    <button @if(!$this->btnattivo) disabled @endif type="button" class="btn btn-primary" wire:click="richiestaProdotti">
                         Richiedi
                     </button>
                 </div>
